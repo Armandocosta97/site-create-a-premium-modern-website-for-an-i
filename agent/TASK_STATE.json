@@ -1,6 +1,8 @@
 {
-  "currentTaskId": "page-home-shell",
-  "status": "pending",
-  "lastCompletedTaskId": null,
-  "completedTaskIds": []
+  "currentTaskId": "section-home-hero",
+  "status": "ready_for_next_task",
+  "lastCompletedTaskId": "page-home-shell",
+  "completedTaskIds": [
+    "page-home-shell"
+  ]
 }
