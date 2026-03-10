@@ -74,11 +74,15 @@ const styles = {
     marginTop: "2rem",
   },
   primaryAction: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
     border: 0,
     borderRadius: "999px",
     padding: "0.95rem 1.5rem",
     backgroundColor: "#b85c38",
     color: "#f6f1e8",
+    textDecoration: "none",
     fontSize: "0.98rem",
     fontWeight: 700,
     lineHeight: 1,
@@ -105,14 +109,6 @@ const styles = {
   },
 }
 
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId)
-
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
-}
-
 export default function HeroSection() {
   return (
     <section id="hero" aria-labelledby="home-hero-heading" style={styles.section}>
@@ -131,13 +127,9 @@ export default function HeroSection() {
           </p>
 
           <div style={styles.actions}>
-            <button
-              type="button"
-              style={styles.primaryAction}
-              onClick={() => scrollToSection("contact")}
-            >
+            <a href="#contact" style={styles.primaryAction}>
               Book a table
-            </button>
+            </a>
 
             <a href="tel:+390113821947" style={styles.secondaryAction}>
               Call the restaurant

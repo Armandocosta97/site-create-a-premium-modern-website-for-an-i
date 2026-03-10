@@ -76,3 +76,15 @@ Waiting for validation.
 
 TASK section-home-contact completed successfully.
 Build passed.
+Commit created for TASK section-home-contact.
+
+Prepared TASK cta-home-primary-hero-cta (Add CTA primary-hero-cta on home) for execution.
+
+Launching Codex for TASK cta-home-primary-hero-cta.
+2026-03-10: Updated the home hero primary CTA to use a valid internal anchor link to the `contact` section (`#contact`), preserving its visible placement in the hero and satisfying the CTA destination requirement.
+
+TASK cta-home-primary-hero-cta executed by Codex.
+Waiting for validation.
+
+TASK cta-home-primary-hero-cta completed successfully.
+Build passed.

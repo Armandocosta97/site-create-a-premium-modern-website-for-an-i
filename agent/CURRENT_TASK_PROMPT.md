@@ -1037,20 +1037,25 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-section-home-contact
+cta-home-primary-hero-cta
 
 ## Current task title
-Create contact section on home
+Add CTA primary-hero-cta on home
 
 ## Current task type
-section
+cta
 
 ## Current task target
 ```json
 {
   "pageId": "home",
-  "sectionId": "contact",
-  "sectionType": "contact-block"
+  "ctaId": "primary-hero-cta",
+  "ctaKind": "internal",
+  "destination": {
+    "type": "section",
+    "value": "contact"
+  },
+  "placement": "hero"
 }
 ```
 
@@ -1059,13 +1064,12 @@ section
 
 ## Files allowed
 - src/pages/Home.jsx
-- src/components/ContactSection.jsx
 - src/components
 
 ## Definition of done
-- section contact exists on home
-- section contact matches type contact-block
-- section contact is rendered in page home
+- CTA primary-hero-cta exists on home
+- CTA primary-hero-cta is visible in placement hero
+- CTA primary-hero-cta points to a valid destination
 
 ## Strict execution rules
 - Execute only this current task.
