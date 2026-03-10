@@ -1,20 +1,9 @@
+import HeroSection from "../components/HeroSection"
+
 export default function Home() {
   return (
     <main>
-      <section id="hero" aria-labelledby="home-hero-heading">
-        <div>
-          <p>Osteria contemporanea a Torino</p>
-          <h1 id="home-hero-heading">Modern Italian dining with soul</h1>
-          <p>
-            Seasonal ingredients, elegant plates, and a warm atmosphere in the
-            heart of Torino.
-          </p>
-          <div>
-            <a href="#contact">Book a table</a>
-            <a href="tel:+390113821947">Call the restaurant</a>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       <section id="about" aria-labelledby="about-heading">
         <div>

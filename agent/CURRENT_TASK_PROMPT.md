@@ -1037,32 +1037,35 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-page-home-shell
+section-home-hero
 
 ## Current task title
-Create home page shell
+Create hero section on home
 
 ## Current task type
-page-shell
+section
 
 ## Current task target
 ```json
 {
-  "pageId": "home"
+  "pageId": "home",
+  "sectionId": "hero",
+  "sectionType": "hero"
 }
 ```
 
 ## Depends on
-- none
+- page-home-shell
 
 ## Files allowed
-- src/App.jsx
 - src/pages/Home.jsx
+- src/components/HeroSection.jsx
+- src/components
 
 ## Definition of done
-- page shell exists for home
-- home route is mounted if required
-- home page renders without crashing
+- section hero exists on home
+- section hero matches type hero
+- section hero is rendered in page home
 
 ## Strict execution rules
 - Execute only this current task.

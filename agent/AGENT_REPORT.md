@@ -17,3 +17,25 @@ Waiting for validation.
 
 TASK page-home-shell completed successfully.
 Build passed.
+Commit created for TASK page-home-shell.
+
+Prepared TASK section-home-hero (Create hero section on home) for execution.
+
+Launching Codex for TASK section-home-hero.
+
+Completed TASK `section-home-hero`.
+- Added a reusable `HeroSection` component with a full-viewport editorial hero, atmospheric image treatment, and brand-aligned copy.
+- Implemented valid hero CTAs for booking via smooth scroll to the existing `contact` section and direct phone contact via `tel:`.
+- Rendered the hero component from the home page without changing unrelated sections.
+
+TASK section-home-hero executed by Codex.
+Waiting for validation.
+
+TASK section-home-hero completed successfully.
+Build passed.
+
+TASK section-home-hero executed by Codex.
+Waiting for validation.
+
+TASK section-home-hero completed successfully.
+Build passed.
