@@ -1,0 +1,347 @@
+[
+  {
+    "id": "page-home-shell",
+    "type": "page-shell",
+    "title": "Create home page shell",
+    "target": {
+      "pageId": "home"
+    },
+    "dependsOn": [],
+    "filesAllowed": [
+      "src/App.jsx",
+      "src/pages/Home.jsx"
+    ],
+    "done": [
+      "page shell exists for home",
+      "home route is mounted if required",
+      "home page renders without crashing"
+    ]
+  },
+  {
+    "id": "section-home-hero",
+    "type": "section",
+    "title": "Create hero section on home",
+    "target": {
+      "pageId": "home",
+      "sectionId": "hero",
+      "sectionType": "hero"
+    },
+    "dependsOn": [
+      "page-home-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Home.jsx",
+      "src/components/HeroSection.jsx",
+      "src/components"
+    ],
+    "done": [
+      "section hero exists on home",
+      "section hero matches type hero",
+      "section hero is rendered in page home"
+    ]
+  },
+  {
+    "id": "section-home-about",
+    "type": "section",
+    "title": "Create about section on home",
+    "target": {
+      "pageId": "home",
+      "sectionId": "about",
+      "sectionType": "split-content"
+    },
+    "dependsOn": [
+      "page-home-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Home.jsx",
+      "src/components/AboutSection.jsx",
+      "src/components"
+    ],
+    "done": [
+      "section about exists on home",
+      "section about matches type split-content",
+      "section about is rendered in page home"
+    ]
+  },
+  {
+    "id": "section-home-contact",
+    "type": "section",
+    "title": "Create contact section on home",
+    "target": {
+      "pageId": "home",
+      "sectionId": "contact",
+      "sectionType": "contact-block"
+    },
+    "dependsOn": [
+      "page-home-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Home.jsx",
+      "src/components/ContactSection.jsx",
+      "src/components"
+    ],
+    "done": [
+      "section contact exists on home",
+      "section contact matches type contact-block",
+      "section contact is rendered in page home"
+    ]
+  },
+  {
+    "id": "cta-home-primary-hero-cta",
+    "type": "cta",
+    "title": "Add CTA primary-hero-cta on home",
+    "target": {
+      "pageId": "home",
+      "ctaId": "primary-hero-cta",
+      "ctaKind": "internal",
+      "destination": {
+        "type": "section",
+        "value": "contact"
+      },
+      "placement": "hero"
+    },
+    "dependsOn": [
+      "page-home-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Home.jsx",
+      "src/components"
+    ],
+    "done": [
+      "CTA primary-hero-cta exists on home",
+      "CTA primary-hero-cta is visible in placement hero",
+      "CTA primary-hero-cta points to a valid destination"
+    ]
+  },
+  {
+    "id": "cta-home-whatsapp-floating",
+    "type": "cta",
+    "title": "Add CTA whatsapp-floating on home",
+    "target": {
+      "pageId": "home",
+      "ctaId": "whatsapp-floating",
+      "ctaKind": "external",
+      "destination": {
+        "type": "whatsapp",
+        "value": "whatsapp"
+      },
+      "placement": "floating"
+    },
+    "dependsOn": [
+      "page-home-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Home.jsx",
+      "src/components",
+      "src/App.jsx",
+      "src/layout/Layout.jsx"
+    ],
+    "done": [
+      "CTA whatsapp-floating exists on home",
+      "CTA whatsapp-floating is visible in placement floating",
+      "CTA whatsapp-floating points to a valid destination"
+    ]
+  },
+  {
+    "id": "cta-home-phone-hero",
+    "type": "cta",
+    "title": "Add CTA phone-hero on home",
+    "target": {
+      "pageId": "home",
+      "ctaId": "phone-hero",
+      "ctaKind": "external",
+      "destination": {
+        "type": "phone",
+        "value": "phone"
+      },
+      "placement": "hero"
+    },
+    "dependsOn": [
+      "page-home-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Home.jsx",
+      "src/components"
+    ],
+    "done": [
+      "CTA phone-hero exists on home",
+      "CTA phone-hero is visible in placement hero",
+      "CTA phone-hero points to a valid destination"
+    ]
+  },
+  {
+    "id": "page-gallery-shell",
+    "type": "page-shell",
+    "title": "Create gallery page shell",
+    "target": {
+      "pageId": "gallery"
+    },
+    "dependsOn": [],
+    "filesAllowed": [
+      "src/App.jsx",
+      "src/pages/Gallery.jsx"
+    ],
+    "done": [
+      "page shell exists for gallery",
+      "gallery route is mounted if required",
+      "gallery page renders without crashing"
+    ]
+  },
+  {
+    "id": "section-gallery-gallery-grid",
+    "type": "section",
+    "title": "Create gallery-grid section on gallery",
+    "target": {
+      "pageId": "gallery",
+      "sectionId": "gallery-grid",
+      "sectionType": "image-grid"
+    },
+    "dependsOn": [
+      "page-gallery-shell"
+    ],
+    "filesAllowed": [
+      "src/pages/Gallery.jsx",
+      "src/components/Gallery-gridSection.jsx",
+      "src/components"
+    ],
+    "done": [
+      "section gallery-grid exists on gallery",
+      "section gallery-grid matches type image-grid",
+      "section gallery-grid is rendered in page gallery"
+    ]
+  },
+  {
+    "id": "navigation-structure",
+    "type": "navigation",
+    "title": "Build navigation from spec",
+    "target": {
+      "navigation": [
+        {
+          "label": "Home",
+          "type": "route",
+          "target": "/"
+        },
+        {
+          "label": "Gallery",
+          "type": "route",
+          "target": "/gallery"
+        },
+        {
+          "label": "About",
+          "type": "section",
+          "target": "about"
+        },
+        {
+          "label": "Contact",
+          "type": "section",
+          "target": "contact"
+        }
+      ],
+      "routingMode": "hash"
+    },
+    "dependsOn": [
+      "page-home-shell",
+      "page-gallery-shell",
+      "section-home-hero",
+      "section-home-about",
+      "section-home-contact",
+      "section-gallery-gallery-grid"
+    ],
+    "filesAllowed": [
+      "src/App.jsx",
+      "src/layout/Layout.jsx"
+    ],
+    "done": [
+      "all navigation items are rendered",
+      "all navigation links point to valid pages or sections",
+      "navigation is compatible with routing mode"
+    ]
+  },
+  {
+    "id": "seo-basics",
+    "type": "seo",
+    "title": "Add baseline SEO structure",
+    "target": {
+      "pages": [
+        "home",
+        "gallery"
+      ]
+    },
+    "dependsOn": [
+      "page-home-shell",
+      "page-gallery-shell"
+    ],
+    "filesAllowed": [
+      "index.html",
+      "src/pages/Home.jsx",
+      "src/pages/Gallery.jsx"
+    ],
+    "done": [
+      "title exists",
+      "meta description exists",
+      "one meaningful h1 per page exists"
+    ]
+  },
+  {
+    "id": "responsive-polish",
+    "type": "responsive",
+    "title": "Refine responsive layout and spacing",
+    "target": {
+      "breakpoints": [
+        360,
+        768,
+        1024,
+        1440
+      ]
+    },
+    "dependsOn": [
+      "navigation-structure",
+      "section-home-hero",
+      "section-home-about",
+      "section-home-contact",
+      "section-gallery-gallery-grid"
+    ],
+    "filesAllowed": [
+      "src/App.css",
+      "src/index.css",
+      "src/components",
+      "src/pages/Home.jsx",
+      "src/pages/Gallery.jsx"
+    ],
+    "done": [
+      "layout works across required breakpoints",
+      "no horizontal overflow",
+      "spacing and hierarchy are coherent"
+    ]
+  },
+  {
+    "id": "validation-prep",
+    "type": "validation-prep",
+    "title": "Prepare site for final validation",
+    "target": {
+      "checks": [
+        "semantic-structure",
+        "navigation-integrity",
+        "cta-integrity",
+        "images-not-broken",
+        "responsive-layout",
+        "placeholder-content-absent"
+      ]
+    },
+    "dependsOn": [
+      "navigation-structure",
+      "responsive-polish",
+      "seo-basics"
+    ],
+    "filesAllowed": [
+      "src",
+      "index.html"
+    ],
+    "done": [
+      "required semantic structure exists",
+      "required CTA structure exists",
+      "required sections exist",
+      "site is ready for final validation"
+    ]
+  }
+]

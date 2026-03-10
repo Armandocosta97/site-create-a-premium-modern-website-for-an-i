@@ -1,0 +1,114 @@
+{
+  "originalPrompt": "Create a premium modern website for an Italian restaurant called Osteria 19 Torino.\n\nThe website must feel contemporary, elegant, warm, urban, and high quality, like a modern bistro in the center of Turin that combines traditional Italian cuisine with refined presentation.\n\nGENERAL GOAL\nThe final result must look like a real restaurant website ready to be shown to a client, not a generic template.\nThe website should communicate atmosphere, quality ingredients, strong identity, and make it easy for users to explore the menu and book a table.\n\nBRAND POSITIONING\n- Restaurant type: modern Italian restaurant / contemporary osteria\n- City: Torino\n- Target audience:\n  - couples\n  - young professionals\n  - people looking for a stylish dinner place\n  - small groups\n- Brand personality:\n  - refined but not snobbish\n  - urban and warm\n  - authentic Italian food with modern presentation\n  - inviting in the evening\n- Tone of voice:\n  - concise\n  - elegant\n  - appetizing\n  - confident\n\nVISUAL STYLE\n- Design style: modern editorial restaurant website\n- Look and feel:\n  - strong typography\n  - large images\n  - elegant spacing\n  - premium but not overly luxurious\n  - minimal clutter\n- The site must feel intentional, stylish, and contemporary.\n\nCOLOR PALETTE\nUse a modern warm palette:\n- deep charcoal: #1F1F1B\n- warm ivory: #F6F1E8\n- muted olive: #6F7558\n- terracotta accent: #B85C38\n- soft gold accent: #C8A66A\n\nTYPOGRAPHY\n- Titles: elegant serif, with strong editorial character\n- Body: modern clean sans serif\n- High contrast between headings and body text\n- Typography must feel premium and readable\n\nLAYOUT DIRECTION\n- Mobile first\n- Spacious sections\n- Strong hierarchy\n- No clutter\n- Max width containers for readability\n- Full-bleed sections where visually useful\n- Smooth transitions and subtle hover effects\n- Rounded corners can be used sparingly, but overall feel should be sleek and modern\n\nSITE STRUCTURE\nThe website must have these pages:\n- Home\n- Menu\n- Gallery\n\nNAVIGATION\nHeader navigation must include:\n- Home\n- Menu\n- Gallery\n- About\n- Contact\n\nNavigation must be coherent with real existing routes or sections.\nDo not create any broken navigation item.\n\nHEADER\n- Sticky header\n- Transparent on top of hero\n- Becomes solid on scroll\n- Logo or text logo on the left\n- Navigation on the right\n- Mobile menu for smaller screens\n- Header must feel premium and minimal\n\nHOME PAGE STRUCTURE\n\n1. HERO SECTION\n- Large full screen hero\n- Strong atmospheric background image of a stylish Italian restaurant interior or plated dishes\n- Dark overlay for readability\n- Centered or slightly left-aligned content\n- Hero must immediately communicate identity and atmosphere\n\nHero content:\nEyebrow:\n\"Osteria contemporanea a Torino\"\n\nTitle:\n\"Modern Italian dining with soul\"\n\nSubtitle:\n\"Seasonal ingredients, elegant plates, and a warm atmosphere in the heart of Torino.\"\n\nPrimary CTA:\n\"Book a table\"\n\nSecondary CTA:\n\"Explore the menu\"\n\n2. SIGNATURE DISHES SECTION\nA visually strong section showcasing signature dishes.\n\nLayout:\n- responsive card grid\n- 3 columns desktop\n- 2 tablet\n- 1 mobile\n\nInclude at least 6 dishes with:\n- dish image\n- dish name\n- short refined description\n\nExample dish names:\n- Handmade Tajarin with butter and sage\n- Braised beef cheek with red wine reduction\n- Roasted octopus with chickpea cream\n- Burrata, roasted tomatoes and basil oil\n- Hazelnut tiramisu\n- Dark chocolate tart with sea salt\n\nCards must feel premium and modern.\n\n3. ABOUT SECTION\n- Split layout\n- One side image\n- One side text\n\nText should describe the philosophy of the restaurant:\n- seasonal ingredients\n- contemporary interpretation of Italian tradition\n- intimate atmosphere\n- curated wine selection\n\n4. AMBIENCE / EXPERIENCE SECTION\nA section focused on the dining experience.\nCan be text + image or editorial layout.\nMust communicate:\n- dinner atmosphere\n- lighting\n- hospitality\n- wine and cocktails\n- ideal for dates and dinners with friends\n\n5. CONTACT / BOOKING SECTION\nMust include:\n- address\n- phone\n- opening hours\n- booking CTA\n- optional map placeholder area\n- strong visual clarity\n\nAddress:\nVia Maria Vittoria 19\nTorino\n\nPhone:\n+39 011 3821947\n\nOpening hours:\nTuesday – Thursday\n19:00 – 23:00\n\nFriday – Saturday\n19:00 – 00:00\n\nSunday\n12:30 – 15:00\n19:00 – 22:30\n\nMonday\nClosed\n\nMENU PAGE\nCreate a dedicated Menu page.\n\nIt must feel elegant and easy to scan.\n\nStructure:\n- Intro section with title and short description\n- Menu categories with clean visual separation\n\nCategories:\n- Starters\n- Pasta\n- Main courses\n- Desserts\n- Wine selection\n\nEach category must include realistic example items with prices.\n\nExamples:\n\nStarters\n- Burrata, roasted peppers, basil oil — €14\n- Veal tartare, capers, mustard seeds — €16\n- Crispy polenta, mushrooms, fondue — €13\n\nPasta\n- Tajarin, butter, sage, hazelnuts — €17\n- Plin in roast sauce — €18\n- Risotto with saffron and bone marrow — €19\n\nMain courses\n- Beef cheek, parsnip cream, jus — €24\n- Catch of the day, seasonal vegetables — €26\n- Cauliflower steak, olive crumb, herb emulsion — €20\n\nDesserts\n- Hazelnut tiramisu — €9\n- Chocolate tart, sea salt, cream — €9\n- Lemon semifreddo — €8\n\nWine selection\n- Curated Italian labels from Piemonte and beyond\n- Add a short descriptive paragraph rather than a full wine list if needed\n\nGALLERY PAGE\nCreate a dedicated Gallery page.\n\nRequirements:\n- responsive image grid\n- at least 9 images\n- atmosphere images + food images\n- all images should feel coherent and premium\n- hover effects should be subtle\n- images must fill containers correctly\n- no broken layouts\n\nIMAGES\nUse high quality images from Unsplash.\nSearch themes:\n- modern italian restaurant interior\n- fine dining italian dishes\n- restaurant table setting\n- plated pasta\n- wine bar restaurant\n- elegant dining interior\n\nImages must:\n- use object-fit: cover\n- never appear stretched\n- feel visually consistent\n- support the identity of the brand\n\nCTA STRATEGY\nThe site must contain:\n- primary booking CTA in hero\n- menu exploration CTA\n- phone CTA where relevant\n- fixed WhatsApp or booking CTA only if it fits the design cleanly\n\nBooking CTA can point to:\n- a placeholder booking link\n- a tel link\n- or a clear internal booking/contact target\n\nFOOTER\nDark footer with:\n- restaurant name\n- address\n- phone\n- opening hours summary\n- social links placeholder\n- copyright text\n\nSEO / CONTENT\n- One clear H1 per page\n- Realistic and polished copy\n- No lorem ipsum\n- No placeholder feel\n- Content should sound like a real restaurant brand\n\nRESPONSIVE DESIGN\n- Fully responsive\n- No horizontal scroll\n- Balanced spacing on all breakpoints\n- Mobile navigation must work\n- Cards and sections must collapse cleanly\n\nQUALITY EXPECTATION\nThe final website must feel like a real modern restaurant website that could realistically be sold to a client.\nAvoid generic template feel.\nAvoid weak content.\nAvoid empty sections.\nAvoid broken navigation.",
+  "siteName": "site-create-a-premium-modern-website-for-an-i",
+  "businessType": "restaurant",
+  "routing": {
+    "mode": "hash"
+  },
+  "pages": [
+    {
+      "id": "home",
+      "type": "page",
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero"
+        },
+        {
+          "id": "about",
+          "type": "split-content"
+        },
+        {
+          "id": "contact",
+          "type": "contact-block"
+        }
+      ],
+      "ctas": [
+        {
+          "id": "primary-hero-cta",
+          "kind": "internal",
+          "placement": "hero",
+          "target": {
+            "type": "section",
+            "value": "contact"
+          }
+        },
+        {
+          "id": "whatsapp-floating",
+          "kind": "external",
+          "placement": "floating",
+          "target": {
+            "type": "whatsapp",
+            "value": "whatsapp"
+          }
+        },
+        {
+          "id": "phone-hero",
+          "kind": "external",
+          "placement": "hero",
+          "target": {
+            "type": "phone",
+            "value": "phone"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gallery",
+      "type": "page",
+      "sections": [
+        {
+          "id": "gallery-grid",
+          "type": "image-grid"
+        }
+      ],
+      "ctas": []
+    }
+  ],
+  "navigation": [
+    {
+      "label": "Home",
+      "type": "route",
+      "target": "/"
+    },
+    {
+      "label": "Gallery",
+      "type": "route",
+      "target": "/gallery"
+    },
+    {
+      "label": "About",
+      "type": "section",
+      "target": "about"
+    },
+    {
+      "label": "Contact",
+      "type": "section",
+      "target": "contact"
+    }
+  ],
+  "theme": {
+    "mode": "derived-from-prompt"
+  },
+  "validation": {
+    "breakpoints": [
+      360,
+      768,
+      1024,
+      1440
+    ],
+    "checks": [
+      "semantic-structure",
+      "navigation-integrity",
+      "cta-integrity",
+      "images-not-broken",
+      "responsive-layout",
+      "placeholder-content-absent"
+    ]
+  },
+  "features": {
+    "gallery": true,
+    "whatsappCta": true,
+    "phoneCta": true
+  }
+}
