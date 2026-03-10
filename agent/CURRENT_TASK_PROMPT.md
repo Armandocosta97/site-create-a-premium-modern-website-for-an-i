@@ -1037,10 +1037,10 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-section-home-about
+section-home-contact
 
 ## Current task title
-Create about section on home
+Create contact section on home
 
 ## Current task type
 section
@@ -1049,8 +1049,8 @@ section
 ```json
 {
   "pageId": "home",
-  "sectionId": "about",
-  "sectionType": "split-content"
+  "sectionId": "contact",
+  "sectionType": "contact-block"
 }
 ```
 
@@ -1059,13 +1059,13 @@ section
 
 ## Files allowed
 - src/pages/Home.jsx
-- src/components/AboutSection.jsx
+- src/components/ContactSection.jsx
 - src/components
 
 ## Definition of done
-- section about exists on home
-- section about matches type split-content
-- section about is rendered in page home
+- section contact exists on home
+- section contact matches type contact-block
+- section contact is rendered in page home
 
 ## Strict execution rules
 - Execute only this current task.

@@ -1,10 +1,11 @@
 {
-  "currentTaskId": "section-home-contact",
+  "currentTaskId": "cta-home-primary-hero-cta",
   "status": "ready_for_next_task",
-  "lastCompletedTaskId": "section-home-about",
+  "lastCompletedTaskId": "section-home-contact",
   "completedTaskIds": [
     "page-home-shell",
     "section-home-hero",
-    "section-home-about"
+    "section-home-about",
+    "section-home-contact"
   ]
 }

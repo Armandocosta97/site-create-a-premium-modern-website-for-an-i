@@ -54,3 +54,25 @@ Waiting for validation.
 
 TASK section-home-about completed successfully.
 Build passed.
+Commit created for TASK section-home-about.
+
+Prepared TASK section-home-contact (Create contact section on home) for execution.
+
+Launching Codex for TASK section-home-contact.
+
+Completed TASK `section-home-contact`.
+- Replaced the placeholder home contact markup with a dedicated reusable `ContactSection` component.
+- Added a full contact block with address, phone link, opening hours, and booking actions while preserving the required `contact` section anchor on the home page.
+- Rendered the contact component from `src/pages/Home.jsx` without changing unrelated routes or sections.
+
+TASK section-home-contact executed by Codex.
+Waiting for validation.
+
+TASK section-home-contact completed successfully.
+Build passed.
+
+TASK section-home-contact executed by Codex.
+Waiting for validation.
+
+TASK section-home-contact completed successfully.
+Build passed.

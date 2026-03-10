@@ -1,8 +1,8 @@
-Modified files: [Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx), [AboutSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx), [AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
+Modified files: [src/components/ContactSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx), [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
 
-Implemented the home `about` section as a dedicated reusable split-content component and rendered it from the home page. The new section preserves the required `id="about"` anchor, adds refined restaurant-specific copy aligned to the brief, includes a supporting image, and uses a responsive two-column layout that collapses cleanly on smaller screens.
+Implemented the home `contact` section as a dedicated `ContactSection` component and rendered it from [Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx). The section keeps the required `id="contact"` anchor and includes the restaurant address, clickable phone number, opening hours, and booking CTAs aligned with the project brief.
 
-Build result: `npm run build` passed successfully.
+Build result: `npm run build` passed successfully with Vite production output generated.
 
 OpenAI Codex v0.111.0 (research preview)
 --------
@@ -13,7 +13,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/armandocosta/.codex/memories]
 reasoning effort: none
 reasoning summaries: none
-session id: 019cd51d-7fbb-7071-8d48-8475f062a866
+session id: 019cd51e-d81e-7f32-9f0d-b1c0593ea59b
 --------
 user
 # CURRENT TASK EXECUTION PROMPT
@@ -1055,10 +1055,10 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-section-home-about
+section-home-contact
 
 ## Current task title
-Create about section on home
+Create contact section on home
 
 ## Current task type
 section
@@ -1067,8 +1067,8 @@ section
 ```json
 {
   "pageId": "home",
-  "sectionId": "about",
-  "sectionType": "split-content"
+  "sectionId": "contact",
+  "sectionType": "contact-block"
 }
 ```
 
@@ -1077,13 +1077,13 @@ section
 
 ## Files allowed
 - src/pages/Home.jsx
-- src/components/AboutSection.jsx
+- src/components/ContactSection.jsx
 - src/components
 
 ## Definition of done
-- section about exists on home
-- section about matches type split-content
-- section about is rendered in page home
+- section contact exists on home
+- section contact matches type contact-block
+- section contact is rendered in page home
 
 ## Strict execution rules
 - Execute only this current task.
@@ -1112,32 +1112,54 @@ section
 
 mcp startup: no servers
 codex
-I’m executing the current task `section-home-about`. I’ll inspect the task context and the existing home page/components first, then add only the home about split section and verify the build.
+I’m implementing the home contact section only, then I’ll run the build check and update the agent report as required.
 exec
-/bin/zsh -lc "sed -n '1,240p' src/pages/Home.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,240p' agent/CURRENT_TASK_PROMPT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "pwd && rg --files | rg '"'^(src/pages/Home'"\\.jsx|src/components/|agent/AGENT_REPORT\\.md|agent/CURRENT_TASK_PROMPT\\.md|docs/DEVELOPMENT_METHOD\\.md|site-spec\\.json|brief/original-prompt\\.md|brief/brief-summary\\.md)"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
+/bin/zsh -lc "sed -n '1,220p' agent/CURRENT_TASK_PROMPT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,220p' docs/DEVELOPMENT_METHOD.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,220p' src/pages/Home.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "pwd && rg --files src agent brief docs | rg '"'^(src/pages/Home.jsx|src/components/|agent/AGENT_REPORT.md|agent/CURRENT_TASK_PROMPT.md|agent/TASK_STATE.json|agent/TASK_GRAPH.json|site-spec.json|brief/original-prompt.md|brief/brief-summary.md|docs/DEVELOPMENT_METHOD.md)$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+import AboutSection from "../components/AboutSection"
 import HeroSection from "../components/HeroSection"
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
-
-      <section id="about" aria-labelledby="about-heading">
-        <div>
-          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
-          <p>
-            Osteria 19 Torino brings together Italian tradition, refined
-            presentation, and a warm city atmosphere for dinner in the center
-            of Torino.
-          </p>
-        </div>
-      </section>
+      <AboutSection />
 
       <section id="contact" aria-labelledby="contact-heading">
         <div>
- succeeded in 52ms:
+          <h2 id="contact-heading">Book your evening</h2>
+          <p>Via Maria Vittoria 19, Torino</p>
+          <p>
+            <a href="tel:+390113821947">+39 011 3821947</a>
+          </p>
+        </div>
+      </section>
+    </main>
+  )
+ succeeded in 51ms:
+# Development Method
+
+All sites must follow these rules.
+
+## Objective
+- Generate production-ready static websites that are clear, stable, responsive, modular, and easy to validate.
+- Prioritize correctness before visual polish.
+- Prefer predictable implementation over improvisation.
+
+## Source of Truth
+- The human prompt is not the implementation source of truth.
+- `site-spec.json` is the only source of truth for pages, sections, navigation, routing, and required features.
+- If supported by the project architecture, `content.json` is the source of truth for copy, labels, CTA text, and contact details.
+- If supported by the project architecture, `theme.json` is the source of truth for colors, typography, spacing, radius, and visual tokens.
+- The implementation flow must be: `prompt -> site-spec.json -> tasks -> code`.
+- Never implement pages, routes, sections, navigation items, or features that are not defined in the spec.
+
+## Core Principles
+- Build for users first: clarity, speed, and clear actions.
+- Keep code modular: reusable components with clear responsibilities.
+ succeeded in 51ms:
 # CURRENT TASK EXECUTION PROMPT
 
 You are the coding executor for this project.
@@ -1160,88 +1182,21 @@ site-create-a-premium-modern-website-for-an-i
 All sites must follow these rules.
  succeeded in 52ms:
 /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
-src/pages/Home.jsx
-brief/brief-summary.md
-brief/original-prompt.md
 docs/DEVELOPMENT_METHOD.md
-agent/CURRENT_TASK_PROMPT.md
 agent/AGENT_REPORT.md
-site-spec.json
+agent/TASK_STATE.json
+agent/TASK_GRAPH.json
+agent/CURRENT_TASK_PROMPT.md
+src/pages/Home.jsx
+brief/original-prompt.md
+brief/brief-summary.md
 codex
-The home page already has a placeholder `about` section inside `Home.jsx`. I’m checking the existing component patterns under `src/components` so the new split-content section fits the current structure instead of introducing a one-off.
+The home page already has a placeholder `contact` section. I’m checking the existing component patterns in `src/components` so the replacement stays consistent and minimal.
 exec
-/bin/zsh -lc "sed -n '1,240p' site-spec.json" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,240p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc 'rg --files src/components' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 50ms:
-src/components/HeroSection.jsx
- succeeded in 51ms:
-{
-  "originalPrompt": "Create a premium modern website for an Italian restaurant called Osteria 19 Torino.\n\nThe website must feel contemporary, elegant, warm, urban, and high quality, like a modern bistro in the center of Turin that combines traditional Italian cuisine with refined presentation.\n\nGENERAL GOAL\nThe final result must look like a real restaurant website ready to be shown to a client, not a generic template.\nThe website should communicate atmosphere, quality ingredients, strong identity, and make it easy for users to explore the menu and book a table.\n\nBRAND POSITIONING\n- Restaurant type: modern Italian restaurant / contemporary osteria\n- City: Torino\n- Target audience:\n  - couples\n  - young professionals\n  - people looking for a stylish dinner place\n  - small groups\n- Brand personality:\n  - refined but not snobbish\n  - urban and warm\n  - authentic Italian food with modern presentation\n  - inviting in the evening\n- Tone of voice:\n  - concise\n  - elegant\n  - appetizing\n  - confident\n\nVISUAL STYLE\n- Design style: modern editorial restaurant website\n- Look and feel:\n  - strong typography\n  - large images\n  - elegant spacing\n  - premium but not overly luxurious\n  - minimal clutter\n- The site must feel intentional, stylish, and contemporary.\n\nCOLOR PALETTE\nUse a modern warm palette:\n- deep charcoal: #1F1F1B\n- warm ivory: #F6F1E8\n- muted olive: #6F7558\n- terracotta accent: #B85C38\n- soft gold accent: #C8A66A\n\nTYPOGRAPHY\n- Titles: elegant serif, with strong editorial character\n- Body: modern clean sans serif\n- High contrast between headings and body text\n- Typography must feel premium and readable\n\nLAYOUT DIRECTION\n- Mobile first\n- Spacious sections\n- Strong hierarchy\n- No clutter\n- Max width containers for readability\n- Full-bleed sections where visually useful\n- Smooth transitions and subtle hover effects\n- Rounded corners can be used sparingly, but overall feel should be sleek and modern\n\nSITE STRUCTURE\nThe website must have these pages:\n- Home\n- Menu\n- Gallery\n\nNAVIGATION\nHeader navigation must include:\n- Home\n- Menu\n- Gallery\n- About\n- Contact\n\nNavigation must be coherent with real existing routes or sections.\nDo not create any broken navigation item.\n\nHEADER\n- Sticky header\n- Transparent on top of hero\n- Becomes solid on scroll\n- Logo or text logo on the left\n- Navigation on the right\n- Mobile menu for smaller screens\n- Header must feel premium and minimal\n\nHOME PAGE STRUCTURE\n\n1. HERO SECTION\n- Large full screen hero\n- Strong atmospheric background image of a stylish Italian restaurant interior or plated dishes\n- Dark overlay for readability\n- Centered or slightly left-aligned content\n- Hero must immediately communicate identity and atmosphere\n\nHero content:\nEyebrow:\n\"Osteria contemporanea a Torino\"\n\nTitle:\n\"Modern Italian dining with soul\"\n\nSubtitle:\n\"Seasonal ingredients, elegant plates, and a warm atmosphere in the heart of Torino.\"\n\nPrimary CTA:\n\"Book a table\"\n\nSecondary CTA:\n\"Explore the menu\"\n\n2. SIGNATURE DISHES SECTION\nA visually strong section showcasing signature dishes.\n\nLayout:\n- responsive card grid\n- 3 columns desktop\n- 2 tablet\n- 1 mobile\n\nInclude at least 6 dishes with:\n- dish image\n- dish name\n- short refined description\n\nExample dish names:\n- Handmade Tajarin with butter and sage\n- Braised beef cheek with red wine reduction\n- Roasted octopus with chickpea cream\n- Burrata, roasted tomatoes and basil oil\n- Hazelnut tiramisu\n- Dark chocolate tart with sea salt\n\nCards must feel premium and modern.\n\n3. ABOUT SECTION\n- Split layout\n- One side image\n- One side text\n\nText should describe the philosophy of the restaurant:\n- seasonal ingredients\n- contemporary interpretation of Italian tradition\n- intimate atmosphere\n- curated wine selection\n\n4. AMBIENCE / EXPERIENCE SECTION\nA section focused on the dining experience.\nCan be text + image or editorial layout.\nMust communicate:\n- dinner atmosphere\n- lighting\n- hospitality\n- wine and cocktails\n- ideal for dates and dinners with friends\n\n5. CONTACT / BOOKING SECTION\nMust include:\n- address\n- phone\n- opening hours\n- booking CTA\n- optional map placeholder area\n- strong visual clarity\n\nAddress:\nVia Maria Vittoria 19\nTorino\n\nPhone:\n+39 011 3821947\n\nOpening hours:\nTuesday – Thursday\n19:00 – 23:00\n\nFriday – Saturday\n19:00 – 00:00\n\nSunday\n12:30 – 15:00\n19:00 – 22:30\n\nMonday\nClosed\n\nMENU PAGE\nCreate a dedicated Menu page.\n\nIt must feel elegant and easy to scan.\n\nStructure:\n- Intro section with title and short description\n- Menu categories with clean visual separation\n\nCategories:\n- Starters\n- Pasta\n- Main courses\n- Desserts\n- Wine selection\n\nEach category must include realistic example items with prices.\n\nExamples:\n\nStarters\n- Burrata, roasted peppers, basil oil — €14\n- Veal tartare, capers, mustard seeds — €16\n- Crispy polenta, mushrooms, fondue — €13\n\nPasta\n- Tajarin, butter, sage, hazelnuts — €17\n- Plin in roast sauce — €18\n- Risotto with saffron and bone marrow — €19\n\nMain courses\n- Beef cheek, parsnip cream, jus — €24\n- Catch of the day, seasonal vegetables — €26\n- Cauliflower steak, olive crumb, herb emulsion — €20\n\nDesserts\n- Hazelnut tiramisu — €9\n- Chocolate tart, sea salt, cream — €9\n- Lemon semifreddo — €8\n\nWine selection\n- Curated Italian labels from Piemonte and beyond\n- Add a short descriptive paragraph rather than a full wine list if needed\n\nGALLERY PAGE\nCreate a dedicated Gallery page.\n\nRequirements:\n- responsive image grid\n- at least 9 images\n- atmosphere images + food images\n- all images should feel coherent and premium\n- hover effects should be subtle\n- images must fill containers correctly\n- no broken layouts\n\nIMAGES\nUse high quality images from Unsplash.\nSearch themes:\n- modern italian restaurant interior\n- fine dining italian dishes\n- restaurant table setting\n- plated pasta\n- wine bar restaurant\n- elegant dining interior\n\nImages must:\n- use object-fit: cover\n- never appear stretched\n- feel visually consistent\n- support the identity of the brand\n\nCTA STRATEGY\nThe site must contain:\n- primary booking CTA in hero\n- menu exploration CTA\n- phone CTA where relevant\n- fixed WhatsApp or booking CTA only if it fits the design cleanly\n\nBooking CTA can point to:\n- a placeholder booking link\n- a tel link\n- or a clear internal booking/contact target\n\nFOOTER\nDark footer with:\n- restaurant name\n- address\n- phone\n- opening hours summary\n- social links placeholder\n- copyright text\n\nSEO / CONTENT\n- One clear H1 per page\n- Realistic and polished copy\n- No lorem ipsum\n- No placeholder feel\n- Content should sound like a real restaurant brand\n\nRESPONSIVE DESIGN\n- Fully responsive\n- No horizontal scroll\n- Balanced spacing on all breakpoints\n- Mobile navigation must work\n- Cards and sections must collapse cleanly\n\nQUALITY EXPECTATION\nThe final website must feel like a real modern restaurant website that could realistically be sold to a client.\nAvoid generic template feel.\nAvoid weak content.\nAvoid empty sections.\nAvoid broken navigation.",
-  "siteName": "site-create-a-premium-modern-website-for-an-i",
-  "businessType": "restaurant",
-  "routing": {
-    "mode": "hash"
-  },
-  "pages": [
-    {
-      "id": "home",
-      "type": "page",
-      "sections": [
-        {
-          "id": "hero",
-          "type": "hero"
-        },
-        {
-          "id": "about",
-          "type": "split-content"
-        },
- succeeded in 51ms:
-# AGENT REPORT
-
-Project created.
-
-Prepared TASK page-home-shell (Create home page shell) for execution.
-
-Prepared TASK page-home-shell (Create home page shell) for execution.
-
-Launching Codex for TASK page-home-shell.
-
-Completed TASK `page-home-shell`.
-- Replaced the placeholder home page with a semantic shell containing `hero`, `about`, and `contact` sections.
-- Preserved the home route in `src/App.jsx` and ensured the page includes valid booking and phone CTAs.
-
-TASK page-home-shell executed by Codex.
-Waiting for validation.
-
-TASK page-home-shell completed successfully.
-Build passed.
-Commit created for TASK page-home-shell.
-codex
-I have enough context to make the change. Next I’m reading `HeroSection` to match the current visual language, then I’ll replace the placeholder markup in `Home.jsx` with a dedicated `AboutSection` component and append the task report entry.
-exec
-/bin/zsh -lc 'cat package.json' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
-{
-  "name": "site-create-a-premium-modern-website-for-an-i",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test:ui": "playwright test"
-  },
-  "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.13.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@playwright/test": "^1.58.2",
- succeeded in 52ms:
+/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/components/AboutSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc 'rg --files src/components' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
 const backgroundImage =
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
 
@@ -1262,10 +1217,28 @@ const styles = {
     backgroundSize: "cover",
     backgroundPosition: "center",
     transform: "scale(1.04)",
-codex
-I’m editing now. The change is limited to a reusable `AboutSection` component plus wiring it into `Home.jsx`, keeping the existing `about` anchor intact for navigation.
-file update
-A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx
+ succeeded in 52ms:
+# AGENT REPORT
+
+Project created.
+
+Prepared TASK page-home-shell (Create home page shell) for execution.
+
+Prepared TASK page-home-shell (Create home page shell) for execution.
+
+Launching Codex for TASK page-home-shell.
+
+Completed TASK `page-home-shell`.
+- Replaced the placeholder home page with a semantic shell containing `hero`, `about`, and `contact` sections.
+- Preserved the home route in `src/App.jsx` and ensured the page includes valid booking and phone CTAs.
+
+TASK page-home-shell executed by Codex.
+Waiting for validation.
+
+TASK page-home-shell completed successfully.
+Build passed.
+Commit created for TASK page-home-shell.
+ succeeded in 50ms:
 const aboutImage =
   "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
 
@@ -1286,52 +1259,139 @@ const styles = {
     maxWidth: "72rem",
     margin: "0 auto",
     padding: "4.5rem 1.5rem",
+ succeeded in 50ms:
+src/components/AboutSection.jsx
+src/components/HeroSection.jsx
+codex
+I have enough context. Next I’m replacing the placeholder markup with a dedicated `ContactSection` component that keeps the required `contact` anchor, includes the restaurant details and booking actions, and stays within the allowed files.
+exec
+/bin/zsh -lc "sed -n '1,240p' src/App.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,220p' package.json" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "rg --files | rg '"'^(package.json|vite.config|src/App'"\\.(jsx|js|tsx|ts))"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+import { HashRouter, Routes, Route } from "react-router-dom"
+import Layout from "./layout/Layout"
+import Home from "./pages/Home"
+import Gallery from "./pages/Gallery"
+
+export default function App() {
+  return (
+    <HashRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </Layout>
+    </HashRouter>
+  )
+}
+ succeeded in 51ms:
+{
+  "name": "site-create-a-premium-modern-website-for-an-i",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test:ui": "playwright test"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.58.2",
+ succeeded in 51ms:
+src/App.jsx
+package.json
+file update
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
+@@ -1,2 +1,3 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
+ import HeroSection from "../components/HeroSection"
+@@ -8,12 +9,3 @@
+       <AboutSection />
+-
+-      <section id="contact" aria-labelledby="contact-heading">
+-        <div>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
+-          <p>
+-            <a href="tel:+390113821947">+39 011 3821947</a>
+-          </p>
+-        </div>
+-      </section>
++      <ContactSection />
+     </main>
+A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx
+const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
+
+const openingHours = [
+  {
+    days: "Tuesday - Thursday",
+    hours: ["19:00 - 23:00"],
+  },
+  {
+    days: "Friday - Saturday",
+    hours: ["19:00 - 00:00"],
+  },
+  {
+    days: "Sunday",
+    hours: ["12:30 - 15:00", "19:00 - 22:30"],
+  },
+  {
+    days: "Monday",
+    hours: ["Closed"],
+  },
+]
+
+const infoCards = [
+  {
+    title: "Address",
+    content: ["Via Maria Vittoria 19", "Torino"],
+  },
+  {
+    title: "Phone",
+    content: ["+39 011 3821947"],
+    href: "tel:+390113821947",
+  },
+]
+
+const styles = {
+  section: {
+    backgroundColor: "#1f1f1b",
+    color: "#f6f1e8",
+  },
+  shell: {
+    maxWidth: "72rem",
+    margin: "0 auto",
+    padding: "4.5rem 1.5rem 5rem",
+    display: "grid",
+    gap: "1.5rem",
+  },
+  panel: {
     display: "grid",
     gap: "2rem",
-  },
-  mediaCard: {
-    position: "relative",
-    overflow: "hidden",
-    minHeight: "22rem",
+    padding: "1.5rem",
+    border: "1px solid rgba(246, 241, 232, 0.1)",
     borderRadius: "1.75rem",
-    backgroundColor: "#d8d1c5",
-    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-  },
-  image: {
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  imageOverlay: {
-    position: "absolute",
-    inset: 0,
     background:
-      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
+      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
+    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
   },
-  imageBadge: {
-    position: "absolute",
-    left: "1.25rem",
-    bottom: "1.25rem",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.6rem",
-    padding: "0.75rem 1rem",
-    borderRadius: "999px",
-    backgroundColor: "rgba(31, 31, 27, 0.82)",
-    color: "#f6f1e8",
-    fontSize: "0.88rem",
-    letterSpacing: "0.04em",
-  },
-  content: {
+  intro: {
     display: "grid",
-    alignContent: "center",
-    gap: "1.5rem",
+    gap: "1rem",
   },
   eyebrow: {
     margin: 0,
-    color: "#6f7558",
+    color: "#c8a66a",
     textTransform: "uppercase",
     letterSpacing: "0.18em",
     fontSize: "0.78rem",
@@ -1340,211 +1400,248 @@ const styles = {
   title: {
     margin: 0,
     fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
+    fontSize: "clamp(2.2rem, 5vw, 4rem)",
     lineHeight: 1,
     letterSpacing: "-0.04em",
-    maxWidth: "12ch",
+    maxWidth: "10ch",
   },
   lead: {
     margin: 0,
-    maxWidth: "34rem",
-    fontSize: "1.05rem",
-    lineHeight: 1.8,
-    color: "rgba(31, 31, 27, 0.78)",
+    maxWidth: "36rem",
+    color: "rgba(246, 241, 232, 0.78)",
+    fontSize: "1rem",
+    lineHeight: 1.75,
   },
-  highlightList: {
+  content: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+    gap: "1.25rem",
+    alignItems: "start",
+  },
+  card: {
+    display: "grid",
+    gap: "0.85rem",
+    minHeight: "100%",
+    padding: "1.25rem",
+    borderRadius: "1.4rem",
+    backgroundColor: "rgba(246, 241, 232, 0.04)",
+    border: "1px solid rgba(246, 241, 232, 0.08)",
+  },
+  cardTitle: {
+    margin: 0,
+    color: "#c8a66a",
+    fontSize: "0.82rem",
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+  },
+  cardBody: {
+    display: "grid",
+    gap: "0.35rem",
+    color: "rgba(246, 241, 232, 0.92)",
+    lineHeight: 1.7,
+  },
+  cardLink: {
+    color: "#f6f1e8",
+    textDecoration: "none",
+    fontWeight: 600,
+  },
+  hoursList: {
     listStyle: "none",
     margin: 0,
     padding: 0,
     display: "grid",
     gap: "0.9rem",
   },
-  highlightItem: {
+  hoursRow: {
     display: "grid",
-    gridTemplateColumns: "auto 1fr",
-    gap: "0.9rem",
-    alignItems: "start",
+    gridTemplateColumns: "minmax(0, 1fr) auto",
+    gap: "1rem",
     paddingBottom: "0.9rem",
-    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-    color: "rgba(31, 31, 27, 0.82)",
-    lineHeight: 1.65,
+    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
   },
-  marker: {
-    width: "0.65rem",
-    height: "0.65rem",
+  hoursDay: {
+    fontWeight: 600,
+  },
+  hoursTimes: {
+    textAlign: "right",
+    color: "rgba(246, 241, 232, 0.72)",
+  },
+  actions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.9rem",
+  },
+  primaryAction: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: "999px",
-    marginTop: "0.5rem",
-    background:
-      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
+    padding: "0.95rem 1.5rem",
+    backgroundColor: "#b85c38",
+    color: "#f6f1e8",
+    textDecoration: "none",
+    fontSize: "0.98rem",
+    fontWeight: 700,
+  },
+  secondaryAction: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "999px",
+    padding: "0.95rem 1.5rem",
+    border: "1px solid rgba(246, 241, 232, 0.24)",
+    backgroundColor: "rgba(246, 241, 232, 0.04)",
+    color: "#f6f1e8",
+    textDecoration: "none",
+    fontSize: "0.98rem",
+    fontWeight: 700,
+  },
+  note: {
+    margin: 0,
+    color: "rgba(246, 241, 232, 0.62)",
+    fontSize: "0.92rem",
+    lineHeight: 1.6,
   },
 }
 
-const desktopShellStyles = {
-  ...styles.shell,
-  gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
-  alignItems: "center",
-}
-
-export default function AboutSection() {
-  const shellStyle =
-    typeof window !== "undefined" && window.innerWidth >= 960
-      ? desktopShellStyles
-      : styles.shell
-
+export default function ContactSection() {
   return (
-    <section id="about" aria-labelledby="about-heading" style={styles.section}>
-      <div style={shellStyle}>
-        <div style={styles.mediaCard}>
-          <img
-            src={aboutImage}
-            alt="Warm interior table setting at Osteria 19 Torino"
-            style={styles.image}
-          />
-          <div aria-hidden="true" style={styles.imageOverlay} />
-          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-        </div>
+    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
+      <div style={styles.shell}>
+        <div style={styles.panel}>
+          <div style={styles.intro}>
+            <p style={styles.eyebrow}>Contact and booking</p>
+            <h2 id="contact-heading" style={styles.title}>
+              Reserve a table for your next Torino evening
+            </h2>
+            <p style={styles.lead}>
+              Join us for seasonal plates, thoughtful wines, and a dining room
+              designed for dates, small groups, and long conversations.
+            </p>
+          </div>
 
-        <div style={styles.content}>
-          <p style={styles.eyebrow}>About Osteria 19</p>
-          <h2 id="about-heading" style={styles.title}>
-            Italian tradition, interpreted with a lighter hand
-          </h2>
-          <p style={styles.lead}>
-            Osteria 19 Torino brings together seasonal ingredients, precise
-            cooking, and a warm urban mood for dinners that feel intimate,
-            polished, and unmistakably Italian.
-          </p>
-
-          <ul style={styles.highlightList}>
-            {highlights.map((item) => (
-              <li key={item} style={styles.highlightItem}>
-                <span aria-hidden="true" style={styles.marker} />
-                <span>{item}</span>
-              </li>
+          <div style={styles.content}>
+            {infoCards.map((card) => (
+              <article key={card.title} style={styles.card}>
+                <h3 style={styles.cardTitle}>{card.title}</h3>
+                <div style={styles.cardBody}>
+                  {card.content.map((line) =>
+                    card.href ? (
+                      <a key={line} href={card.href} style={styles.cardLink}>
+                        {line}
+                      </a>
+                    ) : (
+                      <span key={line}>{line}</span>
+                    ),
+                  )}
+                </div>
+              </article>
             ))}
-          </ul>
+
+            <article style={styles.card}>
+              <h3 style={styles.cardTitle}>Opening hours</h3>
+              <ul style={styles.hoursList}>
+                {openingHours.map((entry) => (
+                  <li key={entry.days} style={styles.hoursRow}>
+                    <span style={styles.hoursDay}>{entry.days}</span>
+                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
+
+          <div style={styles.actions}>
+            <a href={bookingLink} style={styles.primaryAction}>
+              Book on WhatsApp
+            </a>
+            <a href="tel:+390113821947" style={styles.secondaryAction}>
+              Call for reservations
+            </a>
+          </div>
+
+          <p style={styles.note}>
+            Reservations are recommended for Friday and Saturday dinner service.
+          </p>
         </div>
       </div>
     </section>
   )
 }
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
-@@ -46 +46,5 @@
- Launching Codex for TASK section-home-about.
-+
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
-@@ -1 +1,2 @@
-+import AboutSection from "../components/AboutSection"
- import HeroSection from "../components/HeroSection"
-@@ -6,13 +7,3 @@
-       <HeroSection />
--
--      <section id="about" aria-labelledby="about-heading">
--        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
--          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
--          </p>
--        </div>
--      </section>
-+      <AboutSection />
- 
-apply_patch(auto_approved=true) exited 0 in 56ms:
+apply_patch(auto_approved=true) exited 0 in 63ms:
 Success. Updated the following files:
-A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx
+A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx
 M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
 file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 1810eef164617f0c4d75e8e887e4b3188f986364..28447d0c15f4df1810750b85111d1d986e7887c2
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -44,3 +44,7 @@
- Prepared TASK section-home-about (Create about section on home) for execution.
- 
- Launching Codex for TASK section-home-about.
-+
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
 new file mode 100644
-index 0000000000000000000000000000000000000000..b6b95206797a65e3cc94958971a7745d870b160c
+index 0000000000000000000000000000000000000000..d64f20ea5ded9828685adb1d95ebb05d367eb86a
 --- /dev/null
-+++ b/src/components/AboutSection.jsx
-@@ -0,0 +1,163 @@
-+const aboutImage =
-+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
++++ b/src/components/ContactSection.jsx
+@@ -0,0 +1,239 @@
++const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
 +
-+const highlights = [
-+  "Seasonal produce selected with the rhythm of Piemonte markets",
-+  "Italian classics reworked with clean presentation and measured elegance",
-+  "An intimate dining room shaped for long dinners, wine, and conversation",
-+  "A curated cellar built around local labels and expressive Italian bottles",
++const openingHours = [
++  {
++    days: "Tuesday - Thursday",
++    hours: ["19:00 - 23:00"],
++  },
++  {
++    days: "Friday - Saturday",
++    hours: ["19:00 - 00:00"],
++  },
++  {
++    days: "Sunday",
++    hours: ["12:30 - 15:00", "19:00 - 22:30"],
++  },
++  {
++    days: "Monday",
++    hours: ["Closed"],
++  },
++]
++
++const infoCards = [
++  {
++    title: "Address",
++    content: ["Via Maria Vittoria 19", "Torino"],
++  },
++  {
++    title: "Phone",
++    content: ["+39 011 3821947"],
++    href: "tel:+390113821947",
++  },
 +]
 +
 +const styles = {
 +  section: {
-+    background:
-+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-+    color: "#1f1f1b",
++    backgroundColor: "#1f1f1b",
++    color: "#f6f1e8",
 +  },
 +  shell: {
 +    maxWidth: "72rem",
 +    margin: "0 auto",
-+    padding: "4.5rem 1.5rem",
++    padding: "4.5rem 1.5rem 5rem",
++    display: "grid",
++    gap: "1.5rem",
++  },
++  panel: {
 +    display: "grid",
 +    gap: "2rem",
-+  },
-+  mediaCard: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "22rem",
++    padding: "1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.1)",
 +    borderRadius: "1.75rem",
-+    backgroundColor: "#d8d1c5",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  imageOverlay: {
-+    position: "absolute",
-+    inset: 0,
 +    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
++    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
 +  },
-+  imageBadge: {
-+    position: "absolute",
-+    left: "1.25rem",
-+    bottom: "1.25rem",
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.6rem",
-+    padding: "0.75rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "rgba(31, 31, 27, 0.82)",
-+    color: "#f6f1e8",
-+    fontSize: "0.88rem",
-+    letterSpacing: "0.04em",
-+  },
-+  content: {
++  intro: {
 +    display: "grid",
-+    alignContent: "center",
-+    gap: "1.5rem",
++    gap: "1rem",
 +  },
 +  eyebrow: {
 +    margin: 0,
-+    color: "#6f7558",
++    color: "#c8a66a",
 +    textTransform: "uppercase",
 +    letterSpacing: "0.18em",
 +    fontSize: "0.78rem",
@@ -1553,655 +1650,273 @@ index 0000000000000000000000000000000000000000..b6b95206797a65e3cc94958971a7745d
 +  title: {
 +    margin: 0,
 +    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 5vw, 4rem)",
 +    lineHeight: 1,
 +    letterSpacing: "-0.04em",
-+    maxWidth: "12ch",
++    maxWidth: "10ch",
 +  },
 +  lead: {
 +    margin: 0,
-+    maxWidth: "34rem",
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.78)",
-+  },
-+  highlightList: {
-+    listStyle: "none",
-+    margin: 0,
-+    padding: 0,
-+    display: "grid",
-+    gap: "0.9rem",
-+  },
-+  highlightItem: {
-+    display: "grid",
-+    gridTemplateColumns: "auto 1fr",
-+    gap: "0.9rem",
-+    alignItems: "start",
-+    paddingBottom: "0.9rem",
-+    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-+    color: "rgba(31, 31, 27, 0.82)",
-+    lineHeight: 1.65,
-+  },
-+  marker: {
-+    width: "0.65rem",
-+    height: "0.65rem",
-+    borderRadius: "999px",
-+    marginTop: "0.5rem",
-+    background:
-+      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-+    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
-+  },
-+}
-+
-+const desktopShellStyles = {
-+  ...styles.shell,
-+  gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
-+  alignItems: "center",
-+}
-+
-+export default function AboutSection() {
-+  const shellStyle =
-+    typeof window !== "undefined" && window.innerWidth >= 960
-+      ? desktopShellStyles
-+      : styles.shell
-+
-+  return (
-+    <section id="about" aria-labelledby="about-heading" style={styles.section}>
-+      <div style={shellStyle}>
-+        <div style={styles.mediaCard}>
-+          <img
-+            src={aboutImage}
-+            alt="Warm interior table setting at Osteria 19 Torino"
-+            style={styles.image}
-+          />
-+          <div aria-hidden="true" style={styles.imageOverlay} />
-+          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-+        </div>
-+
-+        <div style={styles.content}>
-+          <p style={styles.eyebrow}>About Osteria 19</p>
-+          <h2 id="about-heading" style={styles.title}>
-+            Italian tradition, interpreted with a lighter hand
-+          </h2>
-+          <p style={styles.lead}>
-+            Osteria 19 Torino brings together seasonal ingredients, precise
-+            cooking, and a warm urban mood for dinners that feel intimate,
-+            polished, and unmistakably Italian.
-+          </p>
-+
-+          <ul style={styles.highlightList}>
-+            {highlights.map((item) => (
-+              <li key={item} style={styles.highlightItem}>
-+                <span aria-hidden="true" style={styles.marker} />
-+                <span>{item}</span>
-+              </li>
-+            ))}
-+          </ul>
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index f2e4ae039b179e29733838d41dd93c56e7f4b43b..28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,20 +1,11 @@
-+import AboutSection from "../components/AboutSection"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-   return (
-     <main>
-       <HeroSection />
--
--      <section id="about" aria-labelledby="about-heading">
--        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
--          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
--          </p>
--        </div>
--      </section>
-+      <AboutSection />
- 
-       <section id="contact" aria-labelledby="contact-heading">
-         <div>
-
-file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 1810eef164617f0c4d75e8e887e4b3188f986364..28447d0c15f4df1810750b85111d1d986e7887c2
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -44,3 +44,7 @@
- Prepared TASK section-home-about (Create about section on home) for execution.
- 
- Launching Codex for TASK section-home-about.
-+
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..b6b95206797a65e3cc94958971a7745d870b160c
---- /dev/null
-+++ b/src/components/AboutSection.jsx
-@@ -0,0 +1,163 @@
-+const aboutImage =
-+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
-+
-+const highlights = [
-+  "Seasonal produce selected with the rhythm of Piemonte markets",
-+  "Italian classics reworked with clean presentation and measured elegance",
-+  "An intimate dining room shaped for long dinners, wine, and conversation",
-+  "A curated cellar built around local labels and expressive Italian bottles",
-+]
-+
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "4.5rem 1.5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  mediaCard: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "22rem",
-+    borderRadius: "1.75rem",
-+    backgroundColor: "#d8d1c5",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  imageOverlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
-+  },
-+  imageBadge: {
-+    position: "absolute",
-+    left: "1.25rem",
-+    bottom: "1.25rem",
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.6rem",
-+    padding: "0.75rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "rgba(31, 31, 27, 0.82)",
-+    color: "#f6f1e8",
-+    fontSize: "0.88rem",
-+    letterSpacing: "0.04em",
++    maxWidth: "36rem",
++    color: "rgba(246, 241, 232, 0.78)",
++    fontSize: "1rem",
++    lineHeight: 1.75,
 +  },
 +  content: {
 +    display: "grid",
-+    alignContent: "center",
-+    gap: "1.5rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1.25rem",
++    alignItems: "start",
 +  },
-+  eyebrow: {
++  card: {
++    display: "grid",
++    gap: "0.85rem",
++    minHeight: "100%",
++    padding: "1.25rem",
++    borderRadius: "1.4rem",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    border: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  cardTitle: {
 +    margin: 0,
-+    color: "#6f7558",
++    color: "#c8a66a",
++    fontSize: "0.82rem",
++    letterSpacing: "0.12em",
 +    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
 +    fontWeight: 700,
 +  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+    maxWidth: "12ch",
++  cardBody: {
++    display: "grid",
++    gap: "0.35rem",
++    color: "rgba(246, 241, 232, 0.92)",
++    lineHeight: 1.7,
 +  },
-+  lead: {
-+    margin: 0,
-+    maxWidth: "34rem",
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.78)",
++  cardLink: {
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontWeight: 600,
 +  },
-+  highlightList: {
++  hoursList: {
 +    listStyle: "none",
 +    margin: 0,
 +    padding: 0,
 +    display: "grid",
 +    gap: "0.9rem",
 +  },
-+  highlightItem: {
++  hoursRow: {
 +    display: "grid",
-+    gridTemplateColumns: "auto 1fr",
-+    gap: "0.9rem",
-+    alignItems: "start",
++    gridTemplateColumns: "minmax(0, 1fr) auto",
++    gap: "1rem",
 +    paddingBottom: "0.9rem",
-+    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-+    color: "rgba(31, 31, 27, 0.82)",
-+    lineHeight: 1.65,
++    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
 +  },
-+  marker: {
-+    width: "0.65rem",
-+    height: "0.65rem",
++  hoursDay: {
++    fontWeight: 600,
++  },
++  hoursTimes: {
++    textAlign: "right",
++    color: "rgba(246, 241, 232, 0.72)",
++  },
++  actions: {
++    display: "flex",
++    flexWrap: "wrap",
++    gap: "0.9rem",
++  },
++  primaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
 +    borderRadius: "999px",
-+    marginTop: "0.5rem",
-+    background:
-+      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-+    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
++    padding: "0.95rem 1.5rem",
++    backgroundColor: "#b85c38",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  secondaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.24)",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  note: {
++    margin: 0,
++    color: "rgba(246, 241, 232, 0.62)",
++    fontSize: "0.92rem",
++    lineHeight: 1.6,
 +  },
 +}
 +
-+const desktopShellStyles = {
-+  ...styles.shell,
-+  gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
-+  alignItems: "center",
-+}
-+
-+export default function AboutSection() {
-+  const shellStyle =
-+    typeof window !== "undefined" && window.innerWidth >= 960
-+      ? desktopShellStyles
-+      : styles.shell
-+
++export default function ContactSection() {
 +  return (
-+    <section id="about" aria-labelledby="about-heading" style={styles.section}>
-+      <div style={shellStyle}>
-+        <div style={styles.mediaCard}>
-+          <img
-+            src={aboutImage}
-+            alt="Warm interior table setting at Osteria 19 Torino"
-+            style={styles.image}
-+          />
-+          <div aria-hidden="true" style={styles.imageOverlay} />
-+          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-+        </div>
++    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
++      <div style={styles.shell}>
++        <div style={styles.panel}>
++          <div style={styles.intro}>
++            <p style={styles.eyebrow}>Contact and booking</p>
++            <h2 id="contact-heading" style={styles.title}>
++              Reserve a table for your next Torino evening
++            </h2>
++            <p style={styles.lead}>
++              Join us for seasonal plates, thoughtful wines, and a dining room
++              designed for dates, small groups, and long conversations.
++            </p>
++          </div>
 +
-+        <div style={styles.content}>
-+          <p style={styles.eyebrow}>About Osteria 19</p>
-+          <h2 id="about-heading" style={styles.title}>
-+            Italian tradition, interpreted with a lighter hand
-+          </h2>
-+          <p style={styles.lead}>
-+            Osteria 19 Torino brings together seasonal ingredients, precise
-+            cooking, and a warm urban mood for dinners that feel intimate,
-+            polished, and unmistakably Italian.
-+          </p>
-+
-+          <ul style={styles.highlightList}>
-+            {highlights.map((item) => (
-+              <li key={item} style={styles.highlightItem}>
-+                <span aria-hidden="true" style={styles.marker} />
-+                <span>{item}</span>
-+              </li>
++          <div style={styles.content}>
++            {infoCards.map((card) => (
++              <article key={card.title} style={styles.card}>
++                <h3 style={styles.cardTitle}>{card.title}</h3>
++                <div style={styles.cardBody}>
++                  {card.content.map((line) =>
++                    card.href ? (
++                      <a key={line} href={card.href} style={styles.cardLink}>
++                        {line}
++                      </a>
++                    ) : (
++                      <span key={line}>{line}</span>
++                    ),
++                  )}
++                </div>
++              </article>
 +            ))}
-+          </ul>
++
++            <article style={styles.card}>
++              <h3 style={styles.cardTitle}>Opening hours</h3>
++              <ul style={styles.hoursList}>
++                {openingHours.map((entry) => (
++                  <li key={entry.days} style={styles.hoursRow}>
++                    <span style={styles.hoursDay}>{entry.days}</span>
++                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
++                  </li>
++                ))}
++              </ul>
++            </article>
++          </div>
++
++          <div style={styles.actions}>
++            <a href={bookingLink} style={styles.primaryAction}>
++              Book on WhatsApp
++            </a>
++            <a href="tel:+390113821947" style={styles.secondaryAction}>
++              Call for reservations
++            </a>
++          </div>
++
++          <p style={styles.note}>
++            Reservations are recommended for Friday and Saturday dinner service.
++          </p>
 +        </div>
 +      </div>
 +    </section>
 +  )
 +}
 diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index f2e4ae039b179e29733838d41dd93c56e7f4b43b..28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb
+index 28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb..b8aae659216c82a49924482de95b3f8942cf7303
 --- a/src/pages/Home.jsx
 +++ b/src/pages/Home.jsx
-@@ -1,20 +1,11 @@
-+import AboutSection from "../components/AboutSection"
+@@ -1,4 +1,5 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
  import HeroSection from "../components/HeroSection"
  
  export default function Home() {
-   return (
+@@ -6,16 +7,7 @@
      <main>
        <HeroSection />
+       <AboutSection />
 -
--      <section id="about" aria-labelledby="about-heading">
+-      <section id="contact" aria-labelledby="contact-heading">
 -        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
 -          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
+-            <a href="tel:+390113821947">+39 011 3821947</a>
 -          </p>
 -        </div>
 -      </section>
-+      <AboutSection />
- 
-       <section id="contact" aria-labelledby="contact-heading">
-         <div>
-
-codex
-The section is in place. I’m making one small correction before validation: removing viewport logic from render so the split layout stays deterministic and build-safe.
-file update
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx
-@@ -21,3 +21,5 @@
-     display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
-     gap: "2rem",
-+    alignItems: "center",
-   },
-@@ -112,8 +114,2 @@
-   },
--}
--
--const desktopShellStyles = {
--  ...styles.shell,
--  gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
--  alignItems: "center",
++      <ContactSection />
+     </main>
+   )
  }
-@@ -121,10 +117,5 @@
- export default function AboutSection() {
--  const shellStyle =
--    typeof window !== "undefined" && window.innerWidth >= 960
--      ? desktopShellStyles
--      : styles.shell
--
-   return (
-     <section id="about" aria-labelledby="about-heading" style={styles.section}>
--      <div style={shellStyle}>
-+      <div style={styles.shell}>
-         <div style={styles.mediaCard}>
-apply_patch(auto_approved=true) exited 0 in 84ms:
-Success. Updated the following files:
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx
-file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 1810eef164617f0c4d75e8e887e4b3188f986364..28447d0c15f4df1810750b85111d1d986e7887c2
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -44,3 +44,7 @@
- Prepared TASK section-home-about (Create about section on home) for execution.
- 
- Launching Codex for TASK section-home-about.
-+
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7dbc0e3db4f
---- /dev/null
-+++ b/src/components/AboutSection.jsx
-@@ -0,0 +1,154 @@
-+const aboutImage =
-+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
-+
-+const highlights = [
-+  "Seasonal produce selected with the rhythm of Piemonte markets",
-+  "Italian classics reworked with clean presentation and measured elegance",
-+  "An intimate dining room shaped for long dinners, wine, and conversation",
-+  "A curated cellar built around local labels and expressive Italian bottles",
-+]
-+
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "4.5rem 1.5rem",
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
-+    gap: "2rem",
-+    alignItems: "center",
-+  },
-+  mediaCard: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "22rem",
-+    borderRadius: "1.75rem",
-+    backgroundColor: "#d8d1c5",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  imageOverlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
-+  },
-+  imageBadge: {
-+    position: "absolute",
-+    left: "1.25rem",
-+    bottom: "1.25rem",
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.6rem",
-+    padding: "0.75rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "rgba(31, 31, 27, 0.82)",
-+    color: "#f6f1e8",
-+    fontSize: "0.88rem",
-+    letterSpacing: "0.04em",
-+  },
-+  content: {
-+    display: "grid",
-+    alignContent: "center",
-+    gap: "1.5rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+    maxWidth: "12ch",
-+  },
-+  lead: {
-+    margin: 0,
-+    maxWidth: "34rem",
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.78)",
-+  },
-+  highlightList: {
-+    listStyle: "none",
-+    margin: 0,
-+    padding: 0,
-+    display: "grid",
-+    gap: "0.9rem",
-+  },
-+  highlightItem: {
-+    display: "grid",
-+    gridTemplateColumns: "auto 1fr",
-+    gap: "0.9rem",
-+    alignItems: "start",
-+    paddingBottom: "0.9rem",
-+    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-+    color: "rgba(31, 31, 27, 0.82)",
-+    lineHeight: 1.65,
-+  },
-+  marker: {
-+    width: "0.65rem",
-+    height: "0.65rem",
-+    borderRadius: "999px",
-+    marginTop: "0.5rem",
-+    background:
-+      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-+    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
-+  },
-+}
-+
-+export default function AboutSection() {
-+  return (
-+    <section id="about" aria-labelledby="about-heading" style={styles.section}>
-+      <div style={styles.shell}>
-+        <div style={styles.mediaCard}>
-+          <img
-+            src={aboutImage}
-+            alt="Warm interior table setting at Osteria 19 Torino"
-+            style={styles.image}
-+          />
-+          <div aria-hidden="true" style={styles.imageOverlay} />
-+          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-+        </div>
-+
-+        <div style={styles.content}>
-+          <p style={styles.eyebrow}>About Osteria 19</p>
-+          <h2 id="about-heading" style={styles.title}>
-+            Italian tradition, interpreted with a lighter hand
-+          </h2>
-+          <p style={styles.lead}>
-+            Osteria 19 Torino brings together seasonal ingredients, precise
-+            cooking, and a warm urban mood for dinners that feel intimate,
-+            polished, and unmistakably Italian.
-+          </p>
-+
-+          <ul style={styles.highlightList}>
-+            {highlights.map((item) => (
-+              <li key={item} style={styles.highlightItem}>
-+                <span aria-hidden="true" style={styles.marker} />
-+                <span>{item}</span>
-+              </li>
-+            ))}
-+          </ul>
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index f2e4ae039b179e29733838d41dd93c56e7f4b43b..28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,20 +1,11 @@
-+import AboutSection from "../components/AboutSection"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-   return (
-     <main>
-       <HeroSection />
--
--      <section id="about" aria-labelledby="about-heading">
--        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
--          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
--          </p>
--        </div>
--      </section>
-+      <AboutSection />
- 
-       <section id="contact" aria-labelledby="contact-heading">
-         <div>
 
 file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 1810eef164617f0c4d75e8e887e4b3188f986364..28447d0c15f4df1810750b85111d1d986e7887c2
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -44,3 +44,7 @@
- Prepared TASK section-home-about (Create about section on home) for execution.
- 
- Launching Codex for TASK section-home-about.
-+
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
 new file mode 100644
-index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7dbc0e3db4f
+index 0000000000000000000000000000000000000000..d64f20ea5ded9828685adb1d95ebb05d367eb86a
 --- /dev/null
-+++ b/src/components/AboutSection.jsx
-@@ -0,0 +1,154 @@
-+const aboutImage =
-+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
++++ b/src/components/ContactSection.jsx
+@@ -0,0 +1,239 @@
++const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
 +
-+const highlights = [
-+  "Seasonal produce selected with the rhythm of Piemonte markets",
-+  "Italian classics reworked with clean presentation and measured elegance",
-+  "An intimate dining room shaped for long dinners, wine, and conversation",
-+  "A curated cellar built around local labels and expressive Italian bottles",
++const openingHours = [
++  {
++    days: "Tuesday - Thursday",
++    hours: ["19:00 - 23:00"],
++  },
++  {
++    days: "Friday - Saturday",
++    hours: ["19:00 - 00:00"],
++  },
++  {
++    days: "Sunday",
++    hours: ["12:30 - 15:00", "19:00 - 22:30"],
++  },
++  {
++    days: "Monday",
++    hours: ["Closed"],
++  },
++]
++
++const infoCards = [
++  {
++    title: "Address",
++    content: ["Via Maria Vittoria 19", "Torino"],
++  },
++  {
++    title: "Phone",
++    content: ["+39 011 3821947"],
++    href: "tel:+390113821947",
++  },
 +]
 +
 +const styles = {
 +  section: {
-+    background:
-+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-+    color: "#1f1f1b",
++    backgroundColor: "#1f1f1b",
++    color: "#f6f1e8",
 +  },
 +  shell: {
 +    maxWidth: "72rem",
 +    margin: "0 auto",
-+    padding: "4.5rem 1.5rem",
++    padding: "4.5rem 1.5rem 5rem",
 +    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
-+    gap: "2rem",
-+    alignItems: "center",
-+  },
-+  mediaCard: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "22rem",
-+    borderRadius: "1.75rem",
-+    backgroundColor: "#d8d1c5",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  imageOverlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
-+  },
-+  imageBadge: {
-+    position: "absolute",
-+    left: "1.25rem",
-+    bottom: "1.25rem",
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.6rem",
-+    padding: "0.75rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "rgba(31, 31, 27, 0.82)",
-+    color: "#f6f1e8",
-+    fontSize: "0.88rem",
-+    letterSpacing: "0.04em",
-+  },
-+  content: {
-+    display: "grid",
-+    alignContent: "center",
 +    gap: "1.5rem",
++  },
++  panel: {
++    display: "grid",
++    gap: "2rem",
++    padding: "1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.1)",
++    borderRadius: "1.75rem",
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
++    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
++  },
++  intro: {
++    display: "grid",
++    gap: "1rem",
 +  },
 +  eyebrow: {
 +    margin: 0,
-+    color: "#6f7558",
++    color: "#c8a66a",
 +    textTransform: "uppercase",
 +    letterSpacing: "0.18em",
 +    fontSize: "0.78rem",
@@ -2210,216 +1925,312 @@ index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7db
 +  title: {
 +    margin: 0,
 +    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 5vw, 4rem)",
 +    lineHeight: 1,
 +    letterSpacing: "-0.04em",
-+    maxWidth: "12ch",
++    maxWidth: "10ch",
 +  },
 +  lead: {
 +    margin: 0,
-+    maxWidth: "34rem",
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.78)",
++    maxWidth: "36rem",
++    color: "rgba(246, 241, 232, 0.78)",
++    fontSize: "1rem",
++    lineHeight: 1.75,
 +  },
-+  highlightList: {
++  content: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1.25rem",
++    alignItems: "start",
++  },
++  card: {
++    display: "grid",
++    gap: "0.85rem",
++    minHeight: "100%",
++    padding: "1.25rem",
++    borderRadius: "1.4rem",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    border: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  cardTitle: {
++    margin: 0,
++    color: "#c8a66a",
++    fontSize: "0.82rem",
++    letterSpacing: "0.12em",
++    textTransform: "uppercase",
++    fontWeight: 700,
++  },
++  cardBody: {
++    display: "grid",
++    gap: "0.35rem",
++    color: "rgba(246, 241, 232, 0.92)",
++    lineHeight: 1.7,
++  },
++  cardLink: {
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontWeight: 600,
++  },
++  hoursList: {
 +    listStyle: "none",
 +    margin: 0,
 +    padding: 0,
 +    display: "grid",
 +    gap: "0.9rem",
 +  },
-+  highlightItem: {
++  hoursRow: {
 +    display: "grid",
-+    gridTemplateColumns: "auto 1fr",
-+    gap: "0.9rem",
-+    alignItems: "start",
++    gridTemplateColumns: "minmax(0, 1fr) auto",
++    gap: "1rem",
 +    paddingBottom: "0.9rem",
-+    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-+    color: "rgba(31, 31, 27, 0.82)",
-+    lineHeight: 1.65,
++    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
 +  },
-+  marker: {
-+    width: "0.65rem",
-+    height: "0.65rem",
++  hoursDay: {
++    fontWeight: 600,
++  },
++  hoursTimes: {
++    textAlign: "right",
++    color: "rgba(246, 241, 232, 0.72)",
++  },
++  actions: {
++    display: "flex",
++    flexWrap: "wrap",
++    gap: "0.9rem",
++  },
++  primaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
 +    borderRadius: "999px",
-+    marginTop: "0.5rem",
-+    background:
-+      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-+    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
++    padding: "0.95rem 1.5rem",
++    backgroundColor: "#b85c38",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  secondaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.24)",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  note: {
++    margin: 0,
++    color: "rgba(246, 241, 232, 0.62)",
++    fontSize: "0.92rem",
++    lineHeight: 1.6,
 +  },
 +}
 +
-+export default function AboutSection() {
++export default function ContactSection() {
 +  return (
-+    <section id="about" aria-labelledby="about-heading" style={styles.section}>
++    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
 +      <div style={styles.shell}>
-+        <div style={styles.mediaCard}>
-+          <img
-+            src={aboutImage}
-+            alt="Warm interior table setting at Osteria 19 Torino"
-+            style={styles.image}
-+          />
-+          <div aria-hidden="true" style={styles.imageOverlay} />
-+          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-+        </div>
++        <div style={styles.panel}>
++          <div style={styles.intro}>
++            <p style={styles.eyebrow}>Contact and booking</p>
++            <h2 id="contact-heading" style={styles.title}>
++              Reserve a table for your next Torino evening
++            </h2>
++            <p style={styles.lead}>
++              Join us for seasonal plates, thoughtful wines, and a dining room
++              designed for dates, small groups, and long conversations.
++            </p>
++          </div>
 +
-+        <div style={styles.content}>
-+          <p style={styles.eyebrow}>About Osteria 19</p>
-+          <h2 id="about-heading" style={styles.title}>
-+            Italian tradition, interpreted with a lighter hand
-+          </h2>
-+          <p style={styles.lead}>
-+            Osteria 19 Torino brings together seasonal ingredients, precise
-+            cooking, and a warm urban mood for dinners that feel intimate,
-+            polished, and unmistakably Italian.
-+          </p>
-+
-+          <ul style={styles.highlightList}>
-+            {highlights.map((item) => (
-+              <li key={item} style={styles.highlightItem}>
-+                <span aria-hidden="true" style={styles.marker} />
-+                <span>{item}</span>
-+              </li>
++          <div style={styles.content}>
++            {infoCards.map((card) => (
++              <article key={card.title} style={styles.card}>
++                <h3 style={styles.cardTitle}>{card.title}</h3>
++                <div style={styles.cardBody}>
++                  {card.content.map((line) =>
++                    card.href ? (
++                      <a key={line} href={card.href} style={styles.cardLink}>
++                        {line}
++                      </a>
++                    ) : (
++                      <span key={line}>{line}</span>
++                    ),
++                  )}
++                </div>
++              </article>
 +            ))}
-+          </ul>
++
++            <article style={styles.card}>
++              <h3 style={styles.cardTitle}>Opening hours</h3>
++              <ul style={styles.hoursList}>
++                {openingHours.map((entry) => (
++                  <li key={entry.days} style={styles.hoursRow}>
++                    <span style={styles.hoursDay}>{entry.days}</span>
++                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
++                  </li>
++                ))}
++              </ul>
++            </article>
++          </div>
++
++          <div style={styles.actions}>
++            <a href={bookingLink} style={styles.primaryAction}>
++              Book on WhatsApp
++            </a>
++            <a href="tel:+390113821947" style={styles.secondaryAction}>
++              Call for reservations
++            </a>
++          </div>
++
++          <p style={styles.note}>
++            Reservations are recommended for Friday and Saturday dinner service.
++          </p>
 +        </div>
 +      </div>
 +    </section>
 +  )
 +}
 diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index f2e4ae039b179e29733838d41dd93c56e7f4b43b..28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb
+index 28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb..b8aae659216c82a49924482de95b3f8942cf7303
 --- a/src/pages/Home.jsx
 +++ b/src/pages/Home.jsx
-@@ -1,20 +1,11 @@
-+import AboutSection from "../components/AboutSection"
+@@ -1,4 +1,5 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
  import HeroSection from "../components/HeroSection"
  
  export default function Home() {
-   return (
+@@ -6,16 +7,7 @@
      <main>
        <HeroSection />
+       <AboutSection />
 -
--      <section id="about" aria-labelledby="about-heading">
+-      <section id="contact" aria-labelledby="contact-heading">
 -        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
 -          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
+-            <a href="tel:+390113821947">+39 011 3821947</a>
 -          </p>
 -        </div>
 -      </section>
-+      <AboutSection />
- 
-       <section id="contact" aria-labelledby="contact-heading">
-         <div>
++      <ContactSection />
+     </main>
+   )
+ }
 
 codex
-I’m running the build check now. If it passes, I’ll return the modified files and the exact implementation summary for this task.
+The component is in place and `Home` now renders it. I’m running the build next, then I’ll append the task summary to the agent report.
 exec
-/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 843ms:
+/bin/zsh -lc "sed -n '1,260p' src/components/ContactSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
+const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
+
+const openingHours = [
+  {
+    days: "Tuesday - Thursday",
+    hours: ["19:00 - 23:00"],
+  },
+  {
+    days: "Friday - Saturday",
+    hours: ["19:00 - 00:00"],
+  },
+  {
+    days: "Sunday",
+    hours: ["12:30 - 15:00", "19:00 - 22:30"],
+  },
+  {
+    days: "Monday",
+    hours: ["Closed"],
+  },
+]
+exec
+/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 827ms:
 
 > site-create-a-premium-modern-website-for-an-i@0.0.0 build
 > vite build
 
 vite v7.3.1 building client environment for production...
 transforming...
-✓ 46 modules transformed.
+✓ 47 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                   0.50 kB │ gzip:  0.32 kB
 dist/assets/index-DQ3P1g1z.css    0.91 kB │ gzip:  0.49 kB
-dist/assets/index-Cro_LhME.js   236.85 kB │ gzip: 75.92 kB
-✓ built in 570ms
+dist/assets/index-uvz9_a6K.js   240.89 kB │ gzip: 76.76 kB
+✓ built in 563ms
 file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 1810eef164617f0c4d75e8e887e4b3188f986364..28447d0c15f4df1810750b85111d1d986e7887c2
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -44,3 +44,7 @@
- Prepared TASK section-home-about (Create about section on home) for execution.
- 
- Launching Codex for TASK section-home-about.
-+
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
 new file mode 100644
-index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7dbc0e3db4f
+index 0000000000000000000000000000000000000000..d64f20ea5ded9828685adb1d95ebb05d367eb86a
 --- /dev/null
-+++ b/src/components/AboutSection.jsx
-@@ -0,0 +1,154 @@
-+const aboutImage =
-+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
++++ b/src/components/ContactSection.jsx
+@@ -0,0 +1,239 @@
++const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
 +
-+const highlights = [
-+  "Seasonal produce selected with the rhythm of Piemonte markets",
-+  "Italian classics reworked with clean presentation and measured elegance",
-+  "An intimate dining room shaped for long dinners, wine, and conversation",
-+  "A curated cellar built around local labels and expressive Italian bottles",
++const openingHours = [
++  {
++    days: "Tuesday - Thursday",
++    hours: ["19:00 - 23:00"],
++  },
++  {
++    days: "Friday - Saturday",
++    hours: ["19:00 - 00:00"],
++  },
++  {
++    days: "Sunday",
++    hours: ["12:30 - 15:00", "19:00 - 22:30"],
++  },
++  {
++    days: "Monday",
++    hours: ["Closed"],
++  },
++]
++
++const infoCards = [
++  {
++    title: "Address",
++    content: ["Via Maria Vittoria 19", "Torino"],
++  },
++  {
++    title: "Phone",
++    content: ["+39 011 3821947"],
++    href: "tel:+390113821947",
++  },
 +]
 +
 +const styles = {
 +  section: {
-+    background:
-+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-+    color: "#1f1f1b",
++    backgroundColor: "#1f1f1b",
++    color: "#f6f1e8",
 +  },
 +  shell: {
 +    maxWidth: "72rem",
 +    margin: "0 auto",
-+    padding: "4.5rem 1.5rem",
++    padding: "4.5rem 1.5rem 5rem",
 +    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
-+    gap: "2rem",
-+    alignItems: "center",
-+  },
-+  mediaCard: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "22rem",
-+    borderRadius: "1.75rem",
-+    backgroundColor: "#d8d1c5",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  imageOverlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
-+  },
-+  imageBadge: {
-+    position: "absolute",
-+    left: "1.25rem",
-+    bottom: "1.25rem",
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.6rem",
-+    padding: "0.75rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "rgba(31, 31, 27, 0.82)",
-+    color: "#f6f1e8",
-+    fontSize: "0.88rem",
-+    letterSpacing: "0.04em",
-+  },
-+  content: {
-+    display: "grid",
-+    alignContent: "center",
 +    gap: "1.5rem",
++  },
++  panel: {
++    display: "grid",
++    gap: "2rem",
++    padding: "1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.1)",
++    borderRadius: "1.75rem",
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
++    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
++  },
++  intro: {
++    display: "grid",
++    gap: "1rem",
 +  },
 +  eyebrow: {
 +    margin: 0,
-+    color: "#6f7558",
++    color: "#c8a66a",
 +    textTransform: "uppercase",
 +    letterSpacing: "0.18em",
 +    fontSize: "0.78rem",
@@ -2428,205 +2239,312 @@ index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7db
 +  title: {
 +    margin: 0,
 +    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 5vw, 4rem)",
 +    lineHeight: 1,
 +    letterSpacing: "-0.04em",
-+    maxWidth: "12ch",
++    maxWidth: "10ch",
 +  },
 +  lead: {
 +    margin: 0,
-+    maxWidth: "34rem",
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.78)",
++    maxWidth: "36rem",
++    color: "rgba(246, 241, 232, 0.78)",
++    fontSize: "1rem",
++    lineHeight: 1.75,
 +  },
-+  highlightList: {
++  content: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1.25rem",
++    alignItems: "start",
++  },
++  card: {
++    display: "grid",
++    gap: "0.85rem",
++    minHeight: "100%",
++    padding: "1.25rem",
++    borderRadius: "1.4rem",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    border: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  cardTitle: {
++    margin: 0,
++    color: "#c8a66a",
++    fontSize: "0.82rem",
++    letterSpacing: "0.12em",
++    textTransform: "uppercase",
++    fontWeight: 700,
++  },
++  cardBody: {
++    display: "grid",
++    gap: "0.35rem",
++    color: "rgba(246, 241, 232, 0.92)",
++    lineHeight: 1.7,
++  },
++  cardLink: {
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontWeight: 600,
++  },
++  hoursList: {
 +    listStyle: "none",
 +    margin: 0,
 +    padding: 0,
 +    display: "grid",
 +    gap: "0.9rem",
 +  },
-+  highlightItem: {
++  hoursRow: {
 +    display: "grid",
-+    gridTemplateColumns: "auto 1fr",
-+    gap: "0.9rem",
-+    alignItems: "start",
++    gridTemplateColumns: "minmax(0, 1fr) auto",
++    gap: "1rem",
 +    paddingBottom: "0.9rem",
-+    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-+    color: "rgba(31, 31, 27, 0.82)",
-+    lineHeight: 1.65,
++    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
 +  },
-+  marker: {
-+    width: "0.65rem",
-+    height: "0.65rem",
++  hoursDay: {
++    fontWeight: 600,
++  },
++  hoursTimes: {
++    textAlign: "right",
++    color: "rgba(246, 241, 232, 0.72)",
++  },
++  actions: {
++    display: "flex",
++    flexWrap: "wrap",
++    gap: "0.9rem",
++  },
++  primaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
 +    borderRadius: "999px",
-+    marginTop: "0.5rem",
-+    background:
-+      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-+    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
++    padding: "0.95rem 1.5rem",
++    backgroundColor: "#b85c38",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  secondaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.24)",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  note: {
++    margin: 0,
++    color: "rgba(246, 241, 232, 0.62)",
++    fontSize: "0.92rem",
++    lineHeight: 1.6,
 +  },
 +}
 +
-+export default function AboutSection() {
++export default function ContactSection() {
 +  return (
-+    <section id="about" aria-labelledby="about-heading" style={styles.section}>
++    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
 +      <div style={styles.shell}>
-+        <div style={styles.mediaCard}>
-+          <img
-+            src={aboutImage}
-+            alt="Warm interior table setting at Osteria 19 Torino"
-+            style={styles.image}
-+          />
-+          <div aria-hidden="true" style={styles.imageOverlay} />
-+          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-+        </div>
++        <div style={styles.panel}>
++          <div style={styles.intro}>
++            <p style={styles.eyebrow}>Contact and booking</p>
++            <h2 id="contact-heading" style={styles.title}>
++              Reserve a table for your next Torino evening
++            </h2>
++            <p style={styles.lead}>
++              Join us for seasonal plates, thoughtful wines, and a dining room
++              designed for dates, small groups, and long conversations.
++            </p>
++          </div>
 +
-+        <div style={styles.content}>
-+          <p style={styles.eyebrow}>About Osteria 19</p>
-+          <h2 id="about-heading" style={styles.title}>
-+            Italian tradition, interpreted with a lighter hand
-+          </h2>
-+          <p style={styles.lead}>
-+            Osteria 19 Torino brings together seasonal ingredients, precise
-+            cooking, and a warm urban mood for dinners that feel intimate,
-+            polished, and unmistakably Italian.
-+          </p>
-+
-+          <ul style={styles.highlightList}>
-+            {highlights.map((item) => (
-+              <li key={item} style={styles.highlightItem}>
-+                <span aria-hidden="true" style={styles.marker} />
-+                <span>{item}</span>
-+              </li>
++          <div style={styles.content}>
++            {infoCards.map((card) => (
++              <article key={card.title} style={styles.card}>
++                <h3 style={styles.cardTitle}>{card.title}</h3>
++                <div style={styles.cardBody}>
++                  {card.content.map((line) =>
++                    card.href ? (
++                      <a key={line} href={card.href} style={styles.cardLink}>
++                        {line}
++                      </a>
++                    ) : (
++                      <span key={line}>{line}</span>
++                    ),
++                  )}
++                </div>
++              </article>
 +            ))}
-+          </ul>
++
++            <article style={styles.card}>
++              <h3 style={styles.cardTitle}>Opening hours</h3>
++              <ul style={styles.hoursList}>
++                {openingHours.map((entry) => (
++                  <li key={entry.days} style={styles.hoursRow}>
++                    <span style={styles.hoursDay}>{entry.days}</span>
++                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
++                  </li>
++                ))}
++              </ul>
++            </article>
++          </div>
++
++          <div style={styles.actions}>
++            <a href={bookingLink} style={styles.primaryAction}>
++              Book on WhatsApp
++            </a>
++            <a href="tel:+390113821947" style={styles.secondaryAction}>
++              Call for reservations
++            </a>
++          </div>
++
++          <p style={styles.note}>
++            Reservations are recommended for Friday and Saturday dinner service.
++          </p>
 +        </div>
 +      </div>
 +    </section>
 +  )
 +}
 diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index f2e4ae039b179e29733838d41dd93c56e7f4b43b..28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb
+index 28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb..b8aae659216c82a49924482de95b3f8942cf7303
 --- a/src/pages/Home.jsx
 +++ b/src/pages/Home.jsx
-@@ -1,20 +1,11 @@
-+import AboutSection from "../components/AboutSection"
+@@ -1,4 +1,5 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
  import HeroSection from "../components/HeroSection"
  
  export default function Home() {
-   return (
+@@ -6,16 +7,7 @@
      <main>
        <HeroSection />
+       <AboutSection />
 -
--      <section id="about" aria-labelledby="about-heading">
+-      <section id="contact" aria-labelledby="contact-heading">
 -        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
 -          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
+-            <a href="tel:+390113821947">+39 011 3821947</a>
 -          </p>
 -        </div>
 -      </section>
-+      <AboutSection />
- 
-       <section id="contact" aria-labelledby="contact-heading">
-         <div>
++      <ContactSection />
+     </main>
+   )
+ }
 
 codex
-Modified files: [Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx), [AboutSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx), [AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
-
-Implemented the home `about` section as a dedicated reusable split-content component and rendered it from the home page. The new section preserves the required `id="about"` anchor, adds refined restaurant-specific copy aligned to the brief, includes a supporting image, and uses a responsive two-column layout that collapses cleanly on smaller screens.
-
-Build result: `npm run build` passed successfully.
+The build passed. I’m recording the task outcome in `agent/AGENT_REPORT.md` now, with only the contact-section work and build result.
+file update
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+@@ -61 +61,12 @@
+ Launching Codex for TASK section-home-contact.
++
++Completed TASK `section-home-contact`.
++- Replaced the placeholder home contact markup with a dedicated reusable `ContactSection` component.
++- Added a full contact block with address, phone link, opening hours, and booking actions while preserving the required `contact` section anchor on the home page.
++- Rendered the contact component from `src/pages/Home.jsx` without changing unrelated routes or sections.
++
++TASK section-home-contact executed by Codex.
++Waiting for validation.
++
++TASK section-home-contact completed successfully.
++Build passed.
+apply_patch(auto_approved=true) exited 0 in 59ms:
+Success. Updated the following files:
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 1810eef164617f0c4d75e8e887e4b3188f986364..28447d0c15f4df1810750b85111d1d986e7887c2
+index ed16ddacd3cf593a0fee526155f9e8cc900770e7..0cd227e434967b3bb0452b0376138bdd2c84dd81
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -44,3 +44,7 @@
- Prepared TASK section-home-about (Create about section on home) for execution.
+@@ -59,3 +59,14 @@
+ Prepared TASK section-home-contact (Create contact section on home) for execution.
  
- Launching Codex for TASK section-home-about.
+ Launching Codex for TASK section-home-contact.
 +
-+Completed TASK `section-home-about`.
-+- Replaced the placeholder home about markup with a dedicated reusable `AboutSection` component.
-+- Implemented the required split-content layout with editorial copy, a supporting image, and seasonal/philosophy highlights while preserving the `about` section anchor.
-diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
++Completed TASK `section-home-contact`.
++- Replaced the placeholder home contact markup with a dedicated reusable `ContactSection` component.
++- Added a full contact block with address, phone link, opening hours, and booking actions while preserving the required `contact` section anchor on the home page.
++- Rendered the contact component from `src/pages/Home.jsx` without changing unrelated routes or sections.
++
++TASK section-home-contact executed by Codex.
++Waiting for validation.
++
++TASK section-home-contact completed successfully.
++Build passed.
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
 new file mode 100644
-index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7dbc0e3db4f
+index 0000000000000000000000000000000000000000..d64f20ea5ded9828685adb1d95ebb05d367eb86a
 --- /dev/null
-+++ b/src/components/AboutSection.jsx
-@@ -0,0 +1,154 @@
-+const aboutImage =
-+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
++++ b/src/components/ContactSection.jsx
+@@ -0,0 +1,239 @@
++const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
 +
-+const highlights = [
-+  "Seasonal produce selected with the rhythm of Piemonte markets",
-+  "Italian classics reworked with clean presentation and measured elegance",
-+  "An intimate dining room shaped for long dinners, wine, and conversation",
-+  "A curated cellar built around local labels and expressive Italian bottles",
++const openingHours = [
++  {
++    days: "Tuesday - Thursday",
++    hours: ["19:00 - 23:00"],
++  },
++  {
++    days: "Friday - Saturday",
++    hours: ["19:00 - 00:00"],
++  },
++  {
++    days: "Sunday",
++    hours: ["12:30 - 15:00", "19:00 - 22:30"],
++  },
++  {
++    days: "Monday",
++    hours: ["Closed"],
++  },
++]
++
++const infoCards = [
++  {
++    title: "Address",
++    content: ["Via Maria Vittoria 19", "Torino"],
++  },
++  {
++    title: "Phone",
++    content: ["+39 011 3821947"],
++    href: "tel:+390113821947",
++  },
 +]
 +
 +const styles = {
 +  section: {
-+    background:
-+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-+    color: "#1f1f1b",
++    backgroundColor: "#1f1f1b",
++    color: "#f6f1e8",
 +  },
 +  shell: {
 +    maxWidth: "72rem",
 +    margin: "0 auto",
-+    padding: "4.5rem 1.5rem",
++    padding: "4.5rem 1.5rem 5rem",
 +    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
-+    gap: "2rem",
-+    alignItems: "center",
-+  },
-+  mediaCard: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "22rem",
-+    borderRadius: "1.75rem",
-+    backgroundColor: "#d8d1c5",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  imageOverlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.08) 0%, rgba(31, 31, 27, 0.38) 100%)",
-+  },
-+  imageBadge: {
-+    position: "absolute",
-+    left: "1.25rem",
-+    bottom: "1.25rem",
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.6rem",
-+    padding: "0.75rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "rgba(31, 31, 27, 0.82)",
-+    color: "#f6f1e8",
-+    fontSize: "0.88rem",
-+    letterSpacing: "0.04em",
-+  },
-+  content: {
-+    display: "grid",
-+    alignContent: "center",
 +    gap: "1.5rem",
++  },
++  panel: {
++    display: "grid",
++    gap: "2rem",
++    padding: "1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.1)",
++    borderRadius: "1.75rem",
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
++    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
++  },
++  intro: {
++    display: "grid",
++    gap: "1rem",
 +  },
 +  eyebrow: {
 +    margin: 0,
-+    color: "#6f7558",
++    color: "#c8a66a",
 +    textTransform: "uppercase",
 +    letterSpacing: "0.18em",
 +    fontSize: "0.78rem",
@@ -2635,111 +2553,797 @@ index 0000000000000000000000000000000000000000..1e935fd972c71dd94105f26ab479a7db
 +  title: {
 +    margin: 0,
 +    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 5vw, 4rem)",
 +    lineHeight: 1,
 +    letterSpacing: "-0.04em",
-+    maxWidth: "12ch",
++    maxWidth: "10ch",
 +  },
 +  lead: {
 +    margin: 0,
-+    maxWidth: "34rem",
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.78)",
++    maxWidth: "36rem",
++    color: "rgba(246, 241, 232, 0.78)",
++    fontSize: "1rem",
++    lineHeight: 1.75,
 +  },
-+  highlightList: {
++  content: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1.25rem",
++    alignItems: "start",
++  },
++  card: {
++    display: "grid",
++    gap: "0.85rem",
++    minHeight: "100%",
++    padding: "1.25rem",
++    borderRadius: "1.4rem",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    border: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  cardTitle: {
++    margin: 0,
++    color: "#c8a66a",
++    fontSize: "0.82rem",
++    letterSpacing: "0.12em",
++    textTransform: "uppercase",
++    fontWeight: 700,
++  },
++  cardBody: {
++    display: "grid",
++    gap: "0.35rem",
++    color: "rgba(246, 241, 232, 0.92)",
++    lineHeight: 1.7,
++  },
++  cardLink: {
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontWeight: 600,
++  },
++  hoursList: {
 +    listStyle: "none",
 +    margin: 0,
 +    padding: 0,
 +    display: "grid",
 +    gap: "0.9rem",
 +  },
-+  highlightItem: {
++  hoursRow: {
 +    display: "grid",
-+    gridTemplateColumns: "auto 1fr",
-+    gap: "0.9rem",
-+    alignItems: "start",
++    gridTemplateColumns: "minmax(0, 1fr) auto",
++    gap: "1rem",
 +    paddingBottom: "0.9rem",
-+    borderBottom: "1px solid rgba(31, 31, 27, 0.1)",
-+    color: "rgba(31, 31, 27, 0.82)",
-+    lineHeight: 1.65,
++    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
 +  },
-+  marker: {
-+    width: "0.65rem",
-+    height: "0.65rem",
++  hoursDay: {
++    fontWeight: 600,
++  },
++  hoursTimes: {
++    textAlign: "right",
++    color: "rgba(246, 241, 232, 0.72)",
++  },
++  actions: {
++    display: "flex",
++    flexWrap: "wrap",
++    gap: "0.9rem",
++  },
++  primaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
 +    borderRadius: "999px",
-+    marginTop: "0.5rem",
-+    background:
-+      "linear-gradient(135deg, #c8a66a 0%, #b85c38 100%)",
-+    boxShadow: "0 0 0 6px rgba(184, 92, 56, 0.08)",
++    padding: "0.95rem 1.5rem",
++    backgroundColor: "#b85c38",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  secondaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.24)",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  note: {
++    margin: 0,
++    color: "rgba(246, 241, 232, 0.62)",
++    fontSize: "0.92rem",
++    lineHeight: 1.6,
 +  },
 +}
 +
-+export default function AboutSection() {
++export default function ContactSection() {
 +  return (
-+    <section id="about" aria-labelledby="about-heading" style={styles.section}>
++    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
 +      <div style={styles.shell}>
-+        <div style={styles.mediaCard}>
-+          <img
-+            src={aboutImage}
-+            alt="Warm interior table setting at Osteria 19 Torino"
-+            style={styles.image}
-+          />
-+          <div aria-hidden="true" style={styles.imageOverlay} />
-+          <div style={styles.imageBadge}>Torino evenings, plated with care</div>
-+        </div>
++        <div style={styles.panel}>
++          <div style={styles.intro}>
++            <p style={styles.eyebrow}>Contact and booking</p>
++            <h2 id="contact-heading" style={styles.title}>
++              Reserve a table for your next Torino evening
++            </h2>
++            <p style={styles.lead}>
++              Join us for seasonal plates, thoughtful wines, and a dining room
++              designed for dates, small groups, and long conversations.
++            </p>
++          </div>
 +
-+        <div style={styles.content}>
-+          <p style={styles.eyebrow}>About Osteria 19</p>
-+          <h2 id="about-heading" style={styles.title}>
-+            Italian tradition, interpreted with a lighter hand
-+          </h2>
-+          <p style={styles.lead}>
-+            Osteria 19 Torino brings together seasonal ingredients, precise
-+            cooking, and a warm urban mood for dinners that feel intimate,
-+            polished, and unmistakably Italian.
-+          </p>
-+
-+          <ul style={styles.highlightList}>
-+            {highlights.map((item) => (
-+              <li key={item} style={styles.highlightItem}>
-+                <span aria-hidden="true" style={styles.marker} />
-+                <span>{item}</span>
-+              </li>
++          <div style={styles.content}>
++            {infoCards.map((card) => (
++              <article key={card.title} style={styles.card}>
++                <h3 style={styles.cardTitle}>{card.title}</h3>
++                <div style={styles.cardBody}>
++                  {card.content.map((line) =>
++                    card.href ? (
++                      <a key={line} href={card.href} style={styles.cardLink}>
++                        {line}
++                      </a>
++                    ) : (
++                      <span key={line}>{line}</span>
++                    ),
++                  )}
++                </div>
++              </article>
 +            ))}
-+          </ul>
++
++            <article style={styles.card}>
++              <h3 style={styles.cardTitle}>Opening hours</h3>
++              <ul style={styles.hoursList}>
++                {openingHours.map((entry) => (
++                  <li key={entry.days} style={styles.hoursRow}>
++                    <span style={styles.hoursDay}>{entry.days}</span>
++                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
++                  </li>
++                ))}
++              </ul>
++            </article>
++          </div>
++
++          <div style={styles.actions}>
++            <a href={bookingLink} style={styles.primaryAction}>
++              Book on WhatsApp
++            </a>
++            <a href="tel:+390113821947" style={styles.secondaryAction}>
++              Call for reservations
++            </a>
++          </div>
++
++          <p style={styles.note}>
++            Reservations are recommended for Friday and Saturday dinner service.
++          </p>
 +        </div>
 +      </div>
 +    </section>
 +  )
 +}
 diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index f2e4ae039b179e29733838d41dd93c56e7f4b43b..28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb
+index 28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb..b8aae659216c82a49924482de95b3f8942cf7303
 --- a/src/pages/Home.jsx
 +++ b/src/pages/Home.jsx
-@@ -1,20 +1,11 @@
-+import AboutSection from "../components/AboutSection"
+@@ -1,4 +1,5 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
  import HeroSection from "../components/HeroSection"
  
  export default function Home() {
-   return (
+@@ -6,16 +7,7 @@
      <main>
        <HeroSection />
+       <AboutSection />
 -
--      <section id="about" aria-labelledby="about-heading">
+-      <section id="contact" aria-labelledby="contact-heading">
 -        <div>
--          <h2 id="about-heading">A contemporary osteria shaped by the season</h2>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
 -          <p>
--            Osteria 19 Torino brings together Italian tradition, refined
--            presentation, and a warm city atmosphere for dinner in the center
--            of Torino.
+-            <a href="tel:+390113821947">+39 011 3821947</a>
 -          </p>
 -        </div>
 -      </section>
-+      <AboutSection />
++      <ContactSection />
+     </main>
+   )
+ }
+
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index ed16ddacd3cf593a0fee526155f9e8cc900770e7..0cd227e434967b3bb0452b0376138bdd2c84dd81
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -59,3 +59,14 @@
+ Prepared TASK section-home-contact (Create contact section on home) for execution.
  
-       <section id="contact" aria-labelledby="contact-heading">
-         <div>
+ Launching Codex for TASK section-home-contact.
++
++Completed TASK `section-home-contact`.
++- Replaced the placeholder home contact markup with a dedicated reusable `ContactSection` component.
++- Added a full contact block with address, phone link, opening hours, and booking actions while preserving the required `contact` section anchor on the home page.
++- Rendered the contact component from `src/pages/Home.jsx` without changing unrelated routes or sections.
++
++TASK section-home-contact executed by Codex.
++Waiting for validation.
++
++TASK section-home-contact completed successfully.
++Build passed.
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..d64f20ea5ded9828685adb1d95ebb05d367eb86a
+--- /dev/null
++++ b/src/components/ContactSection.jsx
+@@ -0,0 +1,239 @@
++const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
++
++const openingHours = [
++  {
++    days: "Tuesday - Thursday",
++    hours: ["19:00 - 23:00"],
++  },
++  {
++    days: "Friday - Saturday",
++    hours: ["19:00 - 00:00"],
++  },
++  {
++    days: "Sunday",
++    hours: ["12:30 - 15:00", "19:00 - 22:30"],
++  },
++  {
++    days: "Monday",
++    hours: ["Closed"],
++  },
++]
++
++const infoCards = [
++  {
++    title: "Address",
++    content: ["Via Maria Vittoria 19", "Torino"],
++  },
++  {
++    title: "Phone",
++    content: ["+39 011 3821947"],
++    href: "tel:+390113821947",
++  },
++]
++
++const styles = {
++  section: {
++    backgroundColor: "#1f1f1b",
++    color: "#f6f1e8",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "4.5rem 1.5rem 5rem",
++    display: "grid",
++    gap: "1.5rem",
++  },
++  panel: {
++    display: "grid",
++    gap: "2rem",
++    padding: "1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.1)",
++    borderRadius: "1.75rem",
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
++    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
++  },
++  intro: {
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2.2rem, 5vw, 4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++    maxWidth: "10ch",
++  },
++  lead: {
++    margin: 0,
++    maxWidth: "36rem",
++    color: "rgba(246, 241, 232, 0.78)",
++    fontSize: "1rem",
++    lineHeight: 1.75,
++  },
++  content: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1.25rem",
++    alignItems: "start",
++  },
++  card: {
++    display: "grid",
++    gap: "0.85rem",
++    minHeight: "100%",
++    padding: "1.25rem",
++    borderRadius: "1.4rem",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    border: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  cardTitle: {
++    margin: 0,
++    color: "#c8a66a",
++    fontSize: "0.82rem",
++    letterSpacing: "0.12em",
++    textTransform: "uppercase",
++    fontWeight: 700,
++  },
++  cardBody: {
++    display: "grid",
++    gap: "0.35rem",
++    color: "rgba(246, 241, 232, 0.92)",
++    lineHeight: 1.7,
++  },
++  cardLink: {
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontWeight: 600,
++  },
++  hoursList: {
++    listStyle: "none",
++    margin: 0,
++    padding: 0,
++    display: "grid",
++    gap: "0.9rem",
++  },
++  hoursRow: {
++    display: "grid",
++    gridTemplateColumns: "minmax(0, 1fr) auto",
++    gap: "1rem",
++    paddingBottom: "0.9rem",
++    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  hoursDay: {
++    fontWeight: 600,
++  },
++  hoursTimes: {
++    textAlign: "right",
++    color: "rgba(246, 241, 232, 0.72)",
++  },
++  actions: {
++    display: "flex",
++    flexWrap: "wrap",
++    gap: "0.9rem",
++  },
++  primaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    backgroundColor: "#b85c38",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  secondaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.24)",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  note: {
++    margin: 0,
++    color: "rgba(246, 241, 232, 0.62)",
++    fontSize: "0.92rem",
++    lineHeight: 1.6,
++  },
++}
++
++export default function ContactSection() {
++  return (
++    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
++      <div style={styles.shell}>
++        <div style={styles.panel}>
++          <div style={styles.intro}>
++            <p style={styles.eyebrow}>Contact and booking</p>
++            <h2 id="contact-heading" style={styles.title}>
++              Reserve a table for your next Torino evening
++            </h2>
++            <p style={styles.lead}>
++              Join us for seasonal plates, thoughtful wines, and a dining room
++              designed for dates, small groups, and long conversations.
++            </p>
++          </div>
++
++          <div style={styles.content}>
++            {infoCards.map((card) => (
++              <article key={card.title} style={styles.card}>
++                <h3 style={styles.cardTitle}>{card.title}</h3>
++                <div style={styles.cardBody}>
++                  {card.content.map((line) =>
++                    card.href ? (
++                      <a key={line} href={card.href} style={styles.cardLink}>
++                        {line}
++                      </a>
++                    ) : (
++                      <span key={line}>{line}</span>
++                    ),
++                  )}
++                </div>
++              </article>
++            ))}
++
++            <article style={styles.card}>
++              <h3 style={styles.cardTitle}>Opening hours</h3>
++              <ul style={styles.hoursList}>
++                {openingHours.map((entry) => (
++                  <li key={entry.days} style={styles.hoursRow}>
++                    <span style={styles.hoursDay}>{entry.days}</span>
++                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
++                  </li>
++                ))}
++              </ul>
++            </article>
++          </div>
++
++          <div style={styles.actions}>
++            <a href={bookingLink} style={styles.primaryAction}>
++              Book on WhatsApp
++            </a>
++            <a href="tel:+390113821947" style={styles.secondaryAction}>
++              Call for reservations
++            </a>
++          </div>
++
++          <p style={styles.note}>
++            Reservations are recommended for Friday and Saturday dinner service.
++          </p>
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb..b8aae659216c82a49924482de95b3f8942cf7303
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -1,4 +1,5 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
+ import HeroSection from "../components/HeroSection"
+ 
+ export default function Home() {
+@@ -6,16 +7,7 @@
+     <main>
+       <HeroSection />
+       <AboutSection />
+-
+-      <section id="contact" aria-labelledby="contact-heading">
+-        <div>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
+-          <p>
+-            <a href="tel:+390113821947">+39 011 3821947</a>
+-          </p>
+-        </div>
+-      </section>
++      <ContactSection />
+     </main>
+   )
+ }
+
+codex
+Modified files: [src/components/ContactSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx), [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
+
+Implemented the home `contact` section as a dedicated `ContactSection` component and rendered it from [Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx). The section keeps the required `id="contact"` anchor and includes the restaurant address, clickable phone number, opening hours, and booking CTAs aligned with the project brief.
+
+Build result: `npm run build` passed successfully with Vite production output generated.
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index ed16ddacd3cf593a0fee526155f9e8cc900770e7..0cd227e434967b3bb0452b0376138bdd2c84dd81
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -59,3 +59,14 @@
+ Prepared TASK section-home-contact (Create contact section on home) for execution.
+ 
+ Launching Codex for TASK section-home-contact.
++
++Completed TASK `section-home-contact`.
++- Replaced the placeholder home contact markup with a dedicated reusable `ContactSection` component.
++- Added a full contact block with address, phone link, opening hours, and booking actions while preserving the required `contact` section anchor on the home page.
++- Rendered the contact component from `src/pages/Home.jsx` without changing unrelated routes or sections.
++
++TASK section-home-contact executed by Codex.
++Waiting for validation.
++
++TASK section-home-contact completed successfully.
++Build passed.
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..d64f20ea5ded9828685adb1d95ebb05d367eb86a
+--- /dev/null
++++ b/src/components/ContactSection.jsx
+@@ -0,0 +1,239 @@
++const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
++
++const openingHours = [
++  {
++    days: "Tuesday - Thursday",
++    hours: ["19:00 - 23:00"],
++  },
++  {
++    days: "Friday - Saturday",
++    hours: ["19:00 - 00:00"],
++  },
++  {
++    days: "Sunday",
++    hours: ["12:30 - 15:00", "19:00 - 22:30"],
++  },
++  {
++    days: "Monday",
++    hours: ["Closed"],
++  },
++]
++
++const infoCards = [
++  {
++    title: "Address",
++    content: ["Via Maria Vittoria 19", "Torino"],
++  },
++  {
++    title: "Phone",
++    content: ["+39 011 3821947"],
++    href: "tel:+390113821947",
++  },
++]
++
++const styles = {
++  section: {
++    backgroundColor: "#1f1f1b",
++    color: "#f6f1e8",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "4.5rem 1.5rem 5rem",
++    display: "grid",
++    gap: "1.5rem",
++  },
++  panel: {
++    display: "grid",
++    gap: "2rem",
++    padding: "1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.1)",
++    borderRadius: "1.75rem",
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.05) 0%, rgba(246, 241, 232, 0.02) 100%)",
++    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.22)",
++  },
++  intro: {
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2.2rem, 5vw, 4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++    maxWidth: "10ch",
++  },
++  lead: {
++    margin: 0,
++    maxWidth: "36rem",
++    color: "rgba(246, 241, 232, 0.78)",
++    fontSize: "1rem",
++    lineHeight: 1.75,
++  },
++  content: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1.25rem",
++    alignItems: "start",
++  },
++  card: {
++    display: "grid",
++    gap: "0.85rem",
++    minHeight: "100%",
++    padding: "1.25rem",
++    borderRadius: "1.4rem",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    border: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  cardTitle: {
++    margin: 0,
++    color: "#c8a66a",
++    fontSize: "0.82rem",
++    letterSpacing: "0.12em",
++    textTransform: "uppercase",
++    fontWeight: 700,
++  },
++  cardBody: {
++    display: "grid",
++    gap: "0.35rem",
++    color: "rgba(246, 241, 232, 0.92)",
++    lineHeight: 1.7,
++  },
++  cardLink: {
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontWeight: 600,
++  },
++  hoursList: {
++    listStyle: "none",
++    margin: 0,
++    padding: 0,
++    display: "grid",
++    gap: "0.9rem",
++  },
++  hoursRow: {
++    display: "grid",
++    gridTemplateColumns: "minmax(0, 1fr) auto",
++    gap: "1rem",
++    paddingBottom: "0.9rem",
++    borderBottom: "1px solid rgba(246, 241, 232, 0.08)",
++  },
++  hoursDay: {
++    fontWeight: 600,
++  },
++  hoursTimes: {
++    textAlign: "right",
++    color: "rgba(246, 241, 232, 0.72)",
++  },
++  actions: {
++    display: "flex",
++    flexWrap: "wrap",
++    gap: "0.9rem",
++  },
++  primaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    backgroundColor: "#b85c38",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  secondaryAction: {
++    display: "inline-flex",
++    alignItems: "center",
++    justifyContent: "center",
++    borderRadius: "999px",
++    padding: "0.95rem 1.5rem",
++    border: "1px solid rgba(246, 241, 232, 0.24)",
++    backgroundColor: "rgba(246, 241, 232, 0.04)",
++    color: "#f6f1e8",
++    textDecoration: "none",
++    fontSize: "0.98rem",
++    fontWeight: 700,
++  },
++  note: {
++    margin: 0,
++    color: "rgba(246, 241, 232, 0.62)",
++    fontSize: "0.92rem",
++    lineHeight: 1.6,
++  },
++}
++
++export default function ContactSection() {
++  return (
++    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
++      <div style={styles.shell}>
++        <div style={styles.panel}>
++          <div style={styles.intro}>
++            <p style={styles.eyebrow}>Contact and booking</p>
++            <h2 id="contact-heading" style={styles.title}>
++              Reserve a table for your next Torino evening
++            </h2>
++            <p style={styles.lead}>
++              Join us for seasonal plates, thoughtful wines, and a dining room
++              designed for dates, small groups, and long conversations.
++            </p>
++          </div>
++
++          <div style={styles.content}>
++            {infoCards.map((card) => (
++              <article key={card.title} style={styles.card}>
++                <h3 style={styles.cardTitle}>{card.title}</h3>
++                <div style={styles.cardBody}>
++                  {card.content.map((line) =>
++                    card.href ? (
++                      <a key={line} href={card.href} style={styles.cardLink}>
++                        {line}
++                      </a>
++                    ) : (
++                      <span key={line}>{line}</span>
++                    ),
++                  )}
++                </div>
++              </article>
++            ))}
++
++            <article style={styles.card}>
++              <h3 style={styles.cardTitle}>Opening hours</h3>
++              <ul style={styles.hoursList}>
++                {openingHours.map((entry) => (
++                  <li key={entry.days} style={styles.hoursRow}>
++                    <span style={styles.hoursDay}>{entry.days}</span>
++                    <span style={styles.hoursTimes}>{entry.hours.join(" / ")}</span>
++                  </li>
++                ))}
++              </ul>
++            </article>
++          </div>
++
++          <div style={styles.actions}>
++            <a href={bookingLink} style={styles.primaryAction}>
++              Book on WhatsApp
++            </a>
++            <a href="tel:+390113821947" style={styles.secondaryAction}>
++              Call for reservations
++            </a>
++          </div>
++
++          <p style={styles.note}>
++            Reservations are recommended for Friday and Saturday dinner service.
++          </p>
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 28a107a7869d88f2ed8b8a6fdc98b4aa02fe6abb..b8aae659216c82a49924482de95b3f8942cf7303
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -1,4 +1,5 @@
+ import AboutSection from "../components/AboutSection"
++import ContactSection from "../components/ContactSection"
+ import HeroSection from "../components/HeroSection"
+ 
+ export default function Home() {
+@@ -6,16 +7,7 @@
+     <main>
+       <HeroSection />
+       <AboutSection />
+-
+-      <section id="contact" aria-labelledby="contact-heading">
+-        <div>
+-          <h2 id="contact-heading">Book your evening</h2>
+-          <p>Via Maria Vittoria 19, Torino</p>
+-          <p>
+-            <a href="tel:+390113821947">+39 011 3821947</a>
+-          </p>
+-        </div>
+-      </section>
++      <ContactSection />
+     </main>
+   )
+ }
 
 tokens used
-20.587
+23.979
