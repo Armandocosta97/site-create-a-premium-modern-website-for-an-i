@@ -6,11 +6,13 @@ const styles = {
   main: {
     backgroundColor: "#f6f1e8",
     color: "#1f1f1b",
+    overflowX: "hidden",
   },
   hero: {
     maxWidth: "72rem",
     margin: "0 auto",
-    padding: "7.5rem 1.5rem 3rem",
+    padding:
+      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
   },
   copy: {
     maxWidth: "38rem",
@@ -34,7 +36,7 @@ const styles = {
   },
   lead: {
     margin: 0,
-    fontSize: "1.05rem",
+    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
     lineHeight: 1.8,
     color: "rgba(31, 31, 27, 0.76)",
   },

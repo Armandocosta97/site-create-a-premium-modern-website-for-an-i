@@ -39,14 +39,15 @@ const styles = {
   shell: {
     maxWidth: "72rem",
     margin: "0 auto",
-    padding: "4.5rem 1.5rem 5rem",
+    padding:
+      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
     display: "grid",
     gap: "1.5rem",
   },
   panel: {
     display: "grid",
     gap: "2rem",
-    padding: "1.5rem",
+    padding: "clamp(1.25rem, 4vw, 2.25rem)",
     border: "1px solid rgba(246, 241, 232, 0.1)",
     borderRadius: "1.75rem",
     background:
@@ -82,7 +83,7 @@ const styles = {
   },
   content: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
     gap: "1.25rem",
     alignItems: "start",
   },
@@ -108,6 +109,7 @@ const styles = {
     gap: "0.35rem",
     color: "rgba(246, 241, 232, 0.92)",
     lineHeight: 1.7,
+    wordBreak: "break-word",
   },
   cardLink: {
     color: "#f6f1e8",
@@ -145,18 +147,23 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "999px",
+    flex: "1 1 15rem",
+    minHeight: "3.25rem",
     padding: "0.95rem 1.5rem",
     backgroundColor: "#b85c38",
     color: "#f6f1e8",
     textDecoration: "none",
     fontSize: "0.98rem",
     fontWeight: 700,
+    textAlign: "center",
   },
   secondaryAction: {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "999px",
+    flex: "1 1 15rem",
+    minHeight: "3.25rem",
     padding: "0.95rem 1.5rem",
     border: "1px solid rgba(246, 241, 232, 0.24)",
     backgroundColor: "rgba(246, 241, 232, 0.04)",
@@ -164,6 +171,7 @@ const styles = {
     textDecoration: "none",
     fontSize: "0.98rem",
     fontWeight: 700,
+    textAlign: "center",
   },
   note: {
     margin: 0,

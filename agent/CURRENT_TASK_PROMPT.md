@@ -1037,37 +1037,44 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-seo-basics
+responsive-polish
 
 ## Current task title
-Add baseline SEO structure
+Refine responsive layout and spacing
 
 ## Current task type
-seo
+responsive
 
 ## Current task target
 ```json
 {
-  "pages": [
-    "home",
-    "gallery"
+  "breakpoints": [
+    360,
+    768,
+    1024,
+    1440
   ]
 }
 ```
 
 ## Depends on
-- page-home-shell
-- page-gallery-shell
+- navigation-structure
+- section-home-hero
+- section-home-about
+- section-home-contact
+- section-gallery-gallery-grid
 
 ## Files allowed
-- index.html
+- src/App.css
+- src/index.css
+- src/components
 - src/pages/Home.jsx
 - src/pages/Gallery.jsx
 
 ## Definition of done
-- title exists
-- meta description exists
-- one meaningful h1 per page exists
+- layout works across required breakpoints
+- no horizontal overflow
+- spacing and hierarchy are coherent
 
 ## Strict execution rules
 - Execute only this current task.

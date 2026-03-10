@@ -5,6 +5,13 @@ import ContactSection from "../components/ContactSection"
 import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
 import HeroSection from "../components/HeroSection"
 
+const styles = {
+  main: {
+    backgroundColor: "#f6f1e8",
+    overflowX: "hidden",
+  },
+}
+
 export default function Home() {
   useEffect(() => {
     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
@@ -19,7 +26,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main>
+    <main style={styles.main}>
       <HeroSection />
       <AboutSection />
       <ContactSection />

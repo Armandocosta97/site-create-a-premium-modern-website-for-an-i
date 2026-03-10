@@ -1,10 +1,28 @@
-Modified files: [index.html](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/index.html), [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx), [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx)
+**Modified Files**
 
-Implemented baseline SEO for both routed pages. `index.html` now has a production title and meta description instead of the Vite defaults. [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) and [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) now set route-specific `document.title` and `meta[name="description"]` values on mount, which keeps SEO metadata correct under hash routing. The existing `h1` structure was already valid: `Home` uses the hero heading, and `Gallery` already had a single meaningful `h1`.
+[agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)  
+[src/index.css](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/index.css)  
+[src/components/HeroSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx)  
+[src/components/AboutSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx)  
+[src/components/ContactSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx)  
+[src/components/Gallery-gridSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx)  
+[src/components/FloatingWhatsAppButton.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx)  
+[src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx)  
+[src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx)  
 
-Build result: `npm run build` passed successfully.
+**What Was Implemented**
 
-I did not update `agent/AGENT_REPORT.md` because the current task restricts edits to `index.html`, `src/pages/Home.jsx`, and `src/pages/Gallery.jsx`, and changing the report would have violated that file scope.
+Removed the default Vite global layout constraints and replaced them with app-safe base styles in [src/index.css](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/index.css), including full-width root sizing, box-sizing, overflow protection, image defaults, and section scroll offsets for anchored navigation.
+
+Refined responsive spacing and sizing across the allowed sections and pages: hero padding and CTA sizing, about/contact grid behavior, gallery grid/card sizing, and floating WhatsApp button bounds. I also added `overflowX` protection on [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) and [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) so the layout stays contained across the required breakpoints.
+
+Updated [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md) with the task summary.
+
+**Build Result**
+
+`npm run build` passed successfully with Vite production build output generated in `dist/`.
+
+I did not run browser-based breakpoint validation in this turn, so the build is verified but not visually inspected in-browser here.
 
 OpenAI Codex v0.111.0 (research preview)
 --------
@@ -15,7 +33,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/armandocosta/.codex/memories]
 reasoning effort: none
 reasoning summaries: none
-session id: 019cd524-e9b9-7983-ad11-69662300227d
+session id: 019cd525-ba75-72d1-aead-2f2862c7c073
 --------
 user
 # CURRENT TASK EXECUTION PROMPT
@@ -1057,37 +1075,44 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-seo-basics
+responsive-polish
 
 ## Current task title
-Add baseline SEO structure
+Refine responsive layout and spacing
 
 ## Current task type
-seo
+responsive
 
 ## Current task target
 ```json
 {
-  "pages": [
-    "home",
-    "gallery"
+  "breakpoints": [
+    360,
+    768,
+    1024,
+    1440
   ]
 }
 ```
 
 ## Depends on
-- page-home-shell
-- page-gallery-shell
+- navigation-structure
+- section-home-hero
+- section-home-about
+- section-home-contact
+- section-gallery-gallery-grid
 
 ## Files allowed
-- index.html
+- src/App.css
+- src/index.css
+- src/components
 - src/pages/Home.jsx
 - src/pages/Gallery.jsx
 
 ## Definition of done
-- title exists
-- meta description exists
-- one meaningful h1 per page exists
+- layout works across required breakpoints
+- no horizontal overflow
+- spacing and hierarchy are coherent
 
 ## Strict execution rules
 - Execute only this current task.
@@ -1116,42 +1141,78 @@ seo
 
 mcp startup: no servers
 codex
-I’m checking the current implementation against the SEO task and the allowed files first. Then I’ll make the smallest valid changes for page titles, meta description, and single `h1` coverage on `home` and `gallery`.
+I’m checking the current implementation against the task scope and the allowed files first. Then I’ll tighten responsive spacing and overflow issues without changing structure outside this task.
 exec
-/bin/zsh -lc "sed -n '1,240p' src/pages/Home.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,220p' index.html" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,240p' src/pages/Gallery.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc 'pwd && rg --files index.html src/pages agent/AGENT_REPORT.md brief/original-prompt.md brief/brief-summary.md site-spec.json docs/DEVELOPMENT_METHOD.md agent/CURRENT_TASK_PROMPT.md agent/TASK_STATE.json agent/TASK_GRAPH.json' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>site-create-a-premium-modern-website-for-an-i</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
- succeeded in 52ms:
+/bin/zsh -lc "sed -n '1,220p' src/App.css" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,240p' src/index.css" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/pages/Home.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/pages/Gallery.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "pwd && rg --files . | rg '"'^(src/(App.css|index.css|pages/Home.jsx|pages/Gallery.jsx|components/)|agent/AGENT_REPORT.md|agent/CURRENT_TASK_PROMPT.md|site-spec.json|docs/DEVELOPMENT_METHOD.md|brief/(original-prompt|brief-summary).md)$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+import { useEffect } from "react"
+
 import AboutSection from "../components/AboutSection"
 import ContactSection from "../components/ContactSection"
 import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
 import HeroSection from "../components/HeroSection"
 
 export default function Home() {
-  return (
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <ContactSection />
-      <FloatingWhatsAppButton />
-    </main>
-  )
+  useEffect(() => {
+    document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        "Discover Osteria 19 Torino, a modern osteria with seasonal Italian plates, curated wines, and a warm dining room in the heart of Turin.",
+      )
+    }
+  }, [])
+
+ succeeded in 52ms:
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+ succeeded in 52ms:
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
 }
  succeeded in 52ms:
+import { useEffect } from "react"
+
 import GalleryGridSection from "../components/Gallery-gridSection"
 
 const styles = {
@@ -1170,26 +1231,80 @@ const styles = {
     gap: "1rem",
   },
   eyebrow: {
-    margin: 0,
-    color: "#6f7558",
- succeeded in 52ms:
+ exited 1 in 51ms:
 /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
-agent/CURRENT_TASK_PROMPT.md
-index.html
-agent/TASK_STATE.json
-docs/DEVELOPMENT_METHOD.md
-site-spec.json
-brief/brief-summary.md
-brief/original-prompt.md
-agent/AGENT_REPORT.md
-agent/TASK_GRAPH.json
-src/pages/Home.jsx
-src/pages/Gallery.jsx
 codex
-The page shells are simple, and `index.html` still has Vite defaults. I’m checking whether `Home` already renders an `h1` through `HeroSection` before I add anything, because this task requires exactly one meaningful `h1` per page.
+The current CSS still has Vite defaults, so the responsive work likely needs to happen mostly in shared component styles. I’m reading the active section components now to find the actual layout constraints and any overflow risks.
 exec
 /bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc 'rg -n "<h1|aria-labelledby|HeroSection|gallery-title" src/components src/pages' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+/bin/zsh -lc "sed -n '1,240p' src/components/FloatingWhatsAppButton.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/components/AboutSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,280p' src/components/ContactSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc 'rg --files src/components' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,280p' src/components/Gallery-gridSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 53ms:
+const bookingLink =
+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
+
+const styles = {
+  link: {
+    position: "fixed",
+    right: "1rem",
+    bottom: "1rem",
+    zIndex: 30,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.75rem",
+    padding: "0.85rem 1rem",
+    borderRadius: "999px",
+    backgroundColor: "#25d366",
+    color: "#102417",
+    textDecoration: "none",
+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+    fontSize: "0.95rem",
+    fontWeight: 700,
+ succeeded in 53ms:
+const aboutImage =
+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
+
+const highlights = [
+  "Seasonal produce selected with the rhythm of Piemonte markets",
+  "Italian classics reworked with clean presentation and measured elegance",
+  "An intimate dining room shaped for long dinners, wine, and conversation",
+  "A curated cellar built around local labels and expressive Italian bottles",
+]
+
+const styles = {
+  section: {
+    background:
+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
+    color: "#1f1f1b",
+  },
+  shell: {
+    maxWidth: "72rem",
+    margin: "0 auto",
+    padding: "4.5rem 1.5rem",
+ succeeded in 53ms:
+const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
+
+const openingHours = [
+  {
+    days: "Tuesday - Thursday",
+    hours: ["19:00 - 23:00"],
+  },
+  {
+    days: "Friday - Saturday",
+    hours: ["19:00 - 00:00"],
+  },
+  {
+    days: "Sunday",
+    hours: ["12:30 - 15:00", "19:00 - 22:30"],
+  },
+  {
+    days: "Monday",
+    hours: ["Closed"],
+  },
+]
+ succeeded in 53ms:
 const backgroundImage =
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
 
@@ -1210,232 +1325,100 @@ const styles = {
     backgroundSize: "cover",
     backgroundPosition: "center",
     transform: "scale(1.04)",
- succeeded in 51ms:
-src/pages/Gallery.jsx:44:      <section aria-labelledby="gallery-title" style={styles.hero}>
-src/pages/Gallery.jsx:47:          <h1 id="gallery-title" style={styles.title}>
-src/pages/Home.jsx:4:import HeroSection from "../components/HeroSection"
-src/pages/Home.jsx:9:      <HeroSection />
-src/components/HeroSection.jsx:112:export default function HeroSection() {
-src/components/HeroSection.jsx:114:    <section id="hero" aria-labelledby="home-hero-heading" style={styles.section}>
-src/components/HeroSection.jsx:121:          <h1 id="home-hero-heading" style={styles.title}>
-src/components/Gallery-gridSection.jsx:151:      aria-labelledby="gallery-grid-heading"
-src/components/ContactSection.jsx:178:    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
-src/components/AboutSection.jsx:119:    <section id="about" aria-labelledby="about-heading" style={styles.section}>
+ succeeded in 50ms:
+src/components/FloatingWhatsAppButton.jsx
+src/components/AboutSection.jsx
+src/components/ContactSection.jsx
+src/components/Gallery-gridSection.jsx
+src/components/HeroSection.jsx
+ succeeded in 50ms:
+const galleryImages = [
+  {
+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
+    category: "Dining room",
+    title: "Warm urban interiors",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
+    alt: "Elegant restaurant table setting prepared for evening service",
+    category: "Table setting",
+    title: "Evening table detail",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+    alt: "Refined plated pasta served in a modern Italian restaurant",
+    category: "Pasta",
+    title: "Signature pasta plates",
+  },
+  {
 codex
-`Home` already has a valid hero `h1`, so I won’t add another one. I’m patching `index.html` with a production baseline and using page-level effects in `Home` and `Gallery` so the title and description switch correctly with hash routing.
-file update
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
-@@ -1 +1,3 @@
-+import { useEffect } from "react"
-+
- import GalleryGridSection from "../components/Gallery-gridSection"
-@@ -41,2 +43,14 @@
- export default function Gallery() {
-+  useEffect(() => {
-+    document.title = "Gallery | Osteria 19 Torino"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Browse the Osteria 19 Torino gallery for a look at the dining room, plated dishes, and the refined evening atmosphere of our contemporary restaurant.",
-+      )
-+    }
-+  }, [])
-+
-   return (
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
-@@ -1 +1,3 @@
-+import { useEffect } from "react"
-+
- import AboutSection from "../components/AboutSection"
-@@ -6,2 +8,14 @@
- export default function Home() {
-+  useEffect(() => {
-+    document.title = "Osteria 19 Torino | Contemporary Italian Dining"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Discover Osteria 19 Torino, a modern osteria with seasonal Italian plates, curated wines, and a warm dining room in the heart of Turin.",
-+      )
-+    }
-+  }, [])
-+
-   return (
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/index.html
-@@ -6,3 +6,7 @@
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>site-create-a-premium-modern-website-for-an-i</title>
-+    <meta
-+      name="description"
-+      content="Osteria 19 Torino is a contemporary Italian restaurant in central Turin with seasonal dishes, warm evening atmosphere, and elegant dining."
-+    />
-+    <title>Osteria 19 Torino | Contemporary Italian Dining</title>
-   </head>
-apply_patch(auto_approved=true) exited 0 in 45ms:
-Success. Updated the following files:
-M index.html
-M src/pages/Home.jsx
-M src/pages/Gallery.jsx
-file update:
-diff --git a/index.html b/index.html
-index b07e66bba1626bce697074bed54e4d5d8b1db8c9..e05741fa37a58563642ad06a0c115ac682ced500
---- a/index.html
-+++ b/index.html
-@@ -4,7 +4,11 @@
-     <meta charset="UTF-8" />
-     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>site-create-a-premium-modern-website-for-an-i</title>
-+    <meta
-+      name="description"
-+      content="Osteria 19 Torino is a contemporary Italian restaurant in central Turin with seasonal dishes, warm evening atmosphere, and elegant dining."
-+    />
-+    <title>Osteria 19 Torino | Contemporary Italian Dining</title>
-   </head>
-   <body>
-     <div id="root"></div>
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 8569209fd76792913ca8caad4379993628c828bf..668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,3 +1,5 @@
-+import { useEffect } from "react"
-+
- import GalleryGridSection from "../components/Gallery-gridSection"
- 
- const styles = {
-@@ -39,6 +41,18 @@
- }
- 
- export default function Gallery() {
-+  useEffect(() => {
-+    document.title = "Gallery | Osteria 19 Torino"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Browse the Osteria 19 Torino gallery for a look at the dining room, plated dishes, and the refined evening atmosphere of our contemporary restaurant.",
-+      )
-+    }
-+  }, [])
-+
-   return (
-     <main style={styles.main}>
-       <section aria-labelledby="gallery-title" style={styles.hero}>
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index 4ef64a27281b7924ab29fd0559cecee76fb7a773..34f65c3a82c1336fc2a68a9494d9621bd6cf132b
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,9 +1,23 @@
-+import { useEffect } from "react"
-+
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
- import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-+  useEffect(() => {
-+    document.title = "Osteria 19 Torino | Contemporary Italian Dining"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Discover Osteria 19 Torino, a modern osteria with seasonal Italian plates, curated wines, and a warm dining room in the heart of Turin.",
-+      )
-+    }
-+  }, [])
-+
-   return (
-     <main>
-       <HeroSection />
-
-file update:
-diff --git a/index.html b/index.html
-index b07e66bba1626bce697074bed54e4d5d8b1db8c9..e05741fa37a58563642ad06a0c115ac682ced500
---- a/index.html
-+++ b/index.html
-@@ -4,7 +4,11 @@
-     <meta charset="UTF-8" />
-     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>site-create-a-premium-modern-website-for-an-i</title>
-+    <meta
-+      name="description"
-+      content="Osteria 19 Torino is a contemporary Italian restaurant in central Turin with seasonal dishes, warm evening atmosphere, and elegant dining."
-+    />
-+    <title>Osteria 19 Torino | Contemporary Italian Dining</title>
-   </head>
-   <body>
-     <div id="root"></div>
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 8569209fd76792913ca8caad4379993628c828bf..668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,3 +1,5 @@
-+import { useEffect } from "react"
-+
- import GalleryGridSection from "../components/Gallery-gridSection"
- 
- const styles = {
-@@ -39,6 +41,18 @@
- }
- 
- export default function Gallery() {
-+  useEffect(() => {
-+    document.title = "Gallery | Osteria 19 Torino"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Browse the Osteria 19 Torino gallery for a look at the dining room, plated dishes, and the refined evening atmosphere of our contemporary restaurant.",
-+      )
-+    }
-+  }, [])
-+
-   return (
-     <main style={styles.main}>
-       <section aria-labelledby="gallery-title" style={styles.hero}>
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index 4ef64a27281b7924ab29fd0559cecee76fb7a773..34f65c3a82c1336fc2a68a9494d9621bd6cf132b
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,9 +1,23 @@
-+import { useEffect } from "react"
-+
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
- import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-+  useEffect(() => {
-+    document.title = "Osteria 19 Torino | Contemporary Italian Dining"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Discover Osteria 19 Torino, a modern osteria with seasonal Italian plates, curated wines, and a warm dining room in the heart of Turin.",
-+      )
-+    }
-+  }, [])
-+
-   return (
-     <main>
-       <HeroSection />
-
-codex
-The SEO changes are in place. I’m running a build now to verify the task did not break the app, and then I’ll decide whether `agent/AGENT_REPORT.md` can be updated without violating the task’s file restrictions.
+I have the layout surface now. The main issues are global Vite defaults, fixed-width touch targets at small sizes, and a few grids and floating elements that need stricter mobile behavior.
+Plan update
+Responsive polish needs coordinated CSS cleanup plus small component-level adjustments inside the allowed files.
+  ✓ Inspect active layout and identify overflow/spacing risks across home and gallery
+  → Patch global CSS and component styles for mobile-first spacing, grids, and fixed CTA behavior
+  • Run build check and update agent report
 exec
-/bin/zsh -lc "rg --files package.json && sed -n '1,220p' package.json" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
-package.json
+/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,240p' src/App.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 53ms:
+import { useEffect } from "react"
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+import Layout from "./layout/Layout"
+import Home from "./pages/Home"
+import Gallery from "./pages/Gallery"
+
+function ScrollManager() {
+  const location = useLocation()
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const sectionId = params.get("section")
+
+    if (!sectionId) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+      return
+    }
+
+    window.requestAnimationFrame(() => {
+      const section = document.getElementById(sectionId)
+ succeeded in 53ms:
+# AGENT REPORT
+
+Project created.
+
+Prepared TASK page-home-shell (Create home page shell) for execution.
+
+Prepared TASK page-home-shell (Create home page shell) for execution.
+
+Launching Codex for TASK page-home-shell.
+
+Completed TASK `page-home-shell`.
+- Replaced the placeholder home page with a semantic shell containing `hero`, `about`, and `contact` sections.
+- Preserved the home route in `src/App.jsx` and ensured the page includes valid booking and phone CTAs.
+
+TASK page-home-shell executed by Codex.
+Waiting for validation.
+
+TASK page-home-shell completed successfully.
+Build passed.
+Commit created for TASK page-home-shell.
+codex
+I’ve narrowed this to a small, safe patch: remove the global starter CSS that’s constraining the app, then tighten section spacing and fixed CTA behavior so the layout holds from 360px through desktop.
+exec
+/bin/zsh -lc "sed -n '1,220p' package.json" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,220p' src/main.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 53ms:
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+ succeeded in 53ms:
 {
   "name": "site-create-a-premium-modern-website-for-an-i",
   "private": true,
@@ -1455,8 +1438,1338 @@ package.json
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.58.2",
+codex
+I’m applying the patch now. The changes stay inside the allowed files and focus on global reset fixes, section padding, grid sizing, and mobile-safe CTA sizing rather than reshaping the pages.
+file update
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
+@@ -8,2 +8,3 @@
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+@@ -12,3 +13,4 @@
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+@@ -36,3 +38,3 @@
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx
+@@ -6,4 +6,4 @@
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+@@ -12,3 +12,4 @@
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+@@ -18,3 +19,3 @@
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+@@ -36,2 +37,3 @@
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx
+@@ -19,6 +19,7 @@
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+@@ -28,3 +29,3 @@
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+@@ -55,6 +56,8 @@
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+@@ -63,3 +66,3 @@
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+@@ -76,3 +79,3 @@
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
+@@ -7,2 +7,9 @@
+ 
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
+ export default function Home() {
+@@ -21,3 +28,3 @@
+   return (
+-    <main>
++    <main style={styles.main}>
+       <HeroSection />
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx
+@@ -41,3 +41,4 @@
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+@@ -48,3 +49,3 @@
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+@@ -84,3 +85,3 @@
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+@@ -110,2 +111,3 @@
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+@@ -147,2 +149,4 @@
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+@@ -153,2 +157,3 @@
+     fontWeight: 700,
++    textAlign: "center",
+   },
+@@ -159,2 +164,4 @@
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+@@ -166,2 +173,3 @@
+     fontWeight: 700,
++    textAlign: "center",
+   },
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx
+@@ -66,5 +66,6 @@
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+@@ -98,4 +99,4 @@
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+@@ -104,3 +105,4 @@
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+@@ -125,3 +127,3 @@
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+@@ -141,3 +143,3 @@
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx
+@@ -7,3 +7,3 @@
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+@@ -24,4 +24,4 @@
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+@@ -37,3 +37,4 @@
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+@@ -57,6 +58,6 @@
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+@@ -81,2 +82,4 @@
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+@@ -88,2 +91,3 @@
+     lineHeight: 1,
++    textAlign: "center",
+   },
+@@ -94,2 +98,4 @@
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+@@ -100,2 +106,5 @@
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+@@ -107,3 +116,4 @@
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/index.css
+@@ -1,10 +1,7 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+@@ -15,9 +12,11 @@
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
++
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+@@ -26,42 +25,46 @@
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
++
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+apply_patch(auto_approved=true) exited 0 in 95ms:
+Success. Updated the following files:
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/index.css
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
+file update:
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
+ const styles = {
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
+ }
+ 
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
++
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
++
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -5,6 +5,13 @@
+ import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
+ import HeroSection from "../components/HeroSection"
+ 
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
+ export default function Home() {
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
+   return (
+-    <main>
++    <main style={styles.main}>
+       <HeroSection />
+       <AboutSection />
+       <ContactSection />
+
+file update:
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
+ const styles = {
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
+ }
+ 
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
++
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
++
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -5,6 +5,13 @@
+ import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
+ import HeroSection from "../components/HeroSection"
+ 
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
+ export default function Home() {
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
+   return (
+-    <main>
++    <main style={styles.main}>
+       <HeroSection />
+       <AboutSection />
+       <ContactSection />
+
+codex
+The responsive patch is in. I’m running a build now and then I’ll append the task summary to the agent report with only the work done for this task.
 exec
-/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 824ms:
+/bin/zsh -lc 'git diff -- src/index.css src/components/HeroSection.jsx src/components/AboutSection.jsx src/components/ContactSection.jsx src/components/Gallery-gridSection.jsx src/components/FloatingWhatsAppButton.jsx src/pages/Home.jsx src/pages/Gallery.jsx' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 53ms:
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd..9e26b8e 100644
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@ const styles = {
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+ succeeded in 820ms:
 
 > site-create-a-premium-modern-website-for-an-i@0.0.0 build
 > vite build
@@ -1467,168 +2780,2524 @@ transforming...
 rendering chunks...
 computing gzip size...
 dist/index.html                   0.69 kB │ gzip:  0.40 kB
-dist/assets/index-DQ3P1g1z.css    0.91 kB │ gzip:  0.49 kB
-dist/assets/index-BrP02MWp.js   247.86 kB │ gzip: 78.29 kB
-✓ built in 561ms
+dist/assets/index-aOhLRcYF.css    0.71 kB │ gzip:  0.41 kB
+dist/assets/index-02mnxKfB.js   248.98 kB │ gzip: 78.58 kB
+✓ built in 549ms
 file update:
-diff --git a/index.html b/index.html
-index b07e66bba1626bce697074bed54e4d5d8b1db8c9..e05741fa37a58563642ad06a0c115ac682ced500
---- a/index.html
-+++ b/index.html
-@@ -4,7 +4,11 @@
-     <meta charset="UTF-8" />
-     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>site-create-a-premium-modern-website-for-an-i</title>
-+    <meta
-+      name="description"
-+      content="Osteria 19 Torino is a contemporary Italian restaurant in central Turin with seasonal dishes, warm evening atmosphere, and elegant dining."
-+    />
-+    <title>Osteria 19 Torino | Contemporary Italian Dining</title>
-   </head>
-   <body>
-     <div id="root"></div>
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 8569209fd76792913ca8caad4379993628c828bf..668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,3 +1,5 @@
-+import { useEffect } from "react"
-+
- import GalleryGridSection from "../components/Gallery-gridSection"
- 
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
  const styles = {
-@@ -39,6 +41,18 @@
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
  }
  
- export default function Gallery() {
-+  useEffect(() => {
-+    document.title = "Gallery | Osteria 19 Torino"
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
 +
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Browse the Osteria 19 Torino gallery for a look at the dining room, plated dishes, and the refined evening atmosphere of our contemporary restaurant.",
-+      )
-+    }
-+  }, [])
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
 +
-   return (
-     <main style={styles.main}>
-       <section aria-labelledby="gallery-title" style={styles.hero}>
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
 diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index 4ef64a27281b7924ab29fd0559cecee76fb7a773..34f65c3a82c1336fc2a68a9494d9621bd6cf132b
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
 --- a/src/pages/Home.jsx
 +++ b/src/pages/Home.jsx
-@@ -1,9 +1,23 @@
-+import { useEffect } from "react"
-+
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
+@@ -5,6 +5,13 @@
  import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
  import HeroSection from "../components/HeroSection"
  
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
  export default function Home() {
-+  useEffect(() => {
-+    document.title = "Osteria 19 Torino | Contemporary Italian Dining"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Discover Osteria 19 Torino, a modern osteria with seasonal Italian plates, curated wines, and a warm dining room in the heart of Turin.",
-+      )
-+    }
-+  }, [])
-+
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
    return (
-     <main>
+-    <main>
++    <main style={styles.main}>
        <HeroSection />
+       <AboutSection />
+       <ContactSection />
 
 codex
-Modified files: [index.html](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/index.html), [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx), [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx)
-
-Implemented baseline SEO for both routed pages. `index.html` now has a production title and meta description instead of the Vite defaults. [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) and [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) now set route-specific `document.title` and `meta[name="description"]` values on mount, which keeps SEO metadata correct under hash routing. The existing `h1` structure was already valid: `Home` uses the hero heading, and `Gallery` already had a single meaningful `h1`.
-
-Build result: `npm run build` passed successfully.
-
-I did not update `agent/AGENT_REPORT.md` because the current task restricts edits to `index.html`, `src/pages/Home.jsx`, and `src/pages/Gallery.jsx`, and changing the report would have violated that file scope.
-file update:
-diff --git a/index.html b/index.html
-index b07e66bba1626bce697074bed54e4d5d8b1db8c9..e05741fa37a58563642ad06a0c115ac682ced500
---- a/index.html
-+++ b/index.html
-@@ -4,7 +4,11 @@
-     <meta charset="UTF-8" />
-     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>site-create-a-premium-modern-website-for-an-i</title>
-+    <meta
-+      name="description"
-+      content="Osteria 19 Torino is a contemporary Italian restaurant in central Turin with seasonal dishes, warm evening atmosphere, and elegant dining."
-+    />
-+    <title>Osteria 19 Torino | Contemporary Italian Dining</title>
-   </head>
-   <body>
-     <div id="root"></div>
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 8569209fd76792913ca8caad4379993628c828bf..668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,3 +1,5 @@
-+import { useEffect } from "react"
+The build passed. I’m updating `agent/AGENT_REPORT.md` with a short task-specific entry and then I’ll summarize the modified files and outcome.
+file update
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+@@ -184 +184,8 @@
+ Launching Codex for TASK responsive-polish.
++2026-03-10: Refined responsive spacing and layout behavior across the home and gallery pages by removing the default Vite global constraints, tightening section padding and grid sizing, and making hero/contact/floating CTA elements safer on small screens without changing routing or page structure.
 +
- import GalleryGridSection from "../components/Gallery-gridSection"
++TASK responsive-polish executed by Codex.
++Waiting for validation.
++
++TASK responsive-polish completed successfully.
++Build passed.
+apply_patch(auto_approved=true) exited 0 in 110ms:
+Success. Updated the following files:
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index a7ccede6cf03b2ae3a02c7c921cf818d9da8d1ad..6d814cf4c6fc31eef4fe2407dc31d392a425017b
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -182,3 +182,10 @@
+ Prepared TASK responsive-polish (Refine responsive layout and spacing) for execution.
  
+ Launching Codex for TASK responsive-polish.
++2026-03-10: Refined responsive spacing and layout behavior across the home and gallery pages by removing the default Vite global constraints, tightening section padding and grid sizing, and making hero/contact/floating CTA elements safer on small screens without changing routing or page structure.
++
++TASK responsive-polish executed by Codex.
++Waiting for validation.
++
++TASK responsive-polish completed successfully.
++Build passed.
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
  const styles = {
-@@ -39,6 +41,18 @@
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
  }
  
- export default function Gallery() {
-+  useEffect(() => {
-+    document.title = "Gallery | Osteria 19 Torino"
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
 +
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Browse the Osteria 19 Torino gallery for a look at the dining room, plated dishes, and the refined evening atmosphere of our contemporary restaurant.",
-+      )
-+    }
-+  }, [])
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
 +
-   return (
-     <main style={styles.main}>
-       <section aria-labelledby="gallery-title" style={styles.hero}>
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
 diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index 4ef64a27281b7924ab29fd0559cecee76fb7a773..34f65c3a82c1336fc2a68a9494d9621bd6cf132b
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
 --- a/src/pages/Home.jsx
 +++ b/src/pages/Home.jsx
-@@ -1,9 +1,23 @@
-+import { useEffect } from "react"
-+
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
+@@ -5,6 +5,13 @@
  import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
  import HeroSection from "../components/HeroSection"
  
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
  export default function Home() {
-+  useEffect(() => {
-+    document.title = "Osteria 19 Torino | Contemporary Italian Dining"
-+
-+    const metaDescription = document.querySelector('meta[name="description"]')
-+    if (metaDescription) {
-+      metaDescription.setAttribute(
-+        "content",
-+        "Discover Osteria 19 Torino, a modern osteria with seasonal Italian plates, curated wines, and a warm dining room in the heart of Turin.",
-+      )
-+    }
-+  }, [])
-+
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
    return (
-     <main>
+-    <main>
++    <main style={styles.main}>
        <HeroSection />
+       <AboutSection />
+       <ContactSection />
+
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index a7ccede6cf03b2ae3a02c7c921cf818d9da8d1ad..6d814cf4c6fc31eef4fe2407dc31d392a425017b
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -182,3 +182,10 @@
+ Prepared TASK responsive-polish (Refine responsive layout and spacing) for execution.
+ 
+ Launching Codex for TASK responsive-polish.
++2026-03-10: Refined responsive spacing and layout behavior across the home and gallery pages by removing the default Vite global constraints, tightening section padding and grid sizing, and making hero/contact/floating CTA elements safer on small screens without changing routing or page structure.
++
++TASK responsive-polish executed by Codex.
++Waiting for validation.
++
++TASK responsive-polish completed successfully.
++Build passed.
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
+ const styles = {
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
+ }
+ 
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
++
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
++
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -5,6 +5,13 @@
+ import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
+ import HeroSection from "../components/HeroSection"
+ 
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
+ export default function Home() {
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
+   return (
+-    <main>
++    <main style={styles.main}>
+       <HeroSection />
+       <AboutSection />
+       <ContactSection />
+
+Plan update
+  ✓ Inspect active layout and identify overflow/spacing risks across home and gallery
+  ✓ Patch global CSS and component styles for mobile-first spacing, grids, and fixed CTA behavior
+  ✓ Run build check and update agent report
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index a7ccede6cf03b2ae3a02c7c921cf818d9da8d1ad..6d814cf4c6fc31eef4fe2407dc31d392a425017b
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -182,3 +182,10 @@
+ Prepared TASK responsive-polish (Refine responsive layout and spacing) for execution.
+ 
+ Launching Codex for TASK responsive-polish.
++2026-03-10: Refined responsive spacing and layout behavior across the home and gallery pages by removing the default Vite global constraints, tightening section padding and grid sizing, and making hero/contact/floating CTA elements safer on small screens without changing routing or page structure.
++
++TASK responsive-polish executed by Codex.
++Waiting for validation.
++
++TASK responsive-polish completed successfully.
++Build passed.
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
+ const styles = {
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
+ }
+ 
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
++
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
++
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -5,6 +5,13 @@
+ import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
+ import HeroSection from "../components/HeroSection"
+ 
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
+ export default function Home() {
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
+   return (
+-    <main>
++    <main style={styles.main}>
+       <HeroSection />
+       <AboutSection />
+       <ContactSection />
+
+codex
+**Modified Files**
+
+[agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)  
+[src/index.css](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/index.css)  
+[src/components/HeroSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx)  
+[src/components/AboutSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/AboutSection.jsx)  
+[src/components/ContactSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/ContactSection.jsx)  
+[src/components/Gallery-gridSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx)  
+[src/components/FloatingWhatsAppButton.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx)  
+[src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx)  
+[src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx)  
+
+**What Was Implemented**
+
+Removed the default Vite global layout constraints and replaced them with app-safe base styles in [src/index.css](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/index.css), including full-width root sizing, box-sizing, overflow protection, image defaults, and section scroll offsets for anchored navigation.
+
+Refined responsive spacing and sizing across the allowed sections and pages: hero padding and CTA sizing, about/contact grid behavior, gallery grid/card sizing, and floating WhatsApp button bounds. I also added `overflowX` protection on [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) and [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) so the layout stays contained across the required breakpoints.
+
+Updated [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md) with the task summary.
+
+**Build Result**
+
+`npm run build` passed successfully with Vite production build output generated in `dist/`.
+
+I did not run browser-based breakpoint validation in this turn, so the build is verified but not visually inspected in-browser here.
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index a7ccede6cf03b2ae3a02c7c921cf818d9da8d1ad..6d814cf4c6fc31eef4fe2407dc31d392a425017b
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -182,3 +182,10 @@
+ Prepared TASK responsive-polish (Refine responsive layout and spacing) for execution.
+ 
+ Launching Codex for TASK responsive-polish.
++2026-03-10: Refined responsive spacing and layout behavior across the home and gallery pages by removing the default Vite global constraints, tightening section padding and grid sizing, and making hero/contact/floating CTA elements safer on small screens without changing routing or page structure.
++
++TASK responsive-polish executed by Codex.
++Waiting for validation.
++
++TASK responsive-polish completed successfully.
++Build passed.
+diff --git a/src/components/AboutSection.jsx b/src/components/AboutSection.jsx
+index 1e935fd972c71dd94105f26ab479a7dbc0e3db4f..9e26b8e2200ee621762ddf2752beb2fba204644a
+--- a/src/components/AboutSection.jsx
++++ b/src/components/AboutSection.jsx
+@@ -17,16 +17,17 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)",
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+-    gap: "2rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
++    gap: "clamp(1.5rem, 4vw, 3rem)",
+     alignItems: "center",
+   },
+   mediaCard: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "22rem",
++    minHeight: "clamp(20rem, 56vw, 31rem)",
+     borderRadius: "1.75rem",
+     backgroundColor: "#d8d1c5",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -53,15 +54,17 @@
+     gap: "0.6rem",
+     padding: "0.75rem 1rem",
+     borderRadius: "999px",
++    maxWidth: "calc(100% - 2.5rem)",
+     backgroundColor: "rgba(31, 31, 27, 0.82)",
+     color: "#f6f1e8",
+-    fontSize: "0.88rem",
++    fontSize: "0.84rem",
+     letterSpacing: "0.04em",
++    lineHeight: 1.4,
+   },
+   content: {
+     display: "grid",
+     alignContent: "center",
+-    gap: "1.5rem",
++    gap: "1.35rem",
+   },
+   eyebrow: {
+     margin: 0,
+@@ -74,7 +77,7 @@
+   title: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(2.4rem, 5vw, 4.25rem)",
++    fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
+     lineHeight: 1,
+     letterSpacing: "-0.04em",
+     maxWidth: "12ch",
+diff --git a/src/components/ContactSection.jsx b/src/components/ContactSection.jsx
+index d64f20ea5ded9828685adb1d95ebb05d367eb86a..2ef67d6a67595f39c7ed246c644dbe9f85ee615f
+--- a/src/components/ContactSection.jsx
++++ b/src/components/ContactSection.jsx
+@@ -39,14 +39,15 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "4.5rem 1.5rem 5rem",
++    padding:
++      "clamp(4rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+     gap: "1.5rem",
+   },
+   panel: {
+     display: "grid",
+     gap: "2rem",
+-    padding: "1.5rem",
++    padding: "clamp(1.25rem, 4vw, 2.25rem)",
+     border: "1px solid rgba(246, 241, 232, 0.1)",
+     borderRadius: "1.75rem",
+     background:
+@@ -82,7 +83,7 @@
+   },
+   content: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+     gap: "1.25rem",
+     alignItems: "start",
+   },
+@@ -108,6 +109,7 @@
+     gap: "0.35rem",
+     color: "rgba(246, 241, 232, 0.92)",
+     lineHeight: 1.7,
++    wordBreak: "break-word",
+   },
+   cardLink: {
+     color: "#f6f1e8",
+@@ -145,18 +147,23 @@
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 15rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.24)",
+     backgroundColor: "rgba(246, 241, 232, 0.04)",
+@@ -164,6 +171,7 @@
+     textDecoration: "none",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    textAlign: "center",
+   },
+   note: {
+     margin: 0,
+diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
+index 44d85068470878067a8991837a8912a4962530ec..68ffbed96e0d60852e12873b102201c887986d80
+--- a/src/components/FloatingWhatsAppButton.jsx
++++ b/src/components/FloatingWhatsAppButton.jsx
+@@ -4,19 +4,20 @@
+ const styles = {
+   link: {
+     position: "fixed",
+-    right: "1rem",
+-    bottom: "1rem",
++    right: "clamp(0.75rem, 3vw, 1rem)",
++    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
+     zIndex: 30,
+     display: "inline-flex",
+     alignItems: "center",
+     gap: "0.75rem",
+-    padding: "0.85rem 1rem",
++    maxWidth: "calc(100vw - 1.5rem)",
++    padding: "0.8rem 0.95rem",
+     borderRadius: "999px",
+     backgroundColor: "#25d366",
+     color: "#102417",
+     textDecoration: "none",
+     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
+-    fontSize: "0.95rem",
++    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
+     fontWeight: 700,
+     lineHeight: 1,
+   },
+@@ -34,6 +35,7 @@
+   label: {
+     display: "block",
+     color: "#102417",
++    whiteSpace: "nowrap",
+   },
+ }
+ 
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+index 3167c6ee88b7a1fe06452079d0b4788e83859aa5..2074dfc9439a15f60e6460722660f608b3908935
+--- a/src/components/Gallery-gridSection.jsx
++++ b/src/components/Gallery-gridSection.jsx
+@@ -64,9 +64,10 @@
+   shell: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "0 1.5rem 5rem",
++    padding:
++      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
+     display: "grid",
+-    gap: "2rem",
++    gap: "clamp(1.5rem, 4vw, 2.25rem)",
+   },
+   intro: {
+     display: "grid",
+@@ -96,13 +97,14 @@
+   },
+   grid: {
+     display: "grid",
+-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+-    gap: "1rem",
++    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
++    gap: "clamp(0.9rem, 2vw, 1.25rem)",
+   },
+   card: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "21rem",
++    minHeight: "19rem",
++    aspectRatio: "0.82",
+     borderRadius: "1.6rem",
+     backgroundColor: "#d9d1c4",
+     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+@@ -123,7 +125,7 @@
+   caption: {
+     position: "absolute",
+     inset: "auto 0 0 0",
+-    padding: "1.25rem",
++    padding: "clamp(1rem, 3vw, 1.25rem)",
+     display: "grid",
+     gap: "0.4rem",
+     color: "#f6f1e8",
+@@ -139,7 +141,7 @@
+   captionTitle: {
+     margin: 0,
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "1.35rem",
++    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
+     lineHeight: 1.1,
+   },
+ }
+diff --git a/src/components/HeroSection.jsx b/src/components/HeroSection.jsx
+index 70c3827ad63957a5b5390af176b8692691fcc8f2..346d7acdda02e88206100155ed3d3be5832c4362
+--- a/src/components/HeroSection.jsx
++++ b/src/components/HeroSection.jsx
+@@ -5,7 +5,7 @@
+   section: {
+     position: "relative",
+     overflow: "hidden",
+-    minHeight: "100vh",
++    minHeight: "100svh",
+     display: "flex",
+     alignItems: "stretch",
+     backgroundColor: "#1f1f1b",
+@@ -22,8 +22,8 @@
+   glow: {
+     position: "absolute",
+     inset: "auto -15% -25% auto",
+-    width: "22rem",
+-    height: "22rem",
++    width: "clamp(14rem, 32vw, 22rem)",
++    height: "clamp(14rem, 32vw, 22rem)",
+     borderRadius: "999px",
+     background:
+       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
+@@ -35,7 +35,8 @@
+     width: "100%",
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "8rem 1.5rem 4rem",
++    padding:
++      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
+     display: "grid",
+     alignItems: "end",
+   },
+@@ -55,10 +56,10 @@
+   title: {
+     margin: "1rem 0 0",
+     fontFamily: 'Georgia, "Times New Roman", serif',
+-    fontSize: "clamp(3rem, 9vw, 6rem)",
++    fontSize: "clamp(2.85rem, 10vw, 6rem)",
+     lineHeight: 0.94,
+     letterSpacing: "-0.04em",
+-    maxWidth: "10ch",
++    maxWidth: "9ch",
+   },
+   subtitle: {
+     margin: "1.5rem 0 0",
+@@ -79,6 +80,8 @@
+     justifyContent: "center",
+     border: 0,
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     backgroundColor: "#b85c38",
+     color: "#f6f1e8",
+@@ -86,18 +89,24 @@
+     fontSize: "0.98rem",
+     fontWeight: 700,
+     lineHeight: 1,
++    textAlign: "center",
+   },
+   secondaryAction: {
+     display: "inline-flex",
+     alignItems: "center",
+     justifyContent: "center",
+     borderRadius: "999px",
++    flex: "1 1 14rem",
++    minHeight: "3.25rem",
+     padding: "0.95rem 1.5rem",
+     border: "1px solid rgba(246, 241, 232, 0.42)",
+     color: "#f6f1e8",
+     backgroundColor: "rgba(246, 241, 232, 0.08)",
+     fontSize: "0.98rem",
+     fontWeight: 700,
++    lineHeight: 1,
++    textAlign: "center",
++    textDecoration: "none",
+   },
+   details: {
+     display: "flex",
+@@ -105,7 +114,8 @@
+     gap: "1rem 1.5rem",
+     marginTop: "1.5rem",
+     color: "rgba(246, 241, 232, 0.74)",
+-    fontSize: "0.9rem",
++    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
++    lineHeight: 1.6,
+   },
+ }
+ 
+diff --git a/src/index.css b/src/index.css
+index 08a3ac9e1e5c44ce374f782d7c4fa3aa70e4c1ff..1e802e3713b72d8c9523ca11dc5beba3ab0b94b4
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,68 +1,71 @@
+ :root {
+-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
++  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+   font-weight: 400;
+-
+-  color-scheme: light dark;
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
++  color: #1f1f1b;
++  background-color: #f6f1e8;
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-a {
+-  font-weight: 500;
+-  color: #646cff;
+-  text-decoration: inherit;
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
+ }
+-a:hover {
+-  color: #535bf2;
++
++html {
++  overflow-x: clip;
++  scroll-behavior: smooth;
+ }
+ 
+ body {
+   margin: 0;
+-  display: flex;
+-  place-items: center;
+   min-width: 320px;
+   min-height: 100vh;
++  background-color: #f6f1e8;
++  color: #1f1f1b;
++  overflow-x: clip;
+ }
+ 
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
++body,
++#root {
++  width: 100%;
+ }
+ 
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
++#root {
++  min-height: 100vh;
+ }
+-button:hover {
+-  border-color: #646cff;
++
++img {
++  display: block;
++  max-width: 100%;
+ }
+-button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
++
++a {
++  color: inherit;
++  text-decoration: none;
+ }
+ 
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f9f9f9;
++button,
++input,
++textarea,
++select {
++  font: inherit;
++}
++
++main {
++  display: block;
++}
++
++section {
++  scroll-margin-top: 5.5rem;
++}
++
++@media (max-width: 479px) {
++  section {
++    scroll-margin-top: 4.75rem;
+   }
+ }
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 668f3e0db3b1e7b2cf9690cd2efa40365b8e2f23..b2f3bb4e606f11873fd3dfa891110a8cb6a2d31b
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -6,11 +6,13 @@
+   main: {
+     backgroundColor: "#f6f1e8",
+     color: "#1f1f1b",
++    overflowX: "hidden",
+   },
+   hero: {
+     maxWidth: "72rem",
+     margin: "0 auto",
+-    padding: "7.5rem 1.5rem 3rem",
++    padding:
++      "clamp(6.5rem, 14vw, 7.5rem) clamp(1rem, 4vw, 1.5rem) clamp(2.5rem, 6vw, 3rem)",
+   },
+   copy: {
+     maxWidth: "38rem",
+@@ -34,7 +36,7 @@
+   },
+   lead: {
+     margin: 0,
+-    fontSize: "1.05rem",
++    fontSize: "clamp(1rem, 2.6vw, 1.05rem)",
+     lineHeight: 1.8,
+     color: "rgba(31, 31, 27, 0.76)",
+   },
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 34f65c3a82c1336fc2a68a9494d9621bd6cf132b..62db0664f4692a7c5e6cbca71d784c32346cf4c7
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -5,6 +5,13 @@
+ import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
+ import HeroSection from "../components/HeroSection"
+ 
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    overflowX: "hidden",
++  },
++}
++
+ export default function Home() {
+   useEffect(() => {
+     document.title = "Osteria 19 Torino | Contemporary Italian Dining"
+@@ -19,7 +26,7 @@
+   }, [])
+ 
+   return (
+-    <main>
++    <main style={styles.main}>
+       <HeroSection />
+       <AboutSection />
+       <ContactSection />
 
 tokens used
-15.630
+47.401

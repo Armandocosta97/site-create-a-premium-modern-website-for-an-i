@@ -177,3 +177,21 @@ Waiting for validation.
 
 TASK seo-basics completed successfully.
 Build passed.
+Commit created for TASK seo-basics.
+
+Prepared TASK responsive-polish (Refine responsive layout and spacing) for execution.
+
+Launching Codex for TASK responsive-polish.
+2026-03-10: Refined responsive spacing and layout behavior across the home and gallery pages by removing the default Vite global constraints, tightening section padding and grid sizing, and making hero/contact/floating CTA elements safer on small screens without changing routing or page structure.
+
+TASK responsive-polish executed by Codex.
+Waiting for validation.
+
+TASK responsive-polish completed successfully.
+Build passed.
+
+TASK responsive-polish executed by Codex.
+Waiting for validation.
+
+TASK responsive-polish completed successfully.
+Build passed.

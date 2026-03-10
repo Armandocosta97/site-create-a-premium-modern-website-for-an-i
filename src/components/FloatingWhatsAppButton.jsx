@@ -4,19 +4,20 @@ const bookingLink =
 const styles = {
   link: {
     position: "fixed",
-    right: "1rem",
-    bottom: "1rem",
+    right: "clamp(0.75rem, 3vw, 1rem)",
+    bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
     zIndex: 30,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.75rem",
-    padding: "0.85rem 1rem",
+    maxWidth: "calc(100vw - 1.5rem)",
+    padding: "0.8rem 0.95rem",
     borderRadius: "999px",
     backgroundColor: "#25d366",
     color: "#102417",
     textDecoration: "none",
     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-    fontSize: "0.95rem",
+    fontSize: "clamp(0.88rem, 2.8vw, 0.95rem)",
     fontWeight: 700,
     lineHeight: 1,
   },
@@ -34,6 +35,7 @@ const styles = {
   label: {
     display: "block",
     color: "#102417",
+    whiteSpace: "nowrap",
   },
 }
 

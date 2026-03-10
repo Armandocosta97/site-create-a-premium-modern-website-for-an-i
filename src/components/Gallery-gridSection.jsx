@@ -64,9 +64,10 @@ const styles = {
   shell: {
     maxWidth: "72rem",
     margin: "0 auto",
-    padding: "0 1.5rem 5rem",
+    padding:
+      "0 clamp(1rem, 4vw, 1.5rem) clamp(4.5rem, 9vw, 6rem)",
     display: "grid",
-    gap: "2rem",
+    gap: "clamp(1.5rem, 4vw, 2.25rem)",
   },
   intro: {
     display: "grid",
@@ -96,13 +97,14 @@ const styles = {
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-    gap: "1rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 16rem), 1fr))",
+    gap: "clamp(0.9rem, 2vw, 1.25rem)",
   },
   card: {
     position: "relative",
     overflow: "hidden",
-    minHeight: "21rem",
+    minHeight: "19rem",
+    aspectRatio: "0.82",
     borderRadius: "1.6rem",
     backgroundColor: "#d9d1c4",
     boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
@@ -123,7 +125,7 @@ const styles = {
   caption: {
     position: "absolute",
     inset: "auto 0 0 0",
-    padding: "1.25rem",
+    padding: "clamp(1rem, 3vw, 1.25rem)",
     display: "grid",
     gap: "0.4rem",
     color: "#f6f1e8",
@@ -139,7 +141,7 @@ const styles = {
   captionTitle: {
     margin: 0,
     fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: "1.35rem",
+    fontSize: "clamp(1.15rem, 3vw, 1.35rem)",
     lineHeight: 1.1,
   },
 }

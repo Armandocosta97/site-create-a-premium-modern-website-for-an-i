@@ -5,7 +5,7 @@ const styles = {
   section: {
     position: "relative",
     overflow: "hidden",
-    minHeight: "100vh",
+    minHeight: "100svh",
     display: "flex",
     alignItems: "stretch",
     backgroundColor: "#1f1f1b",
@@ -22,8 +22,8 @@ const styles = {
   glow: {
     position: "absolute",
     inset: "auto -15% -25% auto",
-    width: "22rem",
-    height: "22rem",
+    width: "clamp(14rem, 32vw, 22rem)",
+    height: "clamp(14rem, 32vw, 22rem)",
     borderRadius: "999px",
     background:
       "radial-gradient(circle, rgba(200, 166, 106, 0.34) 0%, rgba(200, 166, 106, 0) 72%)",
@@ -35,7 +35,8 @@ const styles = {
     width: "100%",
     maxWidth: "72rem",
     margin: "0 auto",
-    padding: "8rem 1.5rem 4rem",
+    padding:
+      "clamp(6.5rem, 14vw, 8.5rem) clamp(1rem, 4vw, 1.5rem) clamp(3.5rem, 8vw, 4.5rem)",
     display: "grid",
     alignItems: "end",
   },
@@ -55,10 +56,10 @@ const styles = {
   title: {
     margin: "1rem 0 0",
     fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: "clamp(3rem, 9vw, 6rem)",
+    fontSize: "clamp(2.85rem, 10vw, 6rem)",
     lineHeight: 0.94,
     letterSpacing: "-0.04em",
-    maxWidth: "10ch",
+    maxWidth: "9ch",
   },
   subtitle: {
     margin: "1.5rem 0 0",
@@ -79,6 +80,8 @@ const styles = {
     justifyContent: "center",
     border: 0,
     borderRadius: "999px",
+    flex: "1 1 14rem",
+    minHeight: "3.25rem",
     padding: "0.95rem 1.5rem",
     backgroundColor: "#b85c38",
     color: "#f6f1e8",
@@ -86,18 +89,24 @@ const styles = {
     fontSize: "0.98rem",
     fontWeight: 700,
     lineHeight: 1,
+    textAlign: "center",
   },
   secondaryAction: {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "999px",
+    flex: "1 1 14rem",
+    minHeight: "3.25rem",
     padding: "0.95rem 1.5rem",
     border: "1px solid rgba(246, 241, 232, 0.42)",
     color: "#f6f1e8",
     backgroundColor: "rgba(246, 241, 232, 0.08)",
     fontSize: "0.98rem",
     fontWeight: 700,
+    lineHeight: 1,
+    textAlign: "center",
+    textDecoration: "none",
   },
   details: {
     display: "flex",
@@ -105,7 +114,8 @@ const styles = {
     gap: "1rem 1.5rem",
     marginTop: "1.5rem",
     color: "rgba(246, 241, 232, 0.74)",
-    fontSize: "0.9rem",
+    fontSize: "clamp(0.88rem, 2vw, 0.95rem)",
+    lineHeight: 1.6,
   },
 }
 
