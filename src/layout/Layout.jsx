@@ -1,12 +1,22 @@
+import { Link } from "react-router-dom"
+
+const navigationItems = [
+  { label: "Home", to: "/" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "About", to: "/?section=about" },
+  { label: "Contact", to: "/?section=contact" },
+]
+
 export default function Layout({ children }) {
   return (
     <>
       <header>
         <nav aria-label="Main navigation">
-          <a href="#/">Home</a>
-          <a href="#/gallery">Gallery</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          {navigationItems.map((item) => (
+            <Link key={item.label} to={item.to}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </header>
 

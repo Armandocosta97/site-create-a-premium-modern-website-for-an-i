@@ -1037,35 +1037,59 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-section-gallery-gallery-grid
+navigation-structure
 
 ## Current task title
-Create gallery-grid section on gallery
+Build navigation from spec
 
 ## Current task type
-section
+navigation
 
 ## Current task target
 ```json
 {
-  "pageId": "gallery",
-  "sectionId": "gallery-grid",
-  "sectionType": "image-grid"
+  "navigation": [
+    {
+      "label": "Home",
+      "type": "route",
+      "target": "/"
+    },
+    {
+      "label": "Gallery",
+      "type": "route",
+      "target": "/gallery"
+    },
+    {
+      "label": "About",
+      "type": "section",
+      "target": "about"
+    },
+    {
+      "label": "Contact",
+      "type": "section",
+      "target": "contact"
+    }
+  ],
+  "routingMode": "hash"
 }
 ```
 
 ## Depends on
+- page-home-shell
 - page-gallery-shell
+- section-home-hero
+- section-home-about
+- section-home-contact
+- section-gallery-gallery-grid
 
 ## Files allowed
-- src/pages/Gallery.jsx
-- src/components/Gallery-gridSection.jsx
-- src/components
+- src/App.jsx
+- src/layout/Layout.jsx
 
 ## Definition of done
-- section gallery-grid exists on gallery
-- section gallery-grid matches type image-grid
-- section gallery-grid is rendered in page gallery
+- all navigation items are rendered
+- all navigation links point to valid pages or sections
+- navigation is compatible with routing mode
 
 ## Strict execution rules
 - Execute only this current task.

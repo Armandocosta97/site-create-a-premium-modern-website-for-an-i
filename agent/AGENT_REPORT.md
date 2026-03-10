@@ -148,3 +148,21 @@ Waiting for validation.
 
 TASK section-gallery-gallery-grid completed successfully.
 Build passed.
+Commit created for TASK section-gallery-gallery-grid.
+
+Prepared TASK navigation-structure (Build navigation from spec) for execution.
+
+Launching Codex for TASK navigation-structure.
+2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
+
+TASK navigation-structure executed by Codex.
+Waiting for validation.
+
+TASK navigation-structure completed successfully.
+Build passed.
+
+TASK navigation-structure executed by Codex.
+Waiting for validation.
+
+TASK navigation-structure completed successfully.
+Build passed.

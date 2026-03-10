@@ -1,8 +1,8 @@
-Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [src/components/Gallery-gridSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
+Modified files: [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), [src/layout/Layout.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/layout/Layout.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
 
-Implemented the `gallery-grid` section on the gallery page by adding a reusable `GalleryGridSection` component and rendering it from the gallery page shell. The section uses a responsive image grid with nine premium Unsplash images, lazy-loaded media, semantic `figure`/`figcaption` markup, and copy/styling aligned to the restaurant brand and existing page structure.
+Implemented the navigation from the task spec in [src/layout/Layout.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/layout/Layout.jsx): `Home`, `Gallery`, `About`, and `Contact` are all rendered, and section links now route through the home page using hash-router-safe targets. In [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), I added route-aware section scrolling so `About` and `Contact` resolve correctly whether the user clicks from home or from `/gallery`.
 
-Build result: `npm run build` passed successfully with Vite production output generated.
+Build result: `npm run build` passed successfully. I also updated [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md) with the task summary and build status.
 
 OpenAI Codex v0.111.0 (research preview)
 --------
@@ -13,7 +13,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/armandocosta/.codex/memories]
 reasoning effort: none
 reasoning summaries: none
-session id: 019cd522-b4e3-7e13-83b9-352be8503c33
+session id: 019cd524-0f81-7450-98e8-e3223f7d0688
 --------
 user
 # CURRENT TASK EXECUTION PROMPT
@@ -1055,35 +1055,59 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-section-gallery-gallery-grid
+navigation-structure
 
 ## Current task title
-Create gallery-grid section on gallery
+Build navigation from spec
 
 ## Current task type
-section
+navigation
 
 ## Current task target
 ```json
 {
-  "pageId": "gallery",
-  "sectionId": "gallery-grid",
-  "sectionType": "image-grid"
+  "navigation": [
+    {
+      "label": "Home",
+      "type": "route",
+      "target": "/"
+    },
+    {
+      "label": "Gallery",
+      "type": "route",
+      "target": "/gallery"
+    },
+    {
+      "label": "About",
+      "type": "section",
+      "target": "about"
+    },
+    {
+      "label": "Contact",
+      "type": "section",
+      "target": "contact"
+    }
+  ],
+  "routingMode": "hash"
 }
 ```
 
 ## Depends on
+- page-home-shell
 - page-gallery-shell
+- section-home-hero
+- section-home-about
+- section-home-contact
+- section-gallery-gallery-grid
 
 ## Files allowed
-- src/pages/Gallery.jsx
-- src/components/Gallery-gridSection.jsx
-- src/components
+- src/App.jsx
+- src/layout/Layout.jsx
 
 ## Definition of done
-- section gallery-grid exists on gallery
-- section gallery-grid matches type image-grid
-- section gallery-grid is rendered in page gallery
+- all navigation items are rendered
+- all navigation links point to valid pages or sections
+- navigation is compatible with routing mode
 
 ## Strict execution rules
 - Execute only this current task.
@@ -1112,29 +1136,56 @@ section
 
 mcp startup: no servers
 codex
-I’m checking the current gallery page shell and related source-of-truth files first so I can add only the `gallery-grid` section required by this task and avoid touching unrelated parts.
+I’m checking the current app structure and the two allowed files first so I can wire navigation exactly to the spec without touching unrelated parts.
 exec
-/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,220p' agent/CURRENT_TASK_PROMPT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,220p' src/pages/Gallery.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "pwd && rg --files | rg '"'^(src/pages/Gallery.jsx|src/components|agent/AGENT_REPORT.md|agent/CURRENT_TASK_PROMPT.md|site-spec.json|docs/DEVELOPMENT_METHOD.md)$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
-export default function Gallery() {
+/bin/zsh -lc "sed -n '1,220p' src/App.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/layout/Layout.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "pwd && rg --files . | rg '"'^(src/App'"\\.jsx|src/layout/Layout\\.jsx|site-spec\\.json|agent/CURRENT_TASK_PROMPT\\.md|agent/AGENT_REPORT\\.md|agent/TASK_STATE\\.json|docs/DEVELOPMENT_METHOD\\.md|brief/brief-summary\\.md|brief/original-prompt\\.md)"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
+export default function Layout({ children }) {
   return (
-    <main>
-      <section aria-labelledby="gallery-title">
-        <div>
-          <p>Osteria 19 Torino</p>
-          <h1 id="gallery-title">Gallery</h1>
-          <p>
-            A first look at the dining room, the evening mood, and the plated
-            details that define our contemporary osteria in Torino.
-          </p>
-        </div>
-      </section>
-    </main>
+    <>
+      <header>
+        <nav aria-label="Main navigation">
+          <a href="#/">Home</a>
+          <a href="#/gallery">Gallery</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main>{children}</main>
+
+      <footer>
+        <p>© Website</p>
+      </footer>
+    </>
   )
 }
- succeeded in 51ms:
+ succeeded in 52ms:
+import { HashRouter, Routes, Route } from "react-router-dom"
+import Layout from "./layout/Layout"
+import Home from "./pages/Home"
+import Gallery from "./pages/Gallery"
+
+export default function App() {
+  return (
+    <HashRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </Layout>
+    </HashRouter>
+  )
+}
+ exited 1 in 51ms:
+/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
+codex
+The current navigation is close, but the section links are not hash-router-safe from the gallery route. I’m checking package scripts and the report file format, then I’ll patch `App.jsx` and `Layout.jsx` to generate valid route/section targets from the spec shape.
+exec
+/bin/zsh -lc "sed -n '1,220p' package.json" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,240p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
 # AGENT REPORT
 
 Project created.
@@ -1155,920 +1206,300 @@ Waiting for validation.
 TASK page-home-shell completed successfully.
 Build passed.
 Commit created for TASK page-home-shell.
- succeeded in 51ms:
-# CURRENT TASK EXECUTION PROMPT
-
-You are the coding executor for this project.
-
-## Project path
-site-create-a-premium-modern-website-for-an-i
-
-## Source of truth files
-- brief/original-prompt.md
-- brief/brief-summary.md
-- site-spec.json
-- docs/DEVELOPMENT_METHOD.md
-- agent/TASK_GRAPH.json
-- agent/TASK_STATE.json
-- agent/CURRENT_TASK_PROMPT.md
-
-## Development method
-# Development Method
-
-All sites must follow these rules.
- succeeded in 51ms:
-/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
-src/pages/Gallery.jsx
-docs/DEVELOPMENT_METHOD.md
-agent/CURRENT_TASK_PROMPT.md
-agent/AGENT_REPORT.md
-site-spec.json
+ succeeded in 52ms:
+{
+  "name": "site-create-a-premium-modern-website-for-an-i",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test:ui": "playwright test"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.58.2",
 codex
-I’ve confirmed the gallery page is still just the shell. Next I’m reading the existing component patterns so the new image-grid section matches the project’s current structure and styling approach.
+I have enough context to patch safely. I’m verifying the section ids on the existing pages so the navigation targets line up with real anchors before editing the two allowed files.
 exec
-/bin/zsh -lc "sed -n '1,260p' src/components/ContactSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,260p' src/components/AboutSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc 'rg --files src/components' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
-const aboutImage =
-  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
-
-const highlights = [
-  "Seasonal produce selected with the rhythm of Piemonte markets",
-  "Italian classics reworked with clean presentation and measured elegance",
-  "An intimate dining room shaped for long dinners, wine, and conversation",
-  "A curated cellar built around local labels and expressive Italian bottles",
-]
-
-const styles = {
-  section: {
-    background:
-      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
-    color: "#1f1f1b",
-  },
-  shell: {
-    maxWidth: "72rem",
-    margin: "0 auto",
-    padding: "4.5rem 1.5rem",
- succeeded in 52ms:
-const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-
-const openingHours = [
-  {
-    days: "Tuesday - Thursday",
-    hours: ["19:00 - 23:00"],
-  },
-  {
-    days: "Friday - Saturday",
-    hours: ["19:00 - 00:00"],
-  },
-  {
-    days: "Sunday",
-    hours: ["12:30 - 15:00", "19:00 - 22:30"],
-  },
-  {
-    days: "Monday",
-    hours: ["Closed"],
-  },
-]
- succeeded in 52ms:
-const backgroundImage =
-  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
-
-const styles = {
-  section: {
-    position: "relative",
-    overflow: "hidden",
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "stretch",
-    backgroundColor: "#1f1f1b",
-    color: "#f6f1e8",
-  },
-  media: {
-    position: "absolute",
-    inset: 0,
-    backgroundImage: `linear-gradient(180deg, rgba(16, 16, 14, 0.48) 0%, rgba(16, 16, 14, 0.76) 56%, rgba(16, 16, 14, 0.92) 100%), url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    transform: "scale(1.04)",
+/bin/zsh -lc "rg -n 'Gallery|gallery-grid|hero|about|contact' src/pages src/sections src/components" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "rg -n 'id=\\\"(about|contact)\\\"|id=\\{\\\"(about|contact)\\\"\\}' src" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i exited 2 in 51ms:
+rg: src/sections: No such file or directory (os error 2)
+src/components/Gallery-gridSection.jsx:147:export default function GalleryGridSection() {
+src/components/Gallery-gridSection.jsx:150:      id="gallery-grid"
+src/components/Gallery-gridSection.jsx:151:      aria-labelledby="gallery-grid-heading"
+src/components/Gallery-gridSection.jsx:156:          <p style={styles.eyebrow}>Gallery</p>
+src/components/Gallery-gridSection.jsx:157:          <h2 id="gallery-grid-heading" style={styles.title}>
+src/components/AboutSection.jsx:1:const aboutImage =
+src/components/AboutSection.jsx:119:    <section id="about" aria-labelledby="about-heading" style={styles.section}>
+src/components/AboutSection.jsx:123:            src={aboutImage}
+src/components/AboutSection.jsx:133:          <h2 id="about-heading" style={styles.title}>
+src/pages/Gallery.jsx:1:import GalleryGridSection from "../components/Gallery-gridSection"
+src/pages/Gallery.jsx:8:  hero: {
+src/pages/Gallery.jsx:41:export default function Gallery() {
+src/pages/Gallery.jsx:44:      <section aria-labelledby="gallery-title" style={styles.hero}>
+src/pages/Gallery.jsx:48:            Gallery
+src/pages/Gallery.jsx:56:      <GalleryGridSection />
+src/components/ContactSection.jsx:178:    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
+src/components/ContactSection.jsx:183:            <h2 id="contact-heading" style={styles.title}>
+src/components/HeroSection.jsx:114:    <section id="hero" aria-labelledby="home-hero-heading" style={styles.section}>
+src/components/HeroSection.jsx:121:          <h1 id="home-hero-heading" style={styles.title}>
  succeeded in 51ms:
-src/components/FloatingWhatsAppButton.jsx
-src/components/AboutSection.jsx
-src/components/ContactSection.jsx
-src/components/HeroSection.jsx
+src/components/AboutSection.jsx:119:    <section id="about" aria-labelledby="about-heading" style={styles.section}>
+src/components/ContactSection.jsx:178:    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
 codex
-I have enough context. I’m going to add a dedicated reusable gallery grid component with nine premium restaurant images, mobile-first responsive columns, and accessible captions, then wire it into `src/pages/Gallery.jsx` and finish with a build plus the required agent report update.
+I’m editing `src/App.jsx` and `src/layout/Layout.jsx` now to make section navigation hash-router-compatible from any page, then I’ll append the task result to the agent report and run the build.
 file update
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
-@@ -1,9 +1,51 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+@@ -155 +155,2 @@
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/layout/Layout.jsx
+@@ -1 +1,10 @@
++import { Link } from "react-router-dom"
 +
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
++]
++
+ export default function Layout({ children }) {
+@@ -5,6 +14,7 @@
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx
+@@ -1,2 +1,3 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+@@ -5,2 +6,26 @@
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
 +}
 +
- export default function Gallery() {
-   return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-@@ -13,2 +55,3 @@
-       </section>
-+      <GalleryGridSection />
-     </main>
-A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-    category: "Dining room",
-    title: "Warm urban interiors",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-    alt: "Elegant restaurant table setting prepared for evening service",
-    category: "Table setting",
-    title: "Evening table detail",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-    alt: "Refined plated pasta served in a modern Italian restaurant",
-    category: "Pasta",
-    title: "Signature pasta plates",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-    category: "Atmosphere",
-    title: "Dinner mood in Torino",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-    category: "Hospitality",
-    title: "Designed for long dinners",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-    alt: "Modern plated seafood course with refined presentation",
-    category: "Main course",
-    title: "Seasonal plates with precision",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-    category: "Wine and cocktails",
-    title: "Curated bottles and aperitivi",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-    alt: "Elegant dessert plated with modern presentation and rich textures",
-    category: "Dessert",
-    title: "A polished final course",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-    category: "Interior detail",
-    title: "Quiet corners and soft light",
-  },
-]
-
-const styles = {
-  section: {
-    background:
-      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-    color: "#1f1f1b",
-  },
-  shell: {
-    maxWidth: "72rem",
-    margin: "0 auto",
-    padding: "0 1.5rem 5rem",
-    display: "grid",
-    gap: "2rem",
-  },
-  intro: {
-    display: "grid",
-    gap: "0.9rem",
-    maxWidth: "38rem",
-  },
-  eyebrow: {
-    margin: 0,
-    color: "#6f7558",
-    textTransform: "uppercase",
-    letterSpacing: "0.18em",
-    fontSize: "0.78rem",
-    fontWeight: 700,
-  },
-  title: {
-    margin: 0,
-    fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-    lineHeight: 1,
-    letterSpacing: "-0.04em",
-  },
-  lead: {
-    margin: 0,
-    fontSize: "1rem",
-    lineHeight: 1.75,
-    color: "rgba(31, 31, 27, 0.74)",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-    gap: "1rem",
-  },
-  card: {
-    position: "relative",
-    overflow: "hidden",
-    minHeight: "21rem",
-    borderRadius: "1.6rem",
-    backgroundColor: "#d9d1c4",
-    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-  },
-  image: {
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  overlay: {
-    position: "absolute",
-    inset: 0,
-    background:
-      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-  },
-  caption: {
-    position: "absolute",
-    inset: "auto 0 0 0",
-    padding: "1.25rem",
-    display: "grid",
-    gap: "0.4rem",
-    color: "#f6f1e8",
-  },
-  category: {
-    margin: 0,
-    color: "#c8a66a",
-    textTransform: "uppercase",
-    letterSpacing: "0.14em",
-    fontSize: "0.74rem",
-    fontWeight: 700,
-  },
-  captionTitle: {
-    margin: 0,
-    fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: "1.35rem",
-    lineHeight: 1.1,
-  },
-}
-
-export default function GalleryGridSection() {
-  return (
-    <section
-      id="gallery-grid"
-      aria-labelledby="gallery-grid-heading"
-      style={styles.section}
-    >
-      <div style={styles.shell}>
-        <div style={styles.intro}>
-          <p style={styles.eyebrow}>Gallery</p>
-          <h2 id="gallery-grid-heading" style={styles.title}>
-            Interiors, plates, and the pace of service
-          </h2>
-          <p style={styles.lead}>
-            A visual edit of the dining room, signature dishes, and evening
-            atmosphere that shape Osteria 19 Torino.
-          </p>
-        </div>
-
-        <div style={styles.grid}>
-          {galleryImages.map((image) => (
-            <figure key={image.src} style={styles.card}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                style={styles.image}
-              />
-              <div aria-hidden="true" style={styles.overlay} />
-              <figcaption style={styles.caption}>
-                <p style={styles.category}>{image.category}</p>
-                <p style={styles.captionTitle}>{image.title}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-apply_patch(auto_approved=true) exited 0 in 58ms:
+ export default function App() {
+@@ -8,2 +33,3 @@
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+apply_patch(auto_approved=true) exited 0 in 46ms:
 Success. Updated the following files:
-A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/layout/Layout.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
 file update:
-diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
---- /dev/null
-+++ b/src/components/Gallery-gridSection.jsx
-@@ -0,0 +1,186 @@
-+const galleryImages = [
-+  {
-+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-+    category: "Dining room",
-+    title: "Warm urban interiors",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant restaurant table setting prepared for evening service",
-+    category: "Table setting",
-+    title: "Evening table detail",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Refined plated pasta served in a modern Italian restaurant",
-+    category: "Pasta",
-+    title: "Signature pasta plates",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-+    category: "Atmosphere",
-+    title: "Dinner mood in Torino",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-+    category: "Hospitality",
-+    title: "Designed for long dinners",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Modern plated seafood course with refined presentation",
-+    category: "Main course",
-+    title: "Seasonal plates with precision",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-+    category: "Wine and cocktails",
-+    title: "Curated bottles and aperitivi",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant dessert plated with modern presentation and rich textures",
-+    category: "Dessert",
-+    title: "A polished final course",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-+    category: "Interior detail",
-+    title: "Quiet corners and soft light",
-+  },
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index 02408a03f652753d2df28117368ea2e7243bdab0..535dbca57f51dff2edeacc392e532b52c28a5a4a
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -153,3 +153,4 @@
+ Prepared TASK navigation-structure (Build navigation from spec) for execution.
+ 
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
+diff --git a/src/App.jsx b/src/App.jsx
+index ccf906a29f7c9add3da40568157be9c0b1cb2a6b..bb6983b7333ba6c53c5ce6f1620f8662bed83787
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,11 +1,37 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+ import Home from "./pages/Home"
+ import Gallery from "./pages/Gallery"
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
++}
++
+ export default function App() {
+   return (
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+         <Routes>
+           <Route path="/" element={<Home />} />
+diff --git a/src/layout/Layout.jsx b/src/layout/Layout.jsx
+index cc8e714f09b9889a4a07f00f52c08d55f6557c36..1b0b651e3ff415b812e6a1570c0df327937998bf
+--- a/src/layout/Layout.jsx
++++ b/src/layout/Layout.jsx
+@@ -1,12 +1,22 @@
++import { Link } from "react-router-dom"
++
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
 +]
 +
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "0 1.5rem 5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  intro: {
-+    display: "grid",
-+    gap: "0.9rem",
-+    maxWidth: "38rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1rem",
-+    lineHeight: 1.75,
-+    color: "rgba(31, 31, 27, 0.74)",
-+  },
-+  grid: {
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-+    gap: "1rem",
-+  },
-+  card: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "21rem",
-+    borderRadius: "1.6rem",
-+    backgroundColor: "#d9d1c4",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  overlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-+  },
-+  caption: {
-+    position: "absolute",
-+    inset: "auto 0 0 0",
-+    padding: "1.25rem",
-+    display: "grid",
-+    gap: "0.4rem",
-+    color: "#f6f1e8",
-+  },
-+  category: {
-+    margin: 0,
-+    color: "#c8a66a",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.14em",
-+    fontSize: "0.74rem",
-+    fontWeight: 700,
-+  },
-+  captionTitle: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "1.35rem",
-+    lineHeight: 1.1,
-+  },
-+}
-+
-+export default function GalleryGridSection() {
-+  return (
-+    <section
-+      id="gallery-grid"
-+      aria-labelledby="gallery-grid-heading"
-+      style={styles.section}
-+    >
-+      <div style={styles.shell}>
-+        <div style={styles.intro}>
-+          <p style={styles.eyebrow}>Gallery</p>
-+          <h2 id="gallery-grid-heading" style={styles.title}>
-+            Interiors, plates, and the pace of service
-+          </h2>
-+          <p style={styles.lead}>
-+            A visual edit of the dining room, signature dishes, and evening
-+            atmosphere that shape Osteria 19 Torino.
-+          </p>
-+        </div>
-+
-+        <div style={styles.grid}>
-+          {galleryImages.map((image) => (
-+            <figure key={image.src} style={styles.card}>
-+              <img
-+                src={image.src}
-+                alt={image.alt}
-+                loading="lazy"
-+                style={styles.image}
-+              />
-+              <div aria-hidden="true" style={styles.overlay} />
-+              <figcaption style={styles.caption}>
-+                <p style={styles.category}>{image.category}</p>
-+                <p style={styles.captionTitle}>{image.title}</p>
-+              </figcaption>
-+            </figure>
-+          ))}
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,16 +1,59 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
-+
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
-+}
-+
- export default function Gallery() {
+ export default function Layout({ children }) {
    return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-             details that define our contemporary osteria in Torino.
-           </p>
-         </div>
-       </section>
-+      <GalleryGridSection />
-     </main>
-   )
- }
+     <>
+       <header>
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+       </header>
+ 
 
 file update:
-diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
---- /dev/null
-+++ b/src/components/Gallery-gridSection.jsx
-@@ -0,0 +1,186 @@
-+const galleryImages = [
-+  {
-+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-+    category: "Dining room",
-+    title: "Warm urban interiors",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant restaurant table setting prepared for evening service",
-+    category: "Table setting",
-+    title: "Evening table detail",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Refined plated pasta served in a modern Italian restaurant",
-+    category: "Pasta",
-+    title: "Signature pasta plates",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-+    category: "Atmosphere",
-+    title: "Dinner mood in Torino",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-+    category: "Hospitality",
-+    title: "Designed for long dinners",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Modern plated seafood course with refined presentation",
-+    category: "Main course",
-+    title: "Seasonal plates with precision",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-+    category: "Wine and cocktails",
-+    title: "Curated bottles and aperitivi",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant dessert plated with modern presentation and rich textures",
-+    category: "Dessert",
-+    title: "A polished final course",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-+    category: "Interior detail",
-+    title: "Quiet corners and soft light",
-+  },
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index 02408a03f652753d2df28117368ea2e7243bdab0..535dbca57f51dff2edeacc392e532b52c28a5a4a
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -153,3 +153,4 @@
+ Prepared TASK navigation-structure (Build navigation from spec) for execution.
+ 
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
+diff --git a/src/App.jsx b/src/App.jsx
+index ccf906a29f7c9add3da40568157be9c0b1cb2a6b..bb6983b7333ba6c53c5ce6f1620f8662bed83787
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,11 +1,37 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+ import Home from "./pages/Home"
+ import Gallery from "./pages/Gallery"
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
++}
++
+ export default function App() {
+   return (
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+         <Routes>
+           <Route path="/" element={<Home />} />
+diff --git a/src/layout/Layout.jsx b/src/layout/Layout.jsx
+index cc8e714f09b9889a4a07f00f52c08d55f6557c36..1b0b651e3ff415b812e6a1570c0df327937998bf
+--- a/src/layout/Layout.jsx
++++ b/src/layout/Layout.jsx
+@@ -1,12 +1,22 @@
++import { Link } from "react-router-dom"
++
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
 +]
 +
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "0 1.5rem 5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  intro: {
-+    display: "grid",
-+    gap: "0.9rem",
-+    maxWidth: "38rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1rem",
-+    lineHeight: 1.75,
-+    color: "rgba(31, 31, 27, 0.74)",
-+  },
-+  grid: {
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-+    gap: "1rem",
-+  },
-+  card: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "21rem",
-+    borderRadius: "1.6rem",
-+    backgroundColor: "#d9d1c4",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  overlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-+  },
-+  caption: {
-+    position: "absolute",
-+    inset: "auto 0 0 0",
-+    padding: "1.25rem",
-+    display: "grid",
-+    gap: "0.4rem",
-+    color: "#f6f1e8",
-+  },
-+  category: {
-+    margin: 0,
-+    color: "#c8a66a",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.14em",
-+    fontSize: "0.74rem",
-+    fontWeight: 700,
-+  },
-+  captionTitle: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "1.35rem",
-+    lineHeight: 1.1,
-+  },
-+}
-+
-+export default function GalleryGridSection() {
-+  return (
-+    <section
-+      id="gallery-grid"
-+      aria-labelledby="gallery-grid-heading"
-+      style={styles.section}
-+    >
-+      <div style={styles.shell}>
-+        <div style={styles.intro}>
-+          <p style={styles.eyebrow}>Gallery</p>
-+          <h2 id="gallery-grid-heading" style={styles.title}>
-+            Interiors, plates, and the pace of service
-+          </h2>
-+          <p style={styles.lead}>
-+            A visual edit of the dining room, signature dishes, and evening
-+            atmosphere that shape Osteria 19 Torino.
-+          </p>
-+        </div>
-+
-+        <div style={styles.grid}>
-+          {galleryImages.map((image) => (
-+            <figure key={image.src} style={styles.card}>
-+              <img
-+                src={image.src}
-+                alt={image.alt}
-+                loading="lazy"
-+                style={styles.image}
-+              />
-+              <div aria-hidden="true" style={styles.overlay} />
-+              <figcaption style={styles.caption}>
-+                <p style={styles.category}>{image.category}</p>
-+                <p style={styles.captionTitle}>{image.title}</p>
-+              </figcaption>
-+            </figure>
-+          ))}
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,16 +1,59 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
-+
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
-+}
-+
- export default function Gallery() {
+ export default function Layout({ children }) {
    return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-             details that define our contemporary osteria in Torino.
-           </p>
-         </div>
-       </section>
-+      <GalleryGridSection />
-     </main>
-   )
- }
+     <>
+       <header>
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+       </header>
+ 
 
-codex
-The gallery section is in place. I’m running the build now to catch any integration issues before I update the agent report with the task summary.
 exec
-/bin/zsh -lc "sed -n '1,260p' src/pages/Gallery.jsx
-sed -n '1,320p' src/components/Gallery-gridSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
-import GalleryGridSection from "../components/Gallery-gridSection"
-
-const styles = {
-  main: {
-    backgroundColor: "#f6f1e8",
-    color: "#1f1f1b",
-  },
-  hero: {
-    maxWidth: "72rem",
-    margin: "0 auto",
-    padding: "7.5rem 1.5rem 3rem",
-  },
-  copy: {
-    maxWidth: "38rem",
-    display: "grid",
-    gap: "1rem",
-  },
-  eyebrow: {
-    margin: 0,
-    color: "#6f7558",
-exec
-/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 841ms:
+/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 868ms:
 
 > site-create-a-premium-modern-website-for-an-i@0.0.0 build
 > vite build
@@ -2080,1106 +1511,386 @@ rendering chunks...
 computing gzip size...
 dist/index.html                   0.50 kB │ gzip:  0.32 kB
 dist/assets/index-DQ3P1g1z.css    0.91 kB │ gzip:  0.49 kB
-dist/assets/index-CBstZrwK.js   246.89 kB │ gzip: 77.97 kB
-✓ built in 577ms
+dist/assets/index-Cx17Mia4.js   247.24 kB │ gzip: 78.14 kB
+✓ built in 583ms
 file update:
-diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
---- /dev/null
-+++ b/src/components/Gallery-gridSection.jsx
-@@ -0,0 +1,186 @@
-+const galleryImages = [
-+  {
-+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-+    category: "Dining room",
-+    title: "Warm urban interiors",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant restaurant table setting prepared for evening service",
-+    category: "Table setting",
-+    title: "Evening table detail",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Refined plated pasta served in a modern Italian restaurant",
-+    category: "Pasta",
-+    title: "Signature pasta plates",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-+    category: "Atmosphere",
-+    title: "Dinner mood in Torino",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-+    category: "Hospitality",
-+    title: "Designed for long dinners",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Modern plated seafood course with refined presentation",
-+    category: "Main course",
-+    title: "Seasonal plates with precision",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-+    category: "Wine and cocktails",
-+    title: "Curated bottles and aperitivi",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant dessert plated with modern presentation and rich textures",
-+    category: "Dessert",
-+    title: "A polished final course",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-+    category: "Interior detail",
-+    title: "Quiet corners and soft light",
-+  },
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index 02408a03f652753d2df28117368ea2e7243bdab0..535dbca57f51dff2edeacc392e532b52c28a5a4a
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -153,3 +153,4 @@
+ Prepared TASK navigation-structure (Build navigation from spec) for execution.
+ 
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
+diff --git a/src/App.jsx b/src/App.jsx
+index ccf906a29f7c9add3da40568157be9c0b1cb2a6b..bb6983b7333ba6c53c5ce6f1620f8662bed83787
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,11 +1,37 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+ import Home from "./pages/Home"
+ import Gallery from "./pages/Gallery"
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
++}
++
+ export default function App() {
+   return (
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+         <Routes>
+           <Route path="/" element={<Home />} />
+diff --git a/src/layout/Layout.jsx b/src/layout/Layout.jsx
+index cc8e714f09b9889a4a07f00f52c08d55f6557c36..1b0b651e3ff415b812e6a1570c0df327937998bf
+--- a/src/layout/Layout.jsx
++++ b/src/layout/Layout.jsx
+@@ -1,12 +1,22 @@
++import { Link } from "react-router-dom"
++
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
 +]
 +
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "0 1.5rem 5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  intro: {
-+    display: "grid",
-+    gap: "0.9rem",
-+    maxWidth: "38rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1rem",
-+    lineHeight: 1.75,
-+    color: "rgba(31, 31, 27, 0.74)",
-+  },
-+  grid: {
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-+    gap: "1rem",
-+  },
-+  card: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "21rem",
-+    borderRadius: "1.6rem",
-+    backgroundColor: "#d9d1c4",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  overlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-+  },
-+  caption: {
-+    position: "absolute",
-+    inset: "auto 0 0 0",
-+    padding: "1.25rem",
-+    display: "grid",
-+    gap: "0.4rem",
-+    color: "#f6f1e8",
-+  },
-+  category: {
-+    margin: 0,
-+    color: "#c8a66a",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.14em",
-+    fontSize: "0.74rem",
-+    fontWeight: 700,
-+  },
-+  captionTitle: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "1.35rem",
-+    lineHeight: 1.1,
-+  },
-+}
-+
-+export default function GalleryGridSection() {
-+  return (
-+    <section
-+      id="gallery-grid"
-+      aria-labelledby="gallery-grid-heading"
-+      style={styles.section}
-+    >
-+      <div style={styles.shell}>
-+        <div style={styles.intro}>
-+          <p style={styles.eyebrow}>Gallery</p>
-+          <h2 id="gallery-grid-heading" style={styles.title}>
-+            Interiors, plates, and the pace of service
-+          </h2>
-+          <p style={styles.lead}>
-+            A visual edit of the dining room, signature dishes, and evening
-+            atmosphere that shape Osteria 19 Torino.
-+          </p>
-+        </div>
-+
-+        <div style={styles.grid}>
-+          {galleryImages.map((image) => (
-+            <figure key={image.src} style={styles.card}>
-+              <img
-+                src={image.src}
-+                alt={image.alt}
-+                loading="lazy"
-+                style={styles.image}
-+              />
-+              <div aria-hidden="true" style={styles.overlay} />
-+              <figcaption style={styles.caption}>
-+                <p style={styles.category}>{image.category}</p>
-+                <p style={styles.captionTitle}>{image.title}</p>
-+              </figcaption>
-+            </figure>
-+          ))}
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,16 +1,59 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
-+
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
-+}
-+
- export default function Gallery() {
+ export default function Layout({ children }) {
    return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-             details that define our contemporary osteria in Torino.
-           </p>
-         </div>
-       </section>
-+      <GalleryGridSection />
-     </main>
-   )
- }
+     <>
+       <header>
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+       </header>
+ 
 
 codex
-The build passed. I’m adding the required task note to `agent/AGENT_REPORT.md` now, keeping it limited to what this gallery-grid task implemented.
+The navigation patch is in and the build is green. I’m adding the completion note to the report so the task record matches the implementation and validation outcome.
 file update
 M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
-@@ -143 +143,2 @@
- Launching Codex for TASK section-gallery-gallery-grid.
-+2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
-apply_patch(auto_approved=true) exited 0 in 57ms:
+@@ -156 +156,7 @@
+ 2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
++
++TASK navigation-structure executed by Codex.
++Waiting for validation.
++
++TASK navigation-structure completed successfully.
++Build passed.
+apply_patch(auto_approved=true) exited 0 in 71ms:
 Success. Updated the following files:
 M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index cee5f23115591fbc68cd721dac25586b76f1327b..1943cfc309ce53b5ac9a8b844c0f4b25d67f9f90
+index 02408a03f652753d2df28117368ea2e7243bdab0..e650c5197c9e8da17958a63f04baba20a3b6a966
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -141,3 +141,4 @@
- Prepared TASK section-gallery-gallery-grid (Create gallery-grid section on gallery) for execution.
+@@ -153,3 +153,10 @@
+ Prepared TASK navigation-structure (Build navigation from spec) for execution.
  
- Launching Codex for TASK section-gallery-gallery-grid.
-+2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
-diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
---- /dev/null
-+++ b/src/components/Gallery-gridSection.jsx
-@@ -0,0 +1,186 @@
-+const galleryImages = [
-+  {
-+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-+    category: "Dining room",
-+    title: "Warm urban interiors",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant restaurant table setting prepared for evening service",
-+    category: "Table setting",
-+    title: "Evening table detail",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Refined plated pasta served in a modern Italian restaurant",
-+    category: "Pasta",
-+    title: "Signature pasta plates",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-+    category: "Atmosphere",
-+    title: "Dinner mood in Torino",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-+    category: "Hospitality",
-+    title: "Designed for long dinners",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Modern plated seafood course with refined presentation",
-+    category: "Main course",
-+    title: "Seasonal plates with precision",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-+    category: "Wine and cocktails",
-+    title: "Curated bottles and aperitivi",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant dessert plated with modern presentation and rich textures",
-+    category: "Dessert",
-+    title: "A polished final course",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-+    category: "Interior detail",
-+    title: "Quiet corners and soft light",
-+  },
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
++
++TASK navigation-structure executed by Codex.
++Waiting for validation.
++
++TASK navigation-structure completed successfully.
++Build passed.
+diff --git a/src/App.jsx b/src/App.jsx
+index ccf906a29f7c9add3da40568157be9c0b1cb2a6b..bb6983b7333ba6c53c5ce6f1620f8662bed83787
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,11 +1,37 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+ import Home from "./pages/Home"
+ import Gallery from "./pages/Gallery"
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
++}
++
+ export default function App() {
+   return (
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+         <Routes>
+           <Route path="/" element={<Home />} />
+diff --git a/src/layout/Layout.jsx b/src/layout/Layout.jsx
+index cc8e714f09b9889a4a07f00f52c08d55f6557c36..1b0b651e3ff415b812e6a1570c0df327937998bf
+--- a/src/layout/Layout.jsx
++++ b/src/layout/Layout.jsx
+@@ -1,12 +1,22 @@
++import { Link } from "react-router-dom"
++
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
 +]
 +
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "0 1.5rem 5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  intro: {
-+    display: "grid",
-+    gap: "0.9rem",
-+    maxWidth: "38rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1rem",
-+    lineHeight: 1.75,
-+    color: "rgba(31, 31, 27, 0.74)",
-+  },
-+  grid: {
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-+    gap: "1rem",
-+  },
-+  card: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "21rem",
-+    borderRadius: "1.6rem",
-+    backgroundColor: "#d9d1c4",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  overlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-+  },
-+  caption: {
-+    position: "absolute",
-+    inset: "auto 0 0 0",
-+    padding: "1.25rem",
-+    display: "grid",
-+    gap: "0.4rem",
-+    color: "#f6f1e8",
-+  },
-+  category: {
-+    margin: 0,
-+    color: "#c8a66a",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.14em",
-+    fontSize: "0.74rem",
-+    fontWeight: 700,
-+  },
-+  captionTitle: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "1.35rem",
-+    lineHeight: 1.1,
-+  },
-+}
-+
-+export default function GalleryGridSection() {
-+  return (
-+    <section
-+      id="gallery-grid"
-+      aria-labelledby="gallery-grid-heading"
-+      style={styles.section}
-+    >
-+      <div style={styles.shell}>
-+        <div style={styles.intro}>
-+          <p style={styles.eyebrow}>Gallery</p>
-+          <h2 id="gallery-grid-heading" style={styles.title}>
-+            Interiors, plates, and the pace of service
-+          </h2>
-+          <p style={styles.lead}>
-+            A visual edit of the dining room, signature dishes, and evening
-+            atmosphere that shape Osteria 19 Torino.
-+          </p>
-+        </div>
-+
-+        <div style={styles.grid}>
-+          {galleryImages.map((image) => (
-+            <figure key={image.src} style={styles.card}>
-+              <img
-+                src={image.src}
-+                alt={image.alt}
-+                loading="lazy"
-+                style={styles.image}
-+              />
-+              <div aria-hidden="true" style={styles.overlay} />
-+              <figcaption style={styles.caption}>
-+                <p style={styles.category}>{image.category}</p>
-+                <p style={styles.captionTitle}>{image.title}</p>
-+              </figcaption>
-+            </figure>
-+          ))}
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,16 +1,59 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
-+
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
-+}
-+
- export default function Gallery() {
+ export default function Layout({ children }) {
    return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-             details that define our contemporary osteria in Torino.
-           </p>
-         </div>
-       </section>
-+      <GalleryGridSection />
-     </main>
-   )
- }
+     <>
+       <header>
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+       </header>
+ 
 
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index cee5f23115591fbc68cd721dac25586b76f1327b..1943cfc309ce53b5ac9a8b844c0f4b25d67f9f90
+index 02408a03f652753d2df28117368ea2e7243bdab0..e650c5197c9e8da17958a63f04baba20a3b6a966
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -141,3 +141,4 @@
- Prepared TASK section-gallery-gallery-grid (Create gallery-grid section on gallery) for execution.
+@@ -153,3 +153,10 @@
+ Prepared TASK navigation-structure (Build navigation from spec) for execution.
  
- Launching Codex for TASK section-gallery-gallery-grid.
-+2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
-diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
---- /dev/null
-+++ b/src/components/Gallery-gridSection.jsx
-@@ -0,0 +1,186 @@
-+const galleryImages = [
-+  {
-+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-+    category: "Dining room",
-+    title: "Warm urban interiors",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant restaurant table setting prepared for evening service",
-+    category: "Table setting",
-+    title: "Evening table detail",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Refined plated pasta served in a modern Italian restaurant",
-+    category: "Pasta",
-+    title: "Signature pasta plates",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-+    category: "Atmosphere",
-+    title: "Dinner mood in Torino",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-+    category: "Hospitality",
-+    title: "Designed for long dinners",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Modern plated seafood course with refined presentation",
-+    category: "Main course",
-+    title: "Seasonal plates with precision",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-+    category: "Wine and cocktails",
-+    title: "Curated bottles and aperitivi",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant dessert plated with modern presentation and rich textures",
-+    category: "Dessert",
-+    title: "A polished final course",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-+    category: "Interior detail",
-+    title: "Quiet corners and soft light",
-+  },
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
++
++TASK navigation-structure executed by Codex.
++Waiting for validation.
++
++TASK navigation-structure completed successfully.
++Build passed.
+diff --git a/src/App.jsx b/src/App.jsx
+index ccf906a29f7c9add3da40568157be9c0b1cb2a6b..bb6983b7333ba6c53c5ce6f1620f8662bed83787
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,11 +1,37 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+ import Home from "./pages/Home"
+ import Gallery from "./pages/Gallery"
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
++}
++
+ export default function App() {
+   return (
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+         <Routes>
+           <Route path="/" element={<Home />} />
+diff --git a/src/layout/Layout.jsx b/src/layout/Layout.jsx
+index cc8e714f09b9889a4a07f00f52c08d55f6557c36..1b0b651e3ff415b812e6a1570c0df327937998bf
+--- a/src/layout/Layout.jsx
++++ b/src/layout/Layout.jsx
+@@ -1,12 +1,22 @@
++import { Link } from "react-router-dom"
++
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
 +]
 +
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "0 1.5rem 5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  intro: {
-+    display: "grid",
-+    gap: "0.9rem",
-+    maxWidth: "38rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1rem",
-+    lineHeight: 1.75,
-+    color: "rgba(31, 31, 27, 0.74)",
-+  },
-+  grid: {
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-+    gap: "1rem",
-+  },
-+  card: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "21rem",
-+    borderRadius: "1.6rem",
-+    backgroundColor: "#d9d1c4",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  overlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-+  },
-+  caption: {
-+    position: "absolute",
-+    inset: "auto 0 0 0",
-+    padding: "1.25rem",
-+    display: "grid",
-+    gap: "0.4rem",
-+    color: "#f6f1e8",
-+  },
-+  category: {
-+    margin: 0,
-+    color: "#c8a66a",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.14em",
-+    fontSize: "0.74rem",
-+    fontWeight: 700,
-+  },
-+  captionTitle: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "1.35rem",
-+    lineHeight: 1.1,
-+  },
-+}
-+
-+export default function GalleryGridSection() {
-+  return (
-+    <section
-+      id="gallery-grid"
-+      aria-labelledby="gallery-grid-heading"
-+      style={styles.section}
-+    >
-+      <div style={styles.shell}>
-+        <div style={styles.intro}>
-+          <p style={styles.eyebrow}>Gallery</p>
-+          <h2 id="gallery-grid-heading" style={styles.title}>
-+            Interiors, plates, and the pace of service
-+          </h2>
-+          <p style={styles.lead}>
-+            A visual edit of the dining room, signature dishes, and evening
-+            atmosphere that shape Osteria 19 Torino.
-+          </p>
-+        </div>
-+
-+        <div style={styles.grid}>
-+          {galleryImages.map((image) => (
-+            <figure key={image.src} style={styles.card}>
-+              <img
-+                src={image.src}
-+                alt={image.alt}
-+                loading="lazy"
-+                style={styles.image}
-+              />
-+              <div aria-hidden="true" style={styles.overlay} />
-+              <figcaption style={styles.caption}>
-+                <p style={styles.category}>{image.category}</p>
-+                <p style={styles.captionTitle}>{image.title}</p>
-+              </figcaption>
-+            </figure>
-+          ))}
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,16 +1,59 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
-+
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
-+}
-+
- export default function Gallery() {
+ export default function Layout({ children }) {
    return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-             details that define our contemporary osteria in Torino.
-           </p>
-         </div>
-       </section>
-+      <GalleryGridSection />
-     </main>
-   )
- }
+     <>
+       <header>
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+       </header>
+ 
 
 codex
-Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [src/components/Gallery-gridSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
+Modified files: [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), [src/layout/Layout.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/layout/Layout.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
 
-Implemented the `gallery-grid` section on the gallery page by adding a reusable `GalleryGridSection` component and rendering it from the gallery page shell. The section uses a responsive image grid with nine premium Unsplash images, lazy-loaded media, semantic `figure`/`figcaption` markup, and copy/styling aligned to the restaurant brand and existing page structure.
+Implemented the navigation from the task spec in [src/layout/Layout.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/layout/Layout.jsx): `Home`, `Gallery`, `About`, and `Contact` are all rendered, and section links now route through the home page using hash-router-safe targets. In [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), I added route-aware section scrolling so `About` and `Contact` resolve correctly whether the user clicks from home or from `/gallery`.
 
-Build result: `npm run build` passed successfully with Vite production output generated.
+Build result: `npm run build` passed successfully. I also updated [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md) with the task summary and build status.
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index cee5f23115591fbc68cd721dac25586b76f1327b..1943cfc309ce53b5ac9a8b844c0f4b25d67f9f90
+index 02408a03f652753d2df28117368ea2e7243bdab0..e650c5197c9e8da17958a63f04baba20a3b6a966
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -141,3 +141,4 @@
- Prepared TASK section-gallery-gallery-grid (Create gallery-grid section on gallery) for execution.
+@@ -153,3 +153,10 @@
+ Prepared TASK navigation-structure (Build navigation from spec) for execution.
  
- Launching Codex for TASK section-gallery-gallery-grid.
-+2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
-diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
---- /dev/null
-+++ b/src/components/Gallery-gridSection.jsx
-@@ -0,0 +1,186 @@
-+const galleryImages = [
-+  {
-+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
-+    category: "Dining room",
-+    title: "Warm urban interiors",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant restaurant table setting prepared for evening service",
-+    category: "Table setting",
-+    title: "Evening table detail",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Refined plated pasta served in a modern Italian restaurant",
-+    category: "Pasta",
-+    title: "Signature pasta plates",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
-+    category: "Atmosphere",
-+    title: "Dinner mood in Torino",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
-+    category: "Hospitality",
-+    title: "Designed for long dinners",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Modern plated seafood course with refined presentation",
-+    category: "Main course",
-+    title: "Seasonal plates with precision",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
-+    category: "Wine and cocktails",
-+    title: "Curated bottles and aperitivi",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Elegant dessert plated with modern presentation and rich textures",
-+    category: "Dessert",
-+    title: "A polished final course",
-+  },
-+  {
-+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
-+    category: "Interior detail",
-+    title: "Quiet corners and soft light",
-+  },
+ Launching Codex for TASK navigation-structure.
++2026-03-10: Implemented spec-driven navigation in `src/layout/Layout.jsx` for Home, Gallery, About, and Contact. Route links now use hash-router-safe `Link` targets, and `src/App.jsx` adds route-aware section scrolling so About and Contact resolve correctly from any page.
++
++TASK navigation-structure executed by Codex.
++Waiting for validation.
++
++TASK navigation-structure completed successfully.
++Build passed.
+diff --git a/src/App.jsx b/src/App.jsx
+index ccf906a29f7c9add3da40568157be9c0b1cb2a6b..bb6983b7333ba6c53c5ce6f1620f8662bed83787
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,11 +1,37 @@
+-import { HashRouter, Routes, Route } from "react-router-dom"
++import { useEffect } from "react"
++import { HashRouter, Routes, Route, useLocation } from "react-router-dom"
+ import Layout from "./layout/Layout"
+ import Home from "./pages/Home"
+ import Gallery from "./pages/Gallery"
+ 
++function ScrollManager() {
++  const location = useLocation()
++
++  useEffect(() => {
++    const params = new URLSearchParams(location.search)
++    const sectionId = params.get("section")
++
++    if (!sectionId) {
++      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
++      return
++    }
++
++    window.requestAnimationFrame(() => {
++      const section = document.getElementById(sectionId)
++
++      if (section) {
++        section.scrollIntoView({ behavior: "smooth", block: "start" })
++      }
++    })
++  }, [location.pathname, location.search])
++
++  return null
++}
++
+ export default function App() {
+   return (
+     <HashRouter>
++      <ScrollManager />
+       <Layout>
+         <Routes>
+           <Route path="/" element={<Home />} />
+diff --git a/src/layout/Layout.jsx b/src/layout/Layout.jsx
+index cc8e714f09b9889a4a07f00f52c08d55f6557c36..1b0b651e3ff415b812e6a1570c0df327937998bf
+--- a/src/layout/Layout.jsx
++++ b/src/layout/Layout.jsx
+@@ -1,12 +1,22 @@
++import { Link } from "react-router-dom"
++
++const navigationItems = [
++  { label: "Home", to: "/" },
++  { label: "Gallery", to: "/gallery" },
++  { label: "About", to: "/?section=about" },
++  { label: "Contact", to: "/?section=contact" },
 +]
 +
-+const styles = {
-+  section: {
-+    background:
-+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
-+    color: "#1f1f1b",
-+  },
-+  shell: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "0 1.5rem 5rem",
-+    display: "grid",
-+    gap: "2rem",
-+  },
-+  intro: {
-+    display: "grid",
-+    gap: "0.9rem",
-+    maxWidth: "38rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
-+    lineHeight: 1,
-+    letterSpacing: "-0.04em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1rem",
-+    lineHeight: 1.75,
-+    color: "rgba(31, 31, 27, 0.74)",
-+  },
-+  grid: {
-+    display: "grid",
-+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
-+    gap: "1rem",
-+  },
-+  card: {
-+    position: "relative",
-+    overflow: "hidden",
-+    minHeight: "21rem",
-+    borderRadius: "1.6rem",
-+    backgroundColor: "#d9d1c4",
-+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
-+  },
-+  image: {
-+    position: "absolute",
-+    inset: 0,
-+    width: "100%",
-+    height: "100%",
-+    objectFit: "cover",
-+  },
-+  overlay: {
-+    position: "absolute",
-+    inset: 0,
-+    background:
-+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
-+  },
-+  caption: {
-+    position: "absolute",
-+    inset: "auto 0 0 0",
-+    padding: "1.25rem",
-+    display: "grid",
-+    gap: "0.4rem",
-+    color: "#f6f1e8",
-+  },
-+  category: {
-+    margin: 0,
-+    color: "#c8a66a",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.14em",
-+    fontSize: "0.74rem",
-+    fontWeight: 700,
-+  },
-+  captionTitle: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "1.35rem",
-+    lineHeight: 1.1,
-+  },
-+}
-+
-+export default function GalleryGridSection() {
-+  return (
-+    <section
-+      id="gallery-grid"
-+      aria-labelledby="gallery-grid-heading"
-+      style={styles.section}
-+    >
-+      <div style={styles.shell}>
-+        <div style={styles.intro}>
-+          <p style={styles.eyebrow}>Gallery</p>
-+          <h2 id="gallery-grid-heading" style={styles.title}>
-+            Interiors, plates, and the pace of service
-+          </h2>
-+          <p style={styles.lead}>
-+            A visual edit of the dining room, signature dishes, and evening
-+            atmosphere that shape Osteria 19 Torino.
-+          </p>
-+        </div>
-+
-+        <div style={styles.grid}>
-+          {galleryImages.map((image) => (
-+            <figure key={image.src} style={styles.card}>
-+              <img
-+                src={image.src}
-+                alt={image.alt}
-+                loading="lazy"
-+                style={styles.image}
-+              />
-+              <div aria-hidden="true" style={styles.overlay} />
-+              <figcaption style={styles.caption}>
-+                <p style={styles.category}>{image.category}</p>
-+                <p style={styles.captionTitle}>{image.title}</p>
-+              </figcaption>
-+            </figure>
-+          ))}
-+        </div>
-+      </div>
-+    </section>
-+  )
-+}
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,16 +1,59 @@
-+import GalleryGridSection from "../components/Gallery-gridSection"
-+
-+const styles = {
-+  main: {
-+    backgroundColor: "#f6f1e8",
-+    color: "#1f1f1b",
-+  },
-+  hero: {
-+    maxWidth: "72rem",
-+    margin: "0 auto",
-+    padding: "7.5rem 1.5rem 3rem",
-+  },
-+  copy: {
-+    maxWidth: "38rem",
-+    display: "grid",
-+    gap: "1rem",
-+  },
-+  eyebrow: {
-+    margin: 0,
-+    color: "#6f7558",
-+    textTransform: "uppercase",
-+    letterSpacing: "0.18em",
-+    fontSize: "0.78rem",
-+    fontWeight: 700,
-+  },
-+  title: {
-+    margin: 0,
-+    fontFamily: 'Georgia, "Times New Roman", serif',
-+    fontSize: "clamp(3rem, 8vw, 5rem)",
-+    lineHeight: 0.96,
-+    letterSpacing: "-0.05em",
-+  },
-+  lead: {
-+    margin: 0,
-+    fontSize: "1.05rem",
-+    lineHeight: 1.8,
-+    color: "rgba(31, 31, 27, 0.76)",
-+  },
-+}
-+
- export default function Gallery() {
+ export default function Layout({ children }) {
    return (
--    <main>
--      <section aria-labelledby="gallery-title">
--        <div>
--          <p>Osteria 19 Torino</p>
--          <h1 id="gallery-title">Gallery</h1>
--          <p>
-+    <main style={styles.main}>
-+      <section aria-labelledby="gallery-title" style={styles.hero}>
-+        <div style={styles.copy}>
-+          <p style={styles.eyebrow}>Osteria 19 Torino</p>
-+          <h1 id="gallery-title" style={styles.title}>
-+            Gallery
-+          </h1>
-+          <p style={styles.lead}>
-             A first look at the dining room, the evening mood, and the plated
-             details that define our contemporary osteria in Torino.
-           </p>
-         </div>
-       </section>
-+      <GalleryGridSection />
-     </main>
-   )
- }
+     <>
+       <header>
+         <nav aria-label="Main navigation">
+-          <a href="#/">Home</a>
+-          <a href="#/gallery">Gallery</a>
+-          <a href="#about">About</a>
+-          <a href="#contact">Contact</a>
++          {navigationItems.map((item) => (
++            <Link key={item.label} to={item.to}>
++              {item.label}
++            </Link>
++          ))}
+         </nav>
+       </header>
+ 
 
 tokens used
-24.141
+15.457
