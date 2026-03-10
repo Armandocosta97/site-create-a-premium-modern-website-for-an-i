@@ -1,14 +1,8 @@
-**Modified files**
+Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
 
-[agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
+Implemented the gallery page shell in [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) by replacing the placeholder image block with a semantic `main` and intro section containing a single `h1` and polished gallery intro copy. The `/gallery` route was already correctly mounted in [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), so no route changes were needed. I also appended the task summary to [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
 
-**What was implemented**
-
-The required `phone-hero` CTA was already present in the hero UI, so no change to [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) or [src/components/HeroSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx) was necessary. I validated that it is visible in the home hero and points to the valid destination `tel:+390113821947`, then recorded the task completion in the agent report.
-
-**Build result**
-
-`npm run build` passed successfully on March 10, 2026.
+Build result: `npm run build` passed successfully.
 
 OpenAI Codex v0.111.0 (research preview)
 --------
@@ -19,7 +13,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/armandocosta/.codex/memories]
 reasoning effort: none
 reasoning summaries: none
-session id: 019cd521-a73f-7103-8b0f-97081b7f6784
+session id: 019cd522-444d-7721-9660-db82a48b1fb9
 --------
 user
 # CURRENT TASK EXECUTION PROMPT
@@ -1061,39 +1055,32 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-cta-home-phone-hero
+page-gallery-shell
 
 ## Current task title
-Add CTA phone-hero on home
+Create gallery page shell
 
 ## Current task type
-cta
+page-shell
 
 ## Current task target
 ```json
 {
-  "pageId": "home",
-  "ctaId": "phone-hero",
-  "ctaKind": "external",
-  "destination": {
-    "type": "phone",
-    "value": "phone"
-  },
-  "placement": "hero"
+  "pageId": "gallery"
 }
 ```
 
 ## Depends on
-- page-home-shell
+- none
 
 ## Files allowed
-- src/pages/Home.jsx
-- src/components
+- src/App.jsx
+- src/pages/Gallery.jsx
 
 ## Definition of done
-- CTA phone-hero exists on home
-- CTA phone-hero is visible in placement hero
-- CTA phone-hero points to a valid destination
+- page shell exists for gallery
+- gallery route is mounted if required
+- gallery page renders without crashing
 
 ## Strict execution rules
 - Execute only this current task.
@@ -1122,27 +1109,42 @@ cta
 
 mcp startup: no servers
 codex
-I’m checking the current home page and shared components to add only the hero phone CTA, then I’ll run a build and update the agent report as required.
+I’m checking the current app structure and the task source files first so I can add only the gallery page shell and the route wiring required for this task.
 exec
-/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,220p' src/pages/Home.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "pwd && rg --files src agent | rg 'Home\\.jsx|src/components|AGENT_REPORT\\.md"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
-import AboutSection from "../components/AboutSection"
-import ContactSection from "../components/ContactSection"
-import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
-import HeroSection from "../components/HeroSection"
+/bin/zsh -lc "sed -n '1,220p' src/pages/Gallery.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,200p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,220p' src/App.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "pwd && rg --files | rg '"'^(src/App'"\\.jsx|src/pages/Gallery\\.jsx|agent/AGENT_REPORT\\.md|agent/CURRENT_TASK_PROMPT\\.md|site-spec\\.json|agent/TASK_STATE\\.json)"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
+import { HashRouter, Routes, Route } from "react-router-dom"
+import Layout from "./layout/Layout"
+import Home from "./pages/Home"
+import Gallery from "./pages/Gallery"
 
-export default function Home() {
+export default function App() {
   return (
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <ContactSection />
-      <FloatingWhatsAppButton />
-    </main>
+    <HashRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </Layout>
+    </HashRouter>
   )
 }
- succeeded in 51ms:
+ succeeded in 52ms:
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Gallery</h1>
+      <img
+        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
+        alt="Gallery preview"
+      />
+    </section>
+  )
+}
+ succeeded in 52ms:
 # AGENT REPORT
 
 Project created.
@@ -1163,141 +1165,226 @@ Waiting for validation.
 TASK page-home-shell completed successfully.
 Build passed.
 Commit created for TASK page-home-shell.
- succeeded in 52ms:
-/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
-agent/AGENT_REPORT.md
-src/pages/Home.jsx
-src/components/FloatingWhatsAppButton.jsx
-src/components/AboutSection.jsx
-src/components/ContactSection.jsx
-src/components/HeroSection.jsx
-codex
-I’ve confirmed the home page delegates the hero to a reusable component. Next I’m checking whether the phone CTA is already present there or if I need to add it in the allowed component scope.
-exec
-/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc 'rg -n "tel:|phone|Call|Book a table|Explore the menu" src/components src/pages' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
-const backgroundImage =
-  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
-
-const styles = {
-  section: {
-    position: "relative",
-    overflow: "hidden",
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "stretch",
-    backgroundColor: "#1f1f1b",
-    color: "#f6f1e8",
-  },
-  media: {
-    position: "absolute",
-    inset: 0,
-    backgroundImage: `linear-gradient(180deg, rgba(16, 16, 14, 0.48) 0%, rgba(16, 16, 14, 0.76) 56%, rgba(16, 16, 14, 0.92) 100%), url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    transform: "scale(1.04)",
  succeeded in 51ms:
-src/components/FloatingWhatsAppButton.jsx:46:      aria-label="Book a table on WhatsApp"
-src/components/ContactSection.jsx:30:    href: "tel:+390113821947",
-src/components/ContactSection.jsx:227:            <a href="tel:+390113821947" style={styles.secondaryAction}>
-src/components/ContactSection.jsx:228:              Call for reservations
-src/components/HeroSection.jsx:131:              Book a table
-src/components/HeroSection.jsx:134:            <a href="tel:+390113821947" style={styles.secondaryAction}>
-src/components/HeroSection.jsx:135:              Call the restaurant
+/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
+src/pages/Gallery.jsx
+src/App.jsx
+agent/CURRENT_TASK_PROMPT.md
+agent/TASK_STATE.json
+agent/AGENT_REPORT.md
+site-spec.json
 codex
-The hero already contains the required `tel:` CTA in the correct placement, so I’m treating this task as a validation pass rather than changing working UI code. I’m running the build now, then I’ll append the task result to the agent report.
+The gallery route is already mounted in [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), so I only need to replace the placeholder gallery page with a stable semantic shell and then append the task report entry.
+file update
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+@@ -131 +131,2 @@
+ Launching Codex for TASK page-gallery-shell.
++2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
+@@ -2,9 +2,14 @@
+   return (
+-    <section>
+-      <h1>Gallery</h1>
+-      <img
+-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
+-        alt="Gallery preview"
+-      />
+-    </section>
++    <main>
++      <section aria-labelledby="gallery-title">
++        <div>
++          <p>Osteria 19 Torino</p>
++          <h1 id="gallery-title">Gallery</h1>
++          <p>
++            A first look at the dining room, the evening mood, and the plated
++            details that define our contemporary osteria in Torino.
++          </p>
++        </div>
++      </section>
++    </main>
+   )
+apply_patch(auto_approved=true) exited 0 in 44ms:
+Success. Updated the following files:
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -129,3 +129,4 @@
+ Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
+ 
+ Launching Codex for TASK page-gallery-shell.
++2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,11 +1,16 @@
+ export default function Gallery() {
+   return (
+-    <section>
+-      <h1>Gallery</h1>
+-      <img
+-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
+-        alt="Gallery preview"
+-      />
+-    </section>
++    <main>
++      <section aria-labelledby="gallery-title">
++        <div>
++          <p>Osteria 19 Torino</p>
++          <h1 id="gallery-title">Gallery</h1>
++          <p>
++            A first look at the dining room, the evening mood, and the plated
++            details that define our contemporary osteria in Torino.
++          </p>
++        </div>
++      </section>
++    </main>
+   )
+ }
+
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -129,3 +129,4 @@
+ Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
+ 
+ Launching Codex for TASK page-gallery-shell.
++2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,11 +1,16 @@
+ export default function Gallery() {
+   return (
+-    <section>
+-      <h1>Gallery</h1>
+-      <img
+-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
+-        alt="Gallery preview"
+-      />
+-    </section>
++    <main>
++      <section aria-labelledby="gallery-title">
++        <div>
++          <p>Osteria 19 Torino</p>
++          <h1 id="gallery-title">Gallery</h1>
++          <p>
++            A first look at the dining room, the evening mood, and the plated
++            details that define our contemporary osteria in Torino.
++          </p>
++        </div>
++      </section>
++    </main>
+   )
+ }
+
+codex
+I’ve made the minimal page-shell change. Next I’m running the build check to confirm the gallery route still renders and the app remains stable.
 exec
-/bin/zsh -lc "date '+%Y-%m-%d'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
-2026-03-10
-exec
-/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 811ms:
+/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 818ms:
+
+> site-create-a-premium-modern-website-for-an-i@0.0.0 build
+> vite build
+
 vite v7.3.1 building client environment for production...
 transforming...
 ✓ 48 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                   0.50 kB │ gzip:  0.31 kB
+dist/index.html                   0.50 kB │ gzip:  0.32 kB
 dist/assets/index-DQ3P1g1z.css    0.91 kB │ gzip:  0.49 kB
-dist/assets/index-DEgvcabh.js   241.79 kB │ gzip: 76.91 kB
-✓ built in 571ms
-codex
-I’m updating the report with the validation outcome only. No home component edits were needed because the required phone CTA was already implemented and build-valid.
-file update
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
-@@ -113 +113,8 @@
- Launching Codex for TASK cta-home-phone-hero.
-+2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
-+
-+TASK cta-home-phone-hero executed by Codex.
-+Waiting for validation.
-+
-+TASK cta-home-phone-hero completed successfully.
-+Build passed.
-apply_patch(auto_approved=true) exited 0 in 36ms:
-Success. Updated the following files:
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+dist/assets/index-Ckzy1STf.js   241.94 kB │ gzip: 76.95 kB
+✓ built in 559ms
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 8fc9c32b4a762ee2c99ac3e091339410796f6382..0114fbc994926ad5f396218abcd51843bc8ebae9
+index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -111,3 +111,10 @@
- Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
+@@ -129,3 +129,4 @@
+ Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
  
- Launching Codex for TASK cta-home-phone-hero.
-+2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
-+
-+TASK cta-home-phone-hero executed by Codex.
-+Waiting for validation.
-+
-+TASK cta-home-phone-hero completed successfully.
-+Build passed.
-
-file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 8fc9c32b4a762ee2c99ac3e091339410796f6382..0114fbc994926ad5f396218abcd51843bc8ebae9
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -111,3 +111,10 @@
- Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
- 
- Launching Codex for TASK cta-home-phone-hero.
-+2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
-+
-+TASK cta-home-phone-hero executed by Codex.
-+Waiting for validation.
-+
-+TASK cta-home-phone-hero completed successfully.
-+Build passed.
+ Launching Codex for TASK page-gallery-shell.
++2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,11 +1,16 @@
+ export default function Gallery() {
+   return (
+-    <section>
+-      <h1>Gallery</h1>
+-      <img
+-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
+-        alt="Gallery preview"
+-      />
+-    </section>
++    <main>
++      <section aria-labelledby="gallery-title">
++        <div>
++          <p>Osteria 19 Torino</p>
++          <h1 id="gallery-title">Gallery</h1>
++          <p>
++            A first look at the dining room, the evening mood, and the plated
++            details that define our contemporary osteria in Torino.
++          </p>
++        </div>
++      </section>
++    </main>
+   )
+ }
 
 codex
-**Modified files**
+Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
 
-[agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
+Implemented the gallery page shell in [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) by replacing the placeholder image block with a semantic `main` and intro section containing a single `h1` and polished gallery intro copy. The `/gallery` route was already correctly mounted in [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), so no route changes were needed. I also appended the task summary to [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
 
-**What was implemented**
-
-The required `phone-hero` CTA was already present in the hero UI, so no change to [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) or [src/components/HeroSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx) was necessary. I validated that it is visible in the home hero and points to the valid destination `tel:+390113821947`, then recorded the task completion in the agent report.
-
-**Build result**
-
-`npm run build` passed successfully on March 10, 2026.
+Build result: `npm run build` passed successfully.
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 8fc9c32b4a762ee2c99ac3e091339410796f6382..0114fbc994926ad5f396218abcd51843bc8ebae9
+index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -111,3 +111,10 @@
- Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
+@@ -129,3 +129,4 @@
+ Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
  
- Launching Codex for TASK cta-home-phone-hero.
-+2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
-+
-+TASK cta-home-phone-hero executed by Codex.
-+Waiting for validation.
-+
-+TASK cta-home-phone-hero completed successfully.
-+Build passed.
+ Launching Codex for TASK page-gallery-shell.
++2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,11 +1,16 @@
+ export default function Gallery() {
+   return (
+-    <section>
+-      <h1>Gallery</h1>
+-      <img
+-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
+-        alt="Gallery preview"
+-      />
+-    </section>
++    <main>
++      <section aria-labelledby="gallery-title">
++        <div>
++          <p>Osteria 19 Torino</p>
++          <h1 id="gallery-title">Gallery</h1>
++          <p>
++            A first look at the dining room, the evening mood, and the plated
++            details that define our contemporary osteria in Torino.
++          </p>
++        </div>
++      </section>
++    </main>
+   )
+ }
 
 tokens used
-14.800
+13.260

@@ -1037,39 +1037,32 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-cta-home-phone-hero
+page-gallery-shell
 
 ## Current task title
-Add CTA phone-hero on home
+Create gallery page shell
 
 ## Current task type
-cta
+page-shell
 
 ## Current task target
 ```json
 {
-  "pageId": "home",
-  "ctaId": "phone-hero",
-  "ctaKind": "external",
-  "destination": {
-    "type": "phone",
-    "value": "phone"
-  },
-  "placement": "hero"
+  "pageId": "gallery"
 }
 ```
 
 ## Depends on
-- page-home-shell
+- none
 
 ## Files allowed
-- src/pages/Home.jsx
-- src/components
+- src/App.jsx
+- src/pages/Gallery.jsx
 
 ## Definition of done
-- CTA phone-hero exists on home
-- CTA phone-hero is visible in placement hero
-- CTA phone-hero points to a valid destination
+- page shell exists for gallery
+- gallery route is mounted if required
+- gallery page renders without crashing
 
 ## Strict execution rules
 - Execute only this current task.

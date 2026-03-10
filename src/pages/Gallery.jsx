@@ -1,11 +1,16 @@
 export default function Gallery() {
   return (
-    <section>
-      <h1>Gallery</h1>
-      <img
-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
-        alt="Gallery preview"
-      />
-    </section>
+    <main>
+      <section aria-labelledby="gallery-title">
+        <div>
+          <p>Osteria 19 Torino</p>
+          <h1 id="gallery-title">Gallery</h1>
+          <p>
+            A first look at the dining room, the evening mood, and the plated
+            details that define our contemporary osteria in Torino.
+          </p>
+        </div>
+      </section>
+    </main>
   )
 }
