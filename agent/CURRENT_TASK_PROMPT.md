@@ -1037,10 +1037,10 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-cta-home-primary-hero-cta
+cta-home-whatsapp-floating
 
 ## Current task title
-Add CTA primary-hero-cta on home
+Add CTA whatsapp-floating on home
 
 ## Current task type
 cta
@@ -1049,13 +1049,13 @@ cta
 ```json
 {
   "pageId": "home",
-  "ctaId": "primary-hero-cta",
-  "ctaKind": "internal",
+  "ctaId": "whatsapp-floating",
+  "ctaKind": "external",
   "destination": {
-    "type": "section",
-    "value": "contact"
+    "type": "whatsapp",
+    "value": "whatsapp"
   },
-  "placement": "hero"
+  "placement": "floating"
 }
 ```
 
@@ -1065,11 +1065,13 @@ cta
 ## Files allowed
 - src/pages/Home.jsx
 - src/components
+- src/App.jsx
+- src/layout/Layout.jsx
 
 ## Definition of done
-- CTA primary-hero-cta exists on home
-- CTA primary-hero-cta is visible in placement hero
-- CTA primary-hero-cta points to a valid destination
+- CTA whatsapp-floating exists on home
+- CTA whatsapp-floating is visible in placement floating
+- CTA whatsapp-floating points to a valid destination
 
 ## Strict execution rules
 - Execute only this current task.

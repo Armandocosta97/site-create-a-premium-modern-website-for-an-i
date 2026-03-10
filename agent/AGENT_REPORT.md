@@ -88,3 +88,21 @@ Waiting for validation.
 
 TASK cta-home-primary-hero-cta completed successfully.
 Build passed.
+Commit created for TASK cta-home-primary-hero-cta.
+
+Prepared TASK cta-home-whatsapp-floating (Add CTA whatsapp-floating on home) for execution.
+
+Launching Codex for TASK cta-home-whatsapp-floating.
+2026-03-10: Added a floating WhatsApp booking CTA on the home page using the existing reservation `wa.me` destination, keeping the implementation isolated to a reusable home-only component.
+
+TASK cta-home-whatsapp-floating executed by Codex.
+Waiting for validation.
+
+TASK cta-home-whatsapp-floating completed successfully.
+Build passed.
+
+TASK cta-home-whatsapp-floating executed by Codex.
+Waiting for validation.
+
+TASK cta-home-whatsapp-floating completed successfully.
+Build passed.
