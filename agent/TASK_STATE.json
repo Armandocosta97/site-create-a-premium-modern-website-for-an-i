@@ -1,9 +1,10 @@
 {
-  "currentTaskId": "section-home-about",
+  "currentTaskId": "section-home-contact",
   "status": "ready_for_next_task",
-  "lastCompletedTaskId": "section-home-hero",
+  "lastCompletedTaskId": "section-home-about",
   "completedTaskIds": [
     "page-home-shell",
-    "section-home-hero"
+    "section-home-hero",
+    "section-home-about"
   ]
 }

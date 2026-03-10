@@ -1037,10 +1037,10 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-section-home-hero
+section-home-about
 
 ## Current task title
-Create hero section on home
+Create about section on home
 
 ## Current task type
 section
@@ -1049,8 +1049,8 @@ section
 ```json
 {
   "pageId": "home",
-  "sectionId": "hero",
-  "sectionType": "hero"
+  "sectionId": "about",
+  "sectionType": "split-content"
 }
 ```
 
@@ -1059,13 +1059,13 @@ section
 
 ## Files allowed
 - src/pages/Home.jsx
-- src/components/HeroSection.jsx
+- src/components/AboutSection.jsx
 - src/components
 
 ## Definition of done
-- section hero exists on home
-- section hero matches type hero
-- section hero is rendered in page home
+- section about exists on home
+- section about matches type split-content
+- section about is rendered in page home
 
 ## Strict execution rules
 - Execute only this current task.
