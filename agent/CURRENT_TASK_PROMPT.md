@@ -1037,59 +1037,37 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-navigation-structure
+seo-basics
 
 ## Current task title
-Build navigation from spec
+Add baseline SEO structure
 
 ## Current task type
-navigation
+seo
 
 ## Current task target
 ```json
 {
-  "navigation": [
-    {
-      "label": "Home",
-      "type": "route",
-      "target": "/"
-    },
-    {
-      "label": "Gallery",
-      "type": "route",
-      "target": "/gallery"
-    },
-    {
-      "label": "About",
-      "type": "section",
-      "target": "about"
-    },
-    {
-      "label": "Contact",
-      "type": "section",
-      "target": "contact"
-    }
-  ],
-  "routingMode": "hash"
+  "pages": [
+    "home",
+    "gallery"
+  ]
 }
 ```
 
 ## Depends on
 - page-home-shell
 - page-gallery-shell
-- section-home-hero
-- section-home-about
-- section-home-contact
-- section-gallery-gallery-grid
 
 ## Files allowed
-- src/App.jsx
-- src/layout/Layout.jsx
+- index.html
+- src/pages/Home.jsx
+- src/pages/Gallery.jsx
 
 ## Definition of done
-- all navigation items are rendered
-- all navigation links point to valid pages or sections
-- navigation is compatible with routing mode
+- title exists
+- meta description exists
+- one meaningful h1 per page exists
 
 ## Strict execution rules
 - Execute only this current task.

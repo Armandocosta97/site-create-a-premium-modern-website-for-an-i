@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import GalleryGridSection from "../components/Gallery-gridSection"
 
 const styles = {
@@ -39,6 +41,18 @@ const styles = {
 }
 
 export default function Gallery() {
+  useEffect(() => {
+    document.title = "Gallery | Osteria 19 Torino"
+
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        "Browse the Osteria 19 Torino gallery for a look at the dining room, plated dishes, and the refined evening atmosphere of our contemporary restaurant.",
+      )
+    }
+  }, [])
+
   return (
     <main style={styles.main}>
       <section aria-labelledby="gallery-title" style={styles.hero}>
