@@ -1,13 +1,14 @@
 {
-  "currentTaskId": "cta-home-phone-hero",
+  "currentTaskId": "page-gallery-shell",
   "status": "ready_for_next_task",
-  "lastCompletedTaskId": "cta-home-whatsapp-floating",
+  "lastCompletedTaskId": "cta-home-phone-hero",
   "completedTaskIds": [
     "page-home-shell",
     "section-home-hero",
     "section-home-about",
     "section-home-contact",
     "cta-home-primary-hero-cta",
-    "cta-home-whatsapp-floating"
+    "cta-home-whatsapp-floating",
+    "cta-home-phone-hero"
   ]
 }

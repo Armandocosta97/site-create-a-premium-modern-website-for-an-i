@@ -1037,10 +1037,10 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-cta-home-whatsapp-floating
+cta-home-phone-hero
 
 ## Current task title
-Add CTA whatsapp-floating on home
+Add CTA phone-hero on home
 
 ## Current task type
 cta
@@ -1049,13 +1049,13 @@ cta
 ```json
 {
   "pageId": "home",
-  "ctaId": "whatsapp-floating",
+  "ctaId": "phone-hero",
   "ctaKind": "external",
   "destination": {
-    "type": "whatsapp",
-    "value": "whatsapp"
+    "type": "phone",
+    "value": "phone"
   },
-  "placement": "floating"
+  "placement": "hero"
 }
 ```
 
@@ -1065,13 +1065,11 @@ cta
 ## Files allowed
 - src/pages/Home.jsx
 - src/components
-- src/App.jsx
-- src/layout/Layout.jsx
 
 ## Definition of done
-- CTA whatsapp-floating exists on home
-- CTA whatsapp-floating is visible in placement floating
-- CTA whatsapp-floating points to a valid destination
+- CTA phone-hero exists on home
+- CTA phone-hero is visible in placement hero
+- CTA phone-hero points to a valid destination
 
 ## Strict execution rules
 - Execute only this current task.

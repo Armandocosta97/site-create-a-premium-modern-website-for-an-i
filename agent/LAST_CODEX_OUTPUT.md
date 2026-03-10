@@ -1,15 +1,14 @@
-Modified files:
-- [src/components/FloatingWhatsAppButton.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx)
-- [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx)
-- [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
+**Modified files**
 
-What was implemented:
-- Added a reusable floating WhatsApp CTA component on the home page only.
-- Wired it to a valid WhatsApp booking URL: `https://wa.me/390113821947?...`
-- Kept the CTA visibly fixed at the bottom-right as a floating action.
+[agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
 
-Build result:
-- `npm run build` passed successfully with Vite production build output.
+**What was implemented**
+
+The required `phone-hero` CTA was already present in the hero UI, so no change to [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) or [src/components/HeroSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx) was necessary. I validated that it is visible in the home hero and points to the valid destination `tel:+390113821947`, then recorded the task completion in the agent report.
+
+**Build result**
+
+`npm run build` passed successfully on March 10, 2026.
 
 OpenAI Codex v0.111.0 (research preview)
 --------
@@ -20,7 +19,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/armandocosta/.codex/memories]
 reasoning effort: none
 reasoning summaries: none
-session id: 019cd520-d8e5-7c02-a6ce-0af5ca70c237
+session id: 019cd521-a73f-7103-8b0f-97081b7f6784
 --------
 user
 # CURRENT TASK EXECUTION PROMPT
@@ -1062,10 +1061,10 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-cta-home-whatsapp-floating
+cta-home-phone-hero
 
 ## Current task title
-Add CTA whatsapp-floating on home
+Add CTA phone-hero on home
 
 ## Current task type
 cta
@@ -1074,13 +1073,13 @@ cta
 ```json
 {
   "pageId": "home",
-  "ctaId": "whatsapp-floating",
+  "ctaId": "phone-hero",
   "ctaKind": "external",
   "destination": {
-    "type": "whatsapp",
-    "value": "whatsapp"
+    "type": "phone",
+    "value": "phone"
   },
-  "placement": "floating"
+  "placement": "hero"
 }
 ```
 
@@ -1090,13 +1089,11 @@ cta
 ## Files allowed
 - src/pages/Home.jsx
 - src/components
-- src/App.jsx
-- src/layout/Layout.jsx
 
 ## Definition of done
-- CTA whatsapp-floating exists on home
-- CTA whatsapp-floating is visible in placement floating
-- CTA whatsapp-floating points to a valid destination
+- CTA phone-hero exists on home
+- CTA phone-hero is visible in placement hero
+- CTA phone-hero points to a valid destination
 
 ## Strict execution rules
 - Execute only this current task.
@@ -1125,15 +1122,14 @@ cta
 
 mcp startup: no servers
 codex
-I’m implementing the home floating WhatsApp CTA and checking the existing home/layout structure first so the change stays within the current task scope.
+I’m checking the current home page and shared components to add only the hero phone CTA, then I’ll run a build and update the agent report as required.
 exec
+/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
 /bin/zsh -lc "sed -n '1,220p' src/pages/Home.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,260p' src/App.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,260p' src/layout/Layout.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "pwd && rg --files src agent brief docs | rg '"'^(src|agent|brief|docs)/'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc 'rg -n "whatsapp|WhatsApp|tel:|011|3821947|contact" src/components src/pages src/layout' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+/bin/zsh -lc "pwd && rg --files src agent | rg 'Home\\.jsx|src/components|AGENT_REPORT\\.md"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
 import AboutSection from "../components/AboutSection"
 import ContactSection from "../components/ContactSection"
+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
 import HeroSection from "../components/HeroSection"
 
 export default function Home() {
@@ -1142,86 +1138,11 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ContactSection />
+      <FloatingWhatsAppButton />
     </main>
   )
 }
  succeeded in 51ms:
-export default function Layout({ children }) {
-  return (
-    <>
-      <header>
-        <nav aria-label="Main navigation">
-          <a href="#/">Home</a>
-          <a href="#/gallery">Gallery</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
-
-      <main>{children}</main>
-
-      <footer>
-        <p>© Website</p>
-      </footer>
-    </>
-  )
-}
- succeeded in 51ms:
-import { HashRouter, Routes, Route } from "react-router-dom"
-import Layout from "./layout/Layout"
-import Home from "./pages/Home"
-import Gallery from "./pages/Gallery"
-
-export default function App() {
-  return (
-    <HashRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
-      </Layout>
-    </HashRouter>
-  )
-}
- succeeded in 51ms:
-/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
-src/pages/Home.jsx
-src/pages/Gallery.jsx
-agent/TASK_GRAPH.json
-agent/TASK_QUEUE.md
-agent/CURRENT_TASK_PROMPT.md
-agent/TASK_STATE.json
-agent/LAST_CODEX_OUTPUT.md
-agent/AGENT_REPORT.md
-src/assets/react.svg
-src/App.jsx
-src/main.jsx
-docs/DEVELOPMENT_METHOD.md
-src/index.css
-src/App.css
-src/components/AboutSection.jsx
-src/components/ContactSection.jsx
-src/components/HeroSection.jsx
-src/layout/Layout.jsx
-brief/brief-summary.md
- succeeded in 51ms:
-src/components/HeroSection.jsx:130:            <a href="#contact" style={styles.primaryAction}>
-src/components/HeroSection.jsx:134:            <a href="tel:+390113821947" style={styles.secondaryAction}>
-src/layout/Layout.jsx:9:          <a href="#contact">Contact</a>
-src/components/ContactSection.jsx:1:const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-src/components/ContactSection.jsx:29:    content: ["+39 011 3821947"],
-src/components/ContactSection.jsx:30:    href: "tel:+390113821947",
-src/components/ContactSection.jsx:178:    <section id="contact" aria-labelledby="contact-heading" style={styles.section}>
-src/components/ContactSection.jsx:183:            <h2 id="contact-heading" style={styles.title}>
-src/components/ContactSection.jsx:225:              Book on WhatsApp
-src/components/ContactSection.jsx:227:            <a href="tel:+390113821947" style={styles.secondaryAction}>
-codex
-I’ve confirmed the project already uses a valid `wa.me` booking URL in the contact section. Next I’m aligning the floating CTA with the existing inline-style approach so this stays minimal and consistent.
-exec
-/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,320p' src/components/ContactSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
 # AGENT REPORT
 
 Project created.
@@ -1242,7 +1163,19 @@ Waiting for validation.
 TASK page-home-shell completed successfully.
 Build passed.
 Commit created for TASK page-home-shell.
- succeeded in 51ms:
+ succeeded in 52ms:
+/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
+agent/AGENT_REPORT.md
+src/pages/Home.jsx
+src/components/FloatingWhatsAppButton.jsx
+src/components/AboutSection.jsx
+src/components/ContactSection.jsx
+src/components/HeroSection.jsx
+codex
+I’ve confirmed the home page delegates the hero to a reusable component. Next I’m checking whether the phone CTA is already present there or if I need to add it in the allowed component scope.
+exec
+/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc 'rg -n "tel:|phone|Call|Book a table|Explore the menu" src/components src/pages' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
 const backgroundImage =
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
 
@@ -1264,292 +1197,20 @@ const styles = {
     backgroundPosition: "center",
     transform: "scale(1.04)",
  succeeded in 51ms:
-const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-
-const openingHours = [
-  {
-    days: "Tuesday - Thursday",
-    hours: ["19:00 - 23:00"],
-  },
-  {
-    days: "Friday - Saturday",
-    hours: ["19:00 - 00:00"],
-  },
-  {
-    days: "Sunday",
-    hours: ["12:30 - 15:00", "19:00 - 22:30"],
-  },
-  {
-    days: "Monday",
-    hours: ["Closed"],
-  },
-]
+src/components/FloatingWhatsAppButton.jsx:46:      aria-label="Book a table on WhatsApp"
+src/components/ContactSection.jsx:30:    href: "tel:+390113821947",
+src/components/ContactSection.jsx:227:            <a href="tel:+390113821947" style={styles.secondaryAction}>
+src/components/ContactSection.jsx:228:              Call for reservations
+src/components/HeroSection.jsx:131:              Book a table
+src/components/HeroSection.jsx:134:            <a href="tel:+390113821947" style={styles.secondaryAction}>
+src/components/HeroSection.jsx:135:              Call the restaurant
 codex
-I have enough context. I’m adding a small dedicated floating WhatsApp component, wiring it into the home page only, and then I’ll run the build and append the task summary to the agent report.
-file update
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
-@@ -2,2 +2,3 @@
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
-@@ -10,2 +11,3 @@
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx
-const bookingLink =
-  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-
-const styles = {
-  link: {
-    position: "fixed",
-    right: "1rem",
-    bottom: "1rem",
-    zIndex: 30,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.75rem",
-    padding: "0.85rem 1rem",
-    borderRadius: "999px",
-    backgroundColor: "#25d366",
-    color: "#102417",
-    textDecoration: "none",
-    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-    fontSize: "0.95rem",
-    fontWeight: 700,
-    lineHeight: 1,
-  },
-  icon: {
-    width: "2.1rem",
-    height: "2.1rem",
-    borderRadius: "999px",
-    display: "grid",
-    placeItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.18)",
-    color: "#ffffff",
-    fontSize: "1.1rem",
-    fontWeight: 800,
-  },
-  label: {
-    display: "block",
-    color: "#102417",
-  },
-}
-
-export default function FloatingWhatsAppButton() {
-  return (
-    <a
-      href={bookingLink}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Book a table on WhatsApp"
-      style={styles.link}
-    >
-      <span aria-hidden="true" style={styles.icon}>
-        W
-      </span>
-      <span style={styles.label}>Book on WhatsApp</span>
-    </a>
-  )
-}
-apply_patch(auto_approved=true) exited 0 in 41ms:
-Success. Updated the following files:
-A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx
-file update:
-diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..44d85068470878067a8991837a8912a4962530ec
---- /dev/null
-+++ b/src/components/FloatingWhatsAppButton.jsx
-@@ -0,0 +1,55 @@
-+const bookingLink =
-+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-+
-+const styles = {
-+  link: {
-+    position: "fixed",
-+    right: "1rem",
-+    bottom: "1rem",
-+    zIndex: 30,
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.75rem",
-+    padding: "0.85rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "#25d366",
-+    color: "#102417",
-+    textDecoration: "none",
-+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-+    fontSize: "0.95rem",
-+    fontWeight: 700,
-+    lineHeight: 1,
-+  },
-+  icon: {
-+    width: "2.1rem",
-+    height: "2.1rem",
-+    borderRadius: "999px",
-+    display: "grid",
-+    placeItems: "center",
-+    backgroundColor: "rgba(255, 255, 255, 0.18)",
-+    color: "#ffffff",
-+    fontSize: "1.1rem",
-+    fontWeight: 800,
-+  },
-+  label: {
-+    display: "block",
-+    color: "#102417",
-+  },
-+}
-+
-+export default function FloatingWhatsAppButton() {
-+  return (
-+    <a
-+      href={bookingLink}
-+      target="_blank"
-+      rel="noreferrer"
-+      aria-label="Book a table on WhatsApp"
-+      style={styles.link}
-+    >
-+      <span aria-hidden="true" style={styles.icon}>
-+        W
-+      </span>
-+      <span style={styles.label}>Book on WhatsApp</span>
-+    </a>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index b8aae659216c82a49924482de95b3f8942cf7303..4ef64a27281b7924ab29fd0559cecee76fb7a773
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,5 +1,6 @@
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-@@ -8,6 +9,7 @@
-       <HeroSection />
-       <AboutSection />
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-   )
- }
-
-file update:
-diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..44d85068470878067a8991837a8912a4962530ec
---- /dev/null
-+++ b/src/components/FloatingWhatsAppButton.jsx
-@@ -0,0 +1,55 @@
-+const bookingLink =
-+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-+
-+const styles = {
-+  link: {
-+    position: "fixed",
-+    right: "1rem",
-+    bottom: "1rem",
-+    zIndex: 30,
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.75rem",
-+    padding: "0.85rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "#25d366",
-+    color: "#102417",
-+    textDecoration: "none",
-+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-+    fontSize: "0.95rem",
-+    fontWeight: 700,
-+    lineHeight: 1,
-+  },
-+  icon: {
-+    width: "2.1rem",
-+    height: "2.1rem",
-+    borderRadius: "999px",
-+    display: "grid",
-+    placeItems: "center",
-+    backgroundColor: "rgba(255, 255, 255, 0.18)",
-+    color: "#ffffff",
-+    fontSize: "1.1rem",
-+    fontWeight: 800,
-+  },
-+  label: {
-+    display: "block",
-+    color: "#102417",
-+  },
-+}
-+
-+export default function FloatingWhatsAppButton() {
-+  return (
-+    <a
-+      href={bookingLink}
-+      target="_blank"
-+      rel="noreferrer"
-+      aria-label="Book a table on WhatsApp"
-+      style={styles.link}
-+    >
-+      <span aria-hidden="true" style={styles.icon}>
-+        W
-+      </span>
-+      <span style={styles.label}>Book on WhatsApp</span>
-+    </a>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index b8aae659216c82a49924482de95b3f8942cf7303..4ef64a27281b7924ab29fd0559cecee76fb7a773
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,5 +1,6 @@
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-@@ -8,6 +9,7 @@
-       <HeroSection />
-       <AboutSection />
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-   )
- }
-
-codex
-The floating CTA is in place on the home page with the same reservation destination already used elsewhere. I’m running the build now, then I’ll record the task in the agent report.
+The hero already contains the required `tel:` CTA in the correct placement, so I’m treating this task as a validation pass rather than changing working UI code. I’m running the build now, then I’ll append the task result to the agent report.
 exec
-/bin/zsh -lc 'cat package.json' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
-{
-  "name": "site-create-a-premium-modern-website-for-an-i",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test:ui": "playwright test"
-  },
-  "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.13.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@playwright/test": "^1.58.2",
+/bin/zsh -lc "date '+%Y-%m-%d'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+2026-03-10
 exec
-/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 843ms:
-
-> site-create-a-premium-modern-website-for-an-i@0.0.0 build
-> vite build
-
+/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 811ms:
 vite v7.3.1 building client environment for production...
 transforming...
 ✓ 48 modules transformed.
@@ -1559,407 +1220,84 @@ dist/index.html                   0.50 kB │ gzip:  0.31 kB
 dist/assets/index-DQ3P1g1z.css    0.91 kB │ gzip:  0.49 kB
 dist/assets/index-DEgvcabh.js   241.79 kB │ gzip: 76.91 kB
 ✓ built in 571ms
-file update:
-diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..44d85068470878067a8991837a8912a4962530ec
---- /dev/null
-+++ b/src/components/FloatingWhatsAppButton.jsx
-@@ -0,0 +1,55 @@
-+const bookingLink =
-+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-+
-+const styles = {
-+  link: {
-+    position: "fixed",
-+    right: "1rem",
-+    bottom: "1rem",
-+    zIndex: 30,
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.75rem",
-+    padding: "0.85rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "#25d366",
-+    color: "#102417",
-+    textDecoration: "none",
-+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-+    fontSize: "0.95rem",
-+    fontWeight: 700,
-+    lineHeight: 1,
-+  },
-+  icon: {
-+    width: "2.1rem",
-+    height: "2.1rem",
-+    borderRadius: "999px",
-+    display: "grid",
-+    placeItems: "center",
-+    backgroundColor: "rgba(255, 255, 255, 0.18)",
-+    color: "#ffffff",
-+    fontSize: "1.1rem",
-+    fontWeight: 800,
-+  },
-+  label: {
-+    display: "block",
-+    color: "#102417",
-+  },
-+}
-+
-+export default function FloatingWhatsAppButton() {
-+  return (
-+    <a
-+      href={bookingLink}
-+      target="_blank"
-+      rel="noreferrer"
-+      aria-label="Book a table on WhatsApp"
-+      style={styles.link}
-+    >
-+      <span aria-hidden="true" style={styles.icon}>
-+        W
-+      </span>
-+      <span style={styles.label}>Book on WhatsApp</span>
-+    </a>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index b8aae659216c82a49924482de95b3f8942cf7303..4ef64a27281b7924ab29fd0559cecee76fb7a773
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,5 +1,6 @@
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-@@ -8,6 +9,7 @@
-       <HeroSection />
-       <AboutSection />
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-   )
- }
-
 codex
-The build passed. I’m appending the task result to `agent/AGENT_REPORT.md` now and then I’ll give you the exact modified files and outcome.
+I’m updating the report with the validation outcome only. No home component edits were needed because the required phone CTA was already implemented and build-valid.
 file update
 M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
-@@ -95 +95,8 @@
- Launching Codex for TASK cta-home-whatsapp-floating.
-+2026-03-10: Added a floating WhatsApp booking CTA on the home page using the existing reservation `wa.me` destination, keeping the implementation isolated to a reusable home-only component.
+@@ -113 +113,8 @@
+ Launching Codex for TASK cta-home-phone-hero.
++2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
 +
-+TASK cta-home-whatsapp-floating executed by Codex.
++TASK cta-home-phone-hero executed by Codex.
 +Waiting for validation.
 +
-+TASK cta-home-whatsapp-floating completed successfully.
++TASK cta-home-phone-hero completed successfully.
 +Build passed.
-apply_patch(auto_approved=true) exited 0 in 58ms:
+apply_patch(auto_approved=true) exited 0 in 36ms:
 Success. Updated the following files:
 M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 66b2cd0304c968b7293744e3e5a85d93fbae14d4..a50f547610f02ab66d6a2f0bf250c3767435a856
+index 8fc9c32b4a762ee2c99ac3e091339410796f6382..0114fbc994926ad5f396218abcd51843bc8ebae9
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -93,3 +93,10 @@
- Prepared TASK cta-home-whatsapp-floating (Add CTA whatsapp-floating on home) for execution.
+@@ -111,3 +111,10 @@
+ Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
  
- Launching Codex for TASK cta-home-whatsapp-floating.
-+2026-03-10: Added a floating WhatsApp booking CTA on the home page using the existing reservation `wa.me` destination, keeping the implementation isolated to a reusable home-only component.
+ Launching Codex for TASK cta-home-phone-hero.
++2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
 +
-+TASK cta-home-whatsapp-floating executed by Codex.
++TASK cta-home-phone-hero executed by Codex.
 +Waiting for validation.
 +
-+TASK cta-home-whatsapp-floating completed successfully.
++TASK cta-home-phone-hero completed successfully.
 +Build passed.
-diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..44d85068470878067a8991837a8912a4962530ec
---- /dev/null
-+++ b/src/components/FloatingWhatsAppButton.jsx
-@@ -0,0 +1,55 @@
-+const bookingLink =
-+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-+
-+const styles = {
-+  link: {
-+    position: "fixed",
-+    right: "1rem",
-+    bottom: "1rem",
-+    zIndex: 30,
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.75rem",
-+    padding: "0.85rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "#25d366",
-+    color: "#102417",
-+    textDecoration: "none",
-+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-+    fontSize: "0.95rem",
-+    fontWeight: 700,
-+    lineHeight: 1,
-+  },
-+  icon: {
-+    width: "2.1rem",
-+    height: "2.1rem",
-+    borderRadius: "999px",
-+    display: "grid",
-+    placeItems: "center",
-+    backgroundColor: "rgba(255, 255, 255, 0.18)",
-+    color: "#ffffff",
-+    fontSize: "1.1rem",
-+    fontWeight: 800,
-+  },
-+  label: {
-+    display: "block",
-+    color: "#102417",
-+  },
-+}
-+
-+export default function FloatingWhatsAppButton() {
-+  return (
-+    <a
-+      href={bookingLink}
-+      target="_blank"
-+      rel="noreferrer"
-+      aria-label="Book a table on WhatsApp"
-+      style={styles.link}
-+    >
-+      <span aria-hidden="true" style={styles.icon}>
-+        W
-+      </span>
-+      <span style={styles.label}>Book on WhatsApp</span>
-+    </a>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index b8aae659216c82a49924482de95b3f8942cf7303..4ef64a27281b7924ab29fd0559cecee76fb7a773
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,5 +1,6 @@
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-@@ -8,6 +9,7 @@
-       <HeroSection />
-       <AboutSection />
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-   )
- }
 
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 66b2cd0304c968b7293744e3e5a85d93fbae14d4..a50f547610f02ab66d6a2f0bf250c3767435a856
+index 8fc9c32b4a762ee2c99ac3e091339410796f6382..0114fbc994926ad5f396218abcd51843bc8ebae9
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -93,3 +93,10 @@
- Prepared TASK cta-home-whatsapp-floating (Add CTA whatsapp-floating on home) for execution.
+@@ -111,3 +111,10 @@
+ Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
  
- Launching Codex for TASK cta-home-whatsapp-floating.
-+2026-03-10: Added a floating WhatsApp booking CTA on the home page using the existing reservation `wa.me` destination, keeping the implementation isolated to a reusable home-only component.
+ Launching Codex for TASK cta-home-phone-hero.
++2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
 +
-+TASK cta-home-whatsapp-floating executed by Codex.
++TASK cta-home-phone-hero executed by Codex.
 +Waiting for validation.
 +
-+TASK cta-home-whatsapp-floating completed successfully.
++TASK cta-home-phone-hero completed successfully.
 +Build passed.
-diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..44d85068470878067a8991837a8912a4962530ec
---- /dev/null
-+++ b/src/components/FloatingWhatsAppButton.jsx
-@@ -0,0 +1,55 @@
-+const bookingLink =
-+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-+
-+const styles = {
-+  link: {
-+    position: "fixed",
-+    right: "1rem",
-+    bottom: "1rem",
-+    zIndex: 30,
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.75rem",
-+    padding: "0.85rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "#25d366",
-+    color: "#102417",
-+    textDecoration: "none",
-+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-+    fontSize: "0.95rem",
-+    fontWeight: 700,
-+    lineHeight: 1,
-+  },
-+  icon: {
-+    width: "2.1rem",
-+    height: "2.1rem",
-+    borderRadius: "999px",
-+    display: "grid",
-+    placeItems: "center",
-+    backgroundColor: "rgba(255, 255, 255, 0.18)",
-+    color: "#ffffff",
-+    fontSize: "1.1rem",
-+    fontWeight: 800,
-+  },
-+  label: {
-+    display: "block",
-+    color: "#102417",
-+  },
-+}
-+
-+export default function FloatingWhatsAppButton() {
-+  return (
-+    <a
-+      href={bookingLink}
-+      target="_blank"
-+      rel="noreferrer"
-+      aria-label="Book a table on WhatsApp"
-+      style={styles.link}
-+    >
-+      <span aria-hidden="true" style={styles.icon}>
-+        W
-+      </span>
-+      <span style={styles.label}>Book on WhatsApp</span>
-+    </a>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index b8aae659216c82a49924482de95b3f8942cf7303..4ef64a27281b7924ab29fd0559cecee76fb7a773
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,5 +1,6 @@
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-@@ -8,6 +9,7 @@
-       <HeroSection />
-       <AboutSection />
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-   )
- }
 
 codex
-Modified files:
-- [src/components/FloatingWhatsAppButton.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/FloatingWhatsAppButton.jsx)
-- [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx)
-- [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
+**Modified files**
 
-What was implemented:
-- Added a reusable floating WhatsApp CTA component on the home page only.
-- Wired it to a valid WhatsApp booking URL: `https://wa.me/390113821947?...`
-- Kept the CTA visibly fixed at the bottom-right as a floating action.
+[agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
 
-Build result:
-- `npm run build` passed successfully with Vite production build output.
+**What was implemented**
+
+The required `phone-hero` CTA was already present in the hero UI, so no change to [src/pages/Home.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Home.jsx) or [src/components/HeroSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/HeroSection.jsx) was necessary. I validated that it is visible in the home hero and points to the valid destination `tel:+390113821947`, then recorded the task completion in the agent report.
+
+**Build result**
+
+`npm run build` passed successfully on March 10, 2026.
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index 66b2cd0304c968b7293744e3e5a85d93fbae14d4..a50f547610f02ab66d6a2f0bf250c3767435a856
+index 8fc9c32b4a762ee2c99ac3e091339410796f6382..0114fbc994926ad5f396218abcd51843bc8ebae9
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -93,3 +93,10 @@
- Prepared TASK cta-home-whatsapp-floating (Add CTA whatsapp-floating on home) for execution.
+@@ -111,3 +111,10 @@
+ Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
  
- Launching Codex for TASK cta-home-whatsapp-floating.
-+2026-03-10: Added a floating WhatsApp booking CTA on the home page using the existing reservation `wa.me` destination, keeping the implementation isolated to a reusable home-only component.
+ Launching Codex for TASK cta-home-phone-hero.
++2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
 +
-+TASK cta-home-whatsapp-floating executed by Codex.
++TASK cta-home-phone-hero executed by Codex.
 +Waiting for validation.
 +
-+TASK cta-home-whatsapp-floating completed successfully.
++TASK cta-home-phone-hero completed successfully.
 +Build passed.
-diff --git a/src/components/FloatingWhatsAppButton.jsx b/src/components/FloatingWhatsAppButton.jsx
-new file mode 100644
-index 0000000000000000000000000000000000000000..44d85068470878067a8991837a8912a4962530ec
---- /dev/null
-+++ b/src/components/FloatingWhatsAppButton.jsx
-@@ -0,0 +1,55 @@
-+const bookingLink =
-+  "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
-+
-+const styles = {
-+  link: {
-+    position: "fixed",
-+    right: "1rem",
-+    bottom: "1rem",
-+    zIndex: 30,
-+    display: "inline-flex",
-+    alignItems: "center",
-+    gap: "0.75rem",
-+    padding: "0.85rem 1rem",
-+    borderRadius: "999px",
-+    backgroundColor: "#25d366",
-+    color: "#102417",
-+    textDecoration: "none",
-+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.24)",
-+    fontSize: "0.95rem",
-+    fontWeight: 700,
-+    lineHeight: 1,
-+  },
-+  icon: {
-+    width: "2.1rem",
-+    height: "2.1rem",
-+    borderRadius: "999px",
-+    display: "grid",
-+    placeItems: "center",
-+    backgroundColor: "rgba(255, 255, 255, 0.18)",
-+    color: "#ffffff",
-+    fontSize: "1.1rem",
-+    fontWeight: 800,
-+  },
-+  label: {
-+    display: "block",
-+    color: "#102417",
-+  },
-+}
-+
-+export default function FloatingWhatsAppButton() {
-+  return (
-+    <a
-+      href={bookingLink}
-+      target="_blank"
-+      rel="noreferrer"
-+      aria-label="Book a table on WhatsApp"
-+      style={styles.link}
-+    >
-+      <span aria-hidden="true" style={styles.icon}>
-+        W
-+      </span>
-+      <span style={styles.label}>Book on WhatsApp</span>
-+    </a>
-+  )
-+}
-diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
-index b8aae659216c82a49924482de95b3f8942cf7303..4ef64a27281b7924ab29fd0559cecee76fb7a773
---- a/src/pages/Home.jsx
-+++ b/src/pages/Home.jsx
-@@ -1,5 +1,6 @@
- import AboutSection from "../components/AboutSection"
- import ContactSection from "../components/ContactSection"
-+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
- import HeroSection from "../components/HeroSection"
- 
- export default function Home() {
-@@ -8,6 +9,7 @@
-       <HeroSection />
-       <AboutSection />
-       <ContactSection />
-+      <FloatingWhatsAppButton />
-     </main>
-   )
- }
 
 tokens used
-17.756
+14.800

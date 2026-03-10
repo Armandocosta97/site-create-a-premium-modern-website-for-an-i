@@ -106,3 +106,21 @@ Waiting for validation.
 
 TASK cta-home-whatsapp-floating completed successfully.
 Build passed.
+Commit created for TASK cta-home-whatsapp-floating.
+
+Prepared TASK cta-home-phone-hero (Add CTA phone-hero on home) for execution.
+
+Launching Codex for TASK cta-home-phone-hero.
+2026-03-10: Validated that the home hero already includes the required visible phone CTA with a valid `tel:+390113821947` destination in the hero action group, so no UI code changes were required for this task.
+
+TASK cta-home-phone-hero executed by Codex.
+Waiting for validation.
+
+TASK cta-home-phone-hero completed successfully.
+Build passed.
+
+TASK cta-home-phone-hero executed by Codex.
+Waiting for validation.
+
+TASK cta-home-phone-hero completed successfully.
+Build passed.
