@@ -26,7 +26,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main style={styles.main}>
+    <main id="main-content" style={styles.main}>
       <HeroSection />
       <AboutSection />
       <ContactSection />

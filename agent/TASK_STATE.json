@@ -1,7 +1,7 @@
 {
-  "currentTaskId": "validation-prep",
-  "status": "ready_for_next_task",
-  "lastCompletedTaskId": "responsive-polish",
+  "currentTaskId": null,
+  "status": "completed",
+  "lastCompletedTaskId": "validation-prep",
   "completedTaskIds": [
     "page-home-shell",
     "section-home-hero",
@@ -14,6 +14,7 @@
     "section-gallery-gallery-grid",
     "navigation-structure",
     "seo-basics",
-    "responsive-polish"
+    "responsive-polish",
+    "validation-prep"
   ]
 }

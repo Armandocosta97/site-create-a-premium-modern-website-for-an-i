@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const backgroundImage =
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
 
@@ -137,9 +139,9 @@ export default function HeroSection() {
           </p>
 
           <div style={styles.actions}>
-            <a href="#contact" style={styles.primaryAction}>
+            <Link to="/?section=contact" style={styles.primaryAction}>
               Book a table
-            </a>
+            </Link>
 
             <a href="tel:+390113821947" style={styles.secondaryAction}>
               Call the restaurant

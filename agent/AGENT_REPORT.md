@@ -195,3 +195,21 @@ Waiting for validation.
 
 TASK responsive-polish completed successfully.
 Build passed.
+Commit created for TASK responsive-polish.
+
+Prepared TASK validation-prep (Prepare site for final validation) for execution.
+
+Launching Codex for TASK validation-prep.
+2026-03-10: Prepared the site for final validation by removing the nested `main` landmark, converting the hero booking CTA to a hash-router-safe internal route, and upgrading the shared layout with a semantic sticky header, mobile navigation, and a complete non-placeholder footer.
+
+TASK validation-prep executed by Codex.
+Waiting for validation.
+
+TASK validation-prep completed successfully.
+Build passed.
+
+TASK validation-prep executed by Codex.
+Waiting for validation.
+
+TASK validation-prep completed successfully.
+Build passed.
