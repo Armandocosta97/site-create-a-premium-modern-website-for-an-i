@@ -1,7 +1,7 @@
 {
-  "currentTaskId": "section-gallery-gallery-grid",
+  "currentTaskId": "navigation-structure",
   "status": "ready_for_next_task",
-  "lastCompletedTaskId": "page-gallery-shell",
+  "lastCompletedTaskId": "section-gallery-gallery-grid",
   "completedTaskIds": [
     "page-home-shell",
     "section-home-hero",
@@ -10,6 +10,7 @@
     "cta-home-primary-hero-cta",
     "cta-home-whatsapp-floating",
     "cta-home-phone-hero",
-    "page-gallery-shell"
+    "page-gallery-shell",
+    "section-gallery-gallery-grid"
   ]
 }

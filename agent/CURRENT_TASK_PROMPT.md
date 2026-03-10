@@ -1037,32 +1037,35 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-page-gallery-shell
+section-gallery-gallery-grid
 
 ## Current task title
-Create gallery page shell
+Create gallery-grid section on gallery
 
 ## Current task type
-page-shell
+section
 
 ## Current task target
 ```json
 {
-  "pageId": "gallery"
+  "pageId": "gallery",
+  "sectionId": "gallery-grid",
+  "sectionType": "image-grid"
 }
 ```
 
 ## Depends on
-- none
+- page-gallery-shell
 
 ## Files allowed
-- src/App.jsx
 - src/pages/Gallery.jsx
+- src/components/Gallery-gridSection.jsx
+- src/components
 
 ## Definition of done
-- page shell exists for gallery
-- gallery route is mounted if required
-- gallery page renders without crashing
+- section gallery-grid exists on gallery
+- section gallery-grid matches type image-grid
+- section gallery-grid is rendered in page gallery
 
 ## Strict execution rules
 - Execute only this current task.

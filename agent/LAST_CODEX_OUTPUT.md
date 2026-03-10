@@ -1,8 +1,8 @@
-Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
+Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [src/components/Gallery-gridSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
 
-Implemented the gallery page shell in [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) by replacing the placeholder image block with a semantic `main` and intro section containing a single `h1` and polished gallery intro copy. The `/gallery` route was already correctly mounted in [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), so no route changes were needed. I also appended the task summary to [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
+Implemented the `gallery-grid` section on the gallery page by adding a reusable `GalleryGridSection` component and rendering it from the gallery page shell. The section uses a responsive image grid with nine premium Unsplash images, lazy-loaded media, semantic `figure`/`figcaption` markup, and copy/styling aligned to the restaurant brand and existing page structure.
 
-Build result: `npm run build` passed successfully.
+Build result: `npm run build` passed successfully with Vite production output generated.
 
 OpenAI Codex v0.111.0 (research preview)
 --------
@@ -13,7 +13,7 @@ approval: never
 sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/armandocosta/.codex/memories]
 reasoning effort: none
 reasoning summaries: none
-session id: 019cd522-444d-7721-9660-db82a48b1fb9
+session id: 019cd522-b4e3-7e13-83b9-352be8503c33
 --------
 user
 # CURRENT TASK EXECUTION PROMPT
@@ -1055,32 +1055,35 @@ Avoid broken navigation.
 ```
 
 ## Current task id
-page-gallery-shell
+section-gallery-gallery-grid
 
 ## Current task title
-Create gallery page shell
+Create gallery-grid section on gallery
 
 ## Current task type
-page-shell
+section
 
 ## Current task target
 ```json
 {
-  "pageId": "gallery"
+  "pageId": "gallery",
+  "sectionId": "gallery-grid",
+  "sectionType": "image-grid"
 }
 ```
 
 ## Depends on
-- none
+- page-gallery-shell
 
 ## Files allowed
-- src/App.jsx
 - src/pages/Gallery.jsx
+- src/components/Gallery-gridSection.jsx
+- src/components
 
 ## Definition of done
-- page shell exists for gallery
-- gallery route is mounted if required
-- gallery page renders without crashing
+- section gallery-grid exists on gallery
+- section gallery-grid matches type image-grid
+- section gallery-grid is rendered in page gallery
 
 ## Strict execution rules
 - Execute only this current task.
@@ -1109,42 +1112,29 @@ page-shell
 
 mcp startup: no servers
 codex
-I’m checking the current app structure and the task source files first so I can add only the gallery page shell and the route wiring required for this task.
+I’m checking the current gallery page shell and related source-of-truth files first so I can add only the `gallery-grid` section required by this task and avoid touching unrelated parts.
 exec
+/bin/zsh -lc "sed -n '1,220p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,220p' agent/CURRENT_TASK_PROMPT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
 /bin/zsh -lc "sed -n '1,220p' src/pages/Gallery.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,200p' agent/AGENT_REPORT.md" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "sed -n '1,220p' src/App.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
-/bin/zsh -lc "pwd && rg --files | rg '"'^(src/App'"\\.jsx|src/pages/Gallery\\.jsx|agent/AGENT_REPORT\\.md|agent/CURRENT_TASK_PROMPT\\.md|site-spec\\.json|agent/TASK_STATE\\.json)"'$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
-import { HashRouter, Routes, Route } from "react-router-dom"
-import Layout from "./layout/Layout"
-import Home from "./pages/Home"
-import Gallery from "./pages/Gallery"
-
-export default function App() {
-  return (
-    <HashRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
-      </Layout>
-    </HashRouter>
-  )
-}
- succeeded in 52ms:
+/bin/zsh -lc "pwd && rg --files | rg '"'^(src/pages/Gallery.jsx|src/components|agent/AGENT_REPORT.md|agent/CURRENT_TASK_PROMPT.md|site-spec.json|docs/DEVELOPMENT_METHOD.md)$'"'" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
 export default function Gallery() {
   return (
-    <section>
-      <h1>Gallery</h1>
-      <img
-        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
-        alt="Gallery preview"
-      />
-    </section>
+    <main>
+      <section aria-labelledby="gallery-title">
+        <div>
+          <p>Osteria 19 Torino</p>
+          <h1 id="gallery-title">Gallery</h1>
+          <p>
+            A first look at the dining room, the evening mood, and the plated
+            details that define our contemporary osteria in Torino.
+          </p>
+        </div>
+      </section>
+    </main>
   )
 }
- succeeded in 52ms:
+ succeeded in 51ms:
 # AGENT REPORT
 
 Project created.
@@ -1166,225 +1156,2030 @@ TASK page-home-shell completed successfully.
 Build passed.
 Commit created for TASK page-home-shell.
  succeeded in 51ms:
+# CURRENT TASK EXECUTION PROMPT
+
+You are the coding executor for this project.
+
+## Project path
+site-create-a-premium-modern-website-for-an-i
+
+## Source of truth files
+- brief/original-prompt.md
+- brief/brief-summary.md
+- site-spec.json
+- docs/DEVELOPMENT_METHOD.md
+- agent/TASK_GRAPH.json
+- agent/TASK_STATE.json
+- agent/CURRENT_TASK_PROMPT.md
+
+## Development method
+# Development Method
+
+All sites must follow these rules.
+ succeeded in 51ms:
 /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i
 src/pages/Gallery.jsx
-src/App.jsx
+docs/DEVELOPMENT_METHOD.md
 agent/CURRENT_TASK_PROMPT.md
-agent/TASK_STATE.json
 agent/AGENT_REPORT.md
 site-spec.json
 codex
-The gallery route is already mounted in [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), so I only need to replace the placeholder gallery page with a stable semantic shell and then append the task report entry.
+I’ve confirmed the gallery page is still just the shell. Next I’m reading the existing component patterns so the new image-grid section matches the project’s current structure and styling approach.
+exec
+/bin/zsh -lc "sed -n '1,260p' src/components/ContactSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/components/AboutSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc "sed -n '1,260p' src/components/HeroSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-iexec
+/bin/zsh -lc 'rg --files src/components' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 52ms:
+const aboutImage =
+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
+
+const highlights = [
+  "Seasonal produce selected with the rhythm of Piemonte markets",
+  "Italian classics reworked with clean presentation and measured elegance",
+  "An intimate dining room shaped for long dinners, wine, and conversation",
+  "A curated cellar built around local labels and expressive Italian bottles",
+]
+
+const styles = {
+  section: {
+    background:
+      "linear-gradient(180deg, #f6f1e8 0%, rgba(246, 241, 232, 0.96) 100%)",
+    color: "#1f1f1b",
+  },
+  shell: {
+    maxWidth: "72rem",
+    margin: "0 auto",
+    padding: "4.5rem 1.5rem",
+ succeeded in 52ms:
+const bookingLink = "https://wa.me/390113821947?text=Buonasera%2C%20vorrei%20prenotare%20un%20tavolo%20da%20Osteria%2019%20Torino."
+
+const openingHours = [
+  {
+    days: "Tuesday - Thursday",
+    hours: ["19:00 - 23:00"],
+  },
+  {
+    days: "Friday - Saturday",
+    hours: ["19:00 - 00:00"],
+  },
+  {
+    days: "Sunday",
+    hours: ["12:30 - 15:00", "19:00 - 22:30"],
+  },
+  {
+    days: "Monday",
+    hours: ["Closed"],
+  },
+]
+ succeeded in 52ms:
+const backgroundImage =
+  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
+
+const styles = {
+  section: {
+    position: "relative",
+    overflow: "hidden",
+    minHeight: "100vh",
+    display: "flex",
+    alignItems: "stretch",
+    backgroundColor: "#1f1f1b",
+    color: "#f6f1e8",
+  },
+  media: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: `linear-gradient(180deg, rgba(16, 16, 14, 0.48) 0%, rgba(16, 16, 14, 0.76) 56%, rgba(16, 16, 14, 0.92) 100%), url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    transform: "scale(1.04)",
+ succeeded in 51ms:
+src/components/FloatingWhatsAppButton.jsx
+src/components/AboutSection.jsx
+src/components/ContactSection.jsx
+src/components/HeroSection.jsx
+codex
+I have enough context. I’m going to add a dedicated reusable gallery grid component with nine premium restaurant images, mobile-first responsive columns, and accessible captions, then wire it into `src/pages/Gallery.jsx` and finish with a build plus the required agent report update.
 file update
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
-@@ -131 +131,2 @@
- Launching Codex for TASK page-gallery-shell.
-+2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
 M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
-@@ -2,9 +2,14 @@
-   return (
--    <section>
--      <h1>Gallery</h1>
--      <img
--        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
--        alt="Gallery preview"
--      />
--    </section>
-+    <main>
-+      <section aria-labelledby="gallery-title">
-+        <div>
-+          <p>Osteria 19 Torino</p>
-+          <h1 id="gallery-title">Gallery</h1>
-+          <p>
-+            A first look at the dining room, the evening mood, and the plated
-+            details that define our contemporary osteria in Torino.
-+          </p>
-+        </div>
-+      </section>
-+    </main>
-   )
-apply_patch(auto_approved=true) exited 0 in 44ms:
-Success. Updated the following files:
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
-M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
-file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -129,3 +129,4 @@
- Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
- 
- Launching Codex for TASK page-gallery-shell.
-+2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,11 +1,16 @@
+@@ -1,9 +1,51 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
  export default function Gallery() {
    return (
--    <section>
--      <h1>Gallery</h1>
--      <img
--        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
--        alt="Gallery preview"
--      />
--    </section>
-+    <main>
-+      <section aria-labelledby="gallery-title">
-+        <div>
-+          <p>Osteria 19 Torino</p>
-+          <h1 id="gallery-title">Gallery</h1>
-+          <p>
-+            A first look at the dining room, the evening mood, and the plated
-+            details that define our contemporary osteria in Torino.
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+@@ -13,2 +55,3 @@
+       </section>
++      <GalleryGridSection />
+     </main>
+A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx
+const galleryImages = [
+  {
+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
+    category: "Dining room",
+    title: "Warm urban interiors",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
+    alt: "Elegant restaurant table setting prepared for evening service",
+    category: "Table setting",
+    title: "Evening table detail",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+    alt: "Refined plated pasta served in a modern Italian restaurant",
+    category: "Pasta",
+    title: "Signature pasta plates",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
+    alt: "Intimate restaurant interior with candlelit tables and bar seating",
+    category: "Atmosphere",
+    title: "Dinner mood in Torino",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
+    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
+    category: "Hospitality",
+    title: "Designed for long dinners",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
+    alt: "Modern plated seafood course with refined presentation",
+    category: "Main course",
+    title: "Seasonal plates with precision",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
+    alt: "Restaurant bar with wine glasses and warm ambient lighting",
+    category: "Wine and cocktails",
+    title: "Curated bottles and aperitivi",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
+    alt: "Elegant dessert plated with modern presentation and rich textures",
+    category: "Dessert",
+    title: "A polished final course",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
+    alt: "Restaurant interior corner with soft lighting and contemporary decor",
+    category: "Interior detail",
+    title: "Quiet corners and soft light",
+  },
+]
+
+const styles = {
+  section: {
+    background:
+      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
+    color: "#1f1f1b",
+  },
+  shell: {
+    maxWidth: "72rem",
+    margin: "0 auto",
+    padding: "0 1.5rem 5rem",
+    display: "grid",
+    gap: "2rem",
+  },
+  intro: {
+    display: "grid",
+    gap: "0.9rem",
+    maxWidth: "38rem",
+  },
+  eyebrow: {
+    margin: 0,
+    color: "#6f7558",
+    textTransform: "uppercase",
+    letterSpacing: "0.18em",
+    fontSize: "0.78rem",
+    fontWeight: 700,
+  },
+  title: {
+    margin: 0,
+    fontFamily: 'Georgia, "Times New Roman", serif',
+    fontSize: "clamp(2rem, 4vw, 3.4rem)",
+    lineHeight: 1,
+    letterSpacing: "-0.04em",
+  },
+  lead: {
+    margin: 0,
+    fontSize: "1rem",
+    lineHeight: 1.75,
+    color: "rgba(31, 31, 27, 0.74)",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
+    gap: "1rem",
+  },
+  card: {
+    position: "relative",
+    overflow: "hidden",
+    minHeight: "21rem",
+    borderRadius: "1.6rem",
+    backgroundColor: "#d9d1c4",
+    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
+  },
+  image: {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+  overlay: {
+    position: "absolute",
+    inset: 0,
+    background:
+      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
+  },
+  caption: {
+    position: "absolute",
+    inset: "auto 0 0 0",
+    padding: "1.25rem",
+    display: "grid",
+    gap: "0.4rem",
+    color: "#f6f1e8",
+  },
+  category: {
+    margin: 0,
+    color: "#c8a66a",
+    textTransform: "uppercase",
+    letterSpacing: "0.14em",
+    fontSize: "0.74rem",
+    fontWeight: 700,
+  },
+  captionTitle: {
+    margin: 0,
+    fontFamily: 'Georgia, "Times New Roman", serif',
+    fontSize: "1.35rem",
+    lineHeight: 1.1,
+  },
+}
+
+export default function GalleryGridSection() {
+  return (
+    <section
+      id="gallery-grid"
+      aria-labelledby="gallery-grid-heading"
+      style={styles.section}
+    >
+      <div style={styles.shell}>
+        <div style={styles.intro}>
+          <p style={styles.eyebrow}>Gallery</p>
+          <h2 id="gallery-grid-heading" style={styles.title}>
+            Interiors, plates, and the pace of service
+          </h2>
+          <p style={styles.lead}>
+            A visual edit of the dining room, signature dishes, and evening
+            atmosphere that shape Osteria 19 Torino.
+          </p>
+        </div>
+
+        <div style={styles.grid}>
+          {galleryImages.map((image) => (
+            <figure key={image.src} style={styles.card}>
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+                style={styles.image}
+              />
+              <div aria-hidden="true" style={styles.overlay} />
+              <figcaption style={styles.caption}>
+                <p style={styles.category}>{image.category}</p>
+                <p style={styles.captionTitle}>{image.title}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+apply_patch(auto_approved=true) exited 0 in 58ms:
+Success. Updated the following files:
+A /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx
+file update:
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
+--- /dev/null
++++ b/src/components/Gallery-gridSection.jsx
+@@ -0,0 +1,186 @@
++const galleryImages = [
++  {
++    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
++    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
++    category: "Dining room",
++    title: "Warm urban interiors",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant restaurant table setting prepared for evening service",
++    category: "Table setting",
++    title: "Evening table detail",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
++    alt: "Refined plated pasta served in a modern Italian restaurant",
++    category: "Pasta",
++    title: "Signature pasta plates",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
++    alt: "Intimate restaurant interior with candlelit tables and bar seating",
++    category: "Atmosphere",
++    title: "Dinner mood in Torino",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
++    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
++    category: "Hospitality",
++    title: "Designed for long dinners",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
++    alt: "Modern plated seafood course with refined presentation",
++    category: "Main course",
++    title: "Seasonal plates with precision",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant bar with wine glasses and warm ambient lighting",
++    category: "Wine and cocktails",
++    title: "Curated bottles and aperitivi",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant dessert plated with modern presentation and rich textures",
++    category: "Dessert",
++    title: "A polished final course",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant interior corner with soft lighting and contemporary decor",
++    category: "Interior detail",
++    title: "Quiet corners and soft light",
++  },
++]
++
++const styles = {
++  section: {
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
++    color: "#1f1f1b",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "0 1.5rem 5rem",
++    display: "grid",
++    gap: "2rem",
++  },
++  intro: {
++    display: "grid",
++    gap: "0.9rem",
++    maxWidth: "38rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2rem, 4vw, 3.4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1rem",
++    lineHeight: 1.75,
++    color: "rgba(31, 31, 27, 0.74)",
++  },
++  grid: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1rem",
++  },
++  card: {
++    position: "relative",
++    overflow: "hidden",
++    minHeight: "21rem",
++    borderRadius: "1.6rem",
++    backgroundColor: "#d9d1c4",
++    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
++  },
++  image: {
++    position: "absolute",
++    inset: 0,
++    width: "100%",
++    height: "100%",
++    objectFit: "cover",
++  },
++  overlay: {
++    position: "absolute",
++    inset: 0,
++    background:
++      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
++  },
++  caption: {
++    position: "absolute",
++    inset: "auto 0 0 0",
++    padding: "1.25rem",
++    display: "grid",
++    gap: "0.4rem",
++    color: "#f6f1e8",
++  },
++  category: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.14em",
++    fontSize: "0.74rem",
++    fontWeight: 700,
++  },
++  captionTitle: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "1.35rem",
++    lineHeight: 1.1,
++  },
++}
++
++export default function GalleryGridSection() {
++  return (
++    <section
++      id="gallery-grid"
++      aria-labelledby="gallery-grid-heading"
++      style={styles.section}
++    >
++      <div style={styles.shell}>
++        <div style={styles.intro}>
++          <p style={styles.eyebrow}>Gallery</p>
++          <h2 id="gallery-grid-heading" style={styles.title}>
++            Interiors, plates, and the pace of service
++          </h2>
++          <p style={styles.lead}>
++            A visual edit of the dining room, signature dishes, and evening
++            atmosphere that shape Osteria 19 Torino.
 +          </p>
 +        </div>
-+      </section>
-+    </main>
++
++        <div style={styles.grid}>
++          {galleryImages.map((image) => (
++            <figure key={image.src} style={styles.card}>
++              <img
++                src={image.src}
++                alt={image.alt}
++                loading="lazy"
++                style={styles.image}
++              />
++              <div aria-hidden="true" style={styles.overlay} />
++              <figcaption style={styles.caption}>
++                <p style={styles.category}>{image.category}</p>
++                <p style={styles.captionTitle}>{image.title}</p>
++              </figcaption>
++            </figure>
++          ))}
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,16 +1,59 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
+ export default function Gallery() {
+   return (
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+             details that define our contemporary osteria in Torino.
+           </p>
+         </div>
+       </section>
++      <GalleryGridSection />
+     </main>
    )
  }
 
 file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -129,3 +129,4 @@
- Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
- 
- Launching Codex for TASK page-gallery-shell.
-+2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,11 +1,16 @@
- export default function Gallery() {
-   return (
--    <section>
--      <h1>Gallery</h1>
--      <img
--        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
--        alt="Gallery preview"
--      />
--    </section>
-+    <main>
-+      <section aria-labelledby="gallery-title">
-+        <div>
-+          <p>Osteria 19 Torino</p>
-+          <h1 id="gallery-title">Gallery</h1>
-+          <p>
-+            A first look at the dining room, the evening mood, and the plated
-+            details that define our contemporary osteria in Torino.
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
+--- /dev/null
++++ b/src/components/Gallery-gridSection.jsx
+@@ -0,0 +1,186 @@
++const galleryImages = [
++  {
++    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
++    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
++    category: "Dining room",
++    title: "Warm urban interiors",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant restaurant table setting prepared for evening service",
++    category: "Table setting",
++    title: "Evening table detail",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
++    alt: "Refined plated pasta served in a modern Italian restaurant",
++    category: "Pasta",
++    title: "Signature pasta plates",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
++    alt: "Intimate restaurant interior with candlelit tables and bar seating",
++    category: "Atmosphere",
++    title: "Dinner mood in Torino",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
++    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
++    category: "Hospitality",
++    title: "Designed for long dinners",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
++    alt: "Modern plated seafood course with refined presentation",
++    category: "Main course",
++    title: "Seasonal plates with precision",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant bar with wine glasses and warm ambient lighting",
++    category: "Wine and cocktails",
++    title: "Curated bottles and aperitivi",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant dessert plated with modern presentation and rich textures",
++    category: "Dessert",
++    title: "A polished final course",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant interior corner with soft lighting and contemporary decor",
++    category: "Interior detail",
++    title: "Quiet corners and soft light",
++  },
++]
++
++const styles = {
++  section: {
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
++    color: "#1f1f1b",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "0 1.5rem 5rem",
++    display: "grid",
++    gap: "2rem",
++  },
++  intro: {
++    display: "grid",
++    gap: "0.9rem",
++    maxWidth: "38rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2rem, 4vw, 3.4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1rem",
++    lineHeight: 1.75,
++    color: "rgba(31, 31, 27, 0.74)",
++  },
++  grid: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1rem",
++  },
++  card: {
++    position: "relative",
++    overflow: "hidden",
++    minHeight: "21rem",
++    borderRadius: "1.6rem",
++    backgroundColor: "#d9d1c4",
++    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
++  },
++  image: {
++    position: "absolute",
++    inset: 0,
++    width: "100%",
++    height: "100%",
++    objectFit: "cover",
++  },
++  overlay: {
++    position: "absolute",
++    inset: 0,
++    background:
++      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
++  },
++  caption: {
++    position: "absolute",
++    inset: "auto 0 0 0",
++    padding: "1.25rem",
++    display: "grid",
++    gap: "0.4rem",
++    color: "#f6f1e8",
++  },
++  category: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.14em",
++    fontSize: "0.74rem",
++    fontWeight: 700,
++  },
++  captionTitle: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "1.35rem",
++    lineHeight: 1.1,
++  },
++}
++
++export default function GalleryGridSection() {
++  return (
++    <section
++      id="gallery-grid"
++      aria-labelledby="gallery-grid-heading"
++      style={styles.section}
++    >
++      <div style={styles.shell}>
++        <div style={styles.intro}>
++          <p style={styles.eyebrow}>Gallery</p>
++          <h2 id="gallery-grid-heading" style={styles.title}>
++            Interiors, plates, and the pace of service
++          </h2>
++          <p style={styles.lead}>
++            A visual edit of the dining room, signature dishes, and evening
++            atmosphere that shape Osteria 19 Torino.
 +          </p>
 +        </div>
-+      </section>
-+    </main>
++
++        <div style={styles.grid}>
++          {galleryImages.map((image) => (
++            <figure key={image.src} style={styles.card}>
++              <img
++                src={image.src}
++                alt={image.alt}
++                loading="lazy"
++                style={styles.image}
++              />
++              <div aria-hidden="true" style={styles.overlay} />
++              <figcaption style={styles.caption}>
++                <p style={styles.category}>{image.category}</p>
++                <p style={styles.captionTitle}>{image.title}</p>
++              </figcaption>
++            </figure>
++          ))}
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,16 +1,59 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
+ export default function Gallery() {
+   return (
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+             details that define our contemporary osteria in Torino.
+           </p>
+         </div>
+       </section>
++      <GalleryGridSection />
+     </main>
    )
  }
 
 codex
-I’ve made the minimal page-shell change. Next I’m running the build check to confirm the gallery route still renders and the app remains stable.
+The gallery section is in place. I’m running the build now to catch any integration issues before I update the agent report with the task summary.
 exec
-/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 818ms:
+/bin/zsh -lc "sed -n '1,260p' src/pages/Gallery.jsx
+sed -n '1,320p' src/components/Gallery-gridSection.jsx" in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 51ms:
+import GalleryGridSection from "../components/Gallery-gridSection"
+
+const styles = {
+  main: {
+    backgroundColor: "#f6f1e8",
+    color: "#1f1f1b",
+  },
+  hero: {
+    maxWidth: "72rem",
+    margin: "0 auto",
+    padding: "7.5rem 1.5rem 3rem",
+  },
+  copy: {
+    maxWidth: "38rem",
+    display: "grid",
+    gap: "1rem",
+  },
+  eyebrow: {
+    margin: 0,
+    color: "#6f7558",
+exec
+/bin/zsh -lc 'npm run build' in /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i succeeded in 841ms:
 
 > site-create-a-premium-modern-website-for-an-i@0.0.0 build
 > vite build
 
 vite v7.3.1 building client environment for production...
 transforming...
-✓ 48 modules transformed.
+✓ 49 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                   0.50 kB │ gzip:  0.32 kB
 dist/assets/index-DQ3P1g1z.css    0.91 kB │ gzip:  0.49 kB
-dist/assets/index-Ckzy1STf.js   241.94 kB │ gzip: 76.95 kB
-✓ built in 559ms
+dist/assets/index-CBstZrwK.js   246.89 kB │ gzip: 77.97 kB
+✓ built in 577ms
 file update:
-diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
---- a/agent/AGENT_REPORT.md
-+++ b/agent/AGENT_REPORT.md
-@@ -129,3 +129,4 @@
- Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
- 
- Launching Codex for TASK page-gallery-shell.
-+2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,11 +1,16 @@
- export default function Gallery() {
-   return (
--    <section>
--      <h1>Gallery</h1>
--      <img
--        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
--        alt="Gallery preview"
--      />
--    </section>
-+    <main>
-+      <section aria-labelledby="gallery-title">
-+        <div>
-+          <p>Osteria 19 Torino</p>
-+          <h1 id="gallery-title">Gallery</h1>
-+          <p>
-+            A first look at the dining room, the evening mood, and the plated
-+            details that define our contemporary osteria in Torino.
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
+--- /dev/null
++++ b/src/components/Gallery-gridSection.jsx
+@@ -0,0 +1,186 @@
++const galleryImages = [
++  {
++    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
++    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
++    category: "Dining room",
++    title: "Warm urban interiors",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant restaurant table setting prepared for evening service",
++    category: "Table setting",
++    title: "Evening table detail",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
++    alt: "Refined plated pasta served in a modern Italian restaurant",
++    category: "Pasta",
++    title: "Signature pasta plates",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
++    alt: "Intimate restaurant interior with candlelit tables and bar seating",
++    category: "Atmosphere",
++    title: "Dinner mood in Torino",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
++    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
++    category: "Hospitality",
++    title: "Designed for long dinners",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
++    alt: "Modern plated seafood course with refined presentation",
++    category: "Main course",
++    title: "Seasonal plates with precision",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant bar with wine glasses and warm ambient lighting",
++    category: "Wine and cocktails",
++    title: "Curated bottles and aperitivi",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant dessert plated with modern presentation and rich textures",
++    category: "Dessert",
++    title: "A polished final course",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant interior corner with soft lighting and contemporary decor",
++    category: "Interior detail",
++    title: "Quiet corners and soft light",
++  },
++]
++
++const styles = {
++  section: {
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
++    color: "#1f1f1b",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "0 1.5rem 5rem",
++    display: "grid",
++    gap: "2rem",
++  },
++  intro: {
++    display: "grid",
++    gap: "0.9rem",
++    maxWidth: "38rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2rem, 4vw, 3.4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1rem",
++    lineHeight: 1.75,
++    color: "rgba(31, 31, 27, 0.74)",
++  },
++  grid: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1rem",
++  },
++  card: {
++    position: "relative",
++    overflow: "hidden",
++    minHeight: "21rem",
++    borderRadius: "1.6rem",
++    backgroundColor: "#d9d1c4",
++    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
++  },
++  image: {
++    position: "absolute",
++    inset: 0,
++    width: "100%",
++    height: "100%",
++    objectFit: "cover",
++  },
++  overlay: {
++    position: "absolute",
++    inset: 0,
++    background:
++      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
++  },
++  caption: {
++    position: "absolute",
++    inset: "auto 0 0 0",
++    padding: "1.25rem",
++    display: "grid",
++    gap: "0.4rem",
++    color: "#f6f1e8",
++  },
++  category: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.14em",
++    fontSize: "0.74rem",
++    fontWeight: 700,
++  },
++  captionTitle: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "1.35rem",
++    lineHeight: 1.1,
++  },
++}
++
++export default function GalleryGridSection() {
++  return (
++    <section
++      id="gallery-grid"
++      aria-labelledby="gallery-grid-heading"
++      style={styles.section}
++    >
++      <div style={styles.shell}>
++        <div style={styles.intro}>
++          <p style={styles.eyebrow}>Gallery</p>
++          <h2 id="gallery-grid-heading" style={styles.title}>
++            Interiors, plates, and the pace of service
++          </h2>
++          <p style={styles.lead}>
++            A visual edit of the dining room, signature dishes, and evening
++            atmosphere that shape Osteria 19 Torino.
 +          </p>
 +        </div>
-+      </section>
-+    </main>
++
++        <div style={styles.grid}>
++          {galleryImages.map((image) => (
++            <figure key={image.src} style={styles.card}>
++              <img
++                src={image.src}
++                alt={image.alt}
++                loading="lazy"
++                style={styles.image}
++              />
++              <div aria-hidden="true" style={styles.overlay} />
++              <figcaption style={styles.caption}>
++                <p style={styles.category}>{image.category}</p>
++                <p style={styles.captionTitle}>{image.title}</p>
++              </figcaption>
++            </figure>
++          ))}
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,16 +1,59 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
+ export default function Gallery() {
+   return (
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+             details that define our contemporary osteria in Torino.
+           </p>
+         </div>
+       </section>
++      <GalleryGridSection />
+     </main>
    )
  }
 
 codex
-Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md)
-
-Implemented the gallery page shell in [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx) by replacing the placeholder image block with a semantic `main` and intro section containing a single `h1` and polished gallery intro copy. The `/gallery` route was already correctly mounted in [src/App.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/App.jsx), so no route changes were needed. I also appended the task summary to [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
-
-Build result: `npm run build` passed successfully.
+The build passed. I’m adding the required task note to `agent/AGENT_REPORT.md` now, keeping it limited to what this gallery-grid task implemented.
+file update
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
+@@ -143 +143,2 @@
+ Launching Codex for TASK section-gallery-gallery-grid.
++2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
+apply_patch(auto_approved=true) exited 0 in 57ms:
+Success. Updated the following files:
+M /Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md
 file update:
 diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
-index daf96c455fedd5346a6a4628c2d7a342260b43b5..4dfb3056906026b1ea4ffe43cecec534c61a11c8
+index cee5f23115591fbc68cd721dac25586b76f1327b..1943cfc309ce53b5ac9a8b844c0f4b25d67f9f90
 --- a/agent/AGENT_REPORT.md
 +++ b/agent/AGENT_REPORT.md
-@@ -129,3 +129,4 @@
- Prepared TASK page-gallery-shell (Create gallery page shell) for execution.
+@@ -141,3 +141,4 @@
+ Prepared TASK section-gallery-gallery-grid (Create gallery-grid section on gallery) for execution.
  
- Launching Codex for TASK page-gallery-shell.
-+2026-03-10: Replaced the placeholder gallery page with a semantic page shell in `src/pages/Gallery.jsx`, keeping the existing `/gallery` hash route mounted in `src/App.jsx` and ensuring the page renders cleanly without implementing the future gallery grid.
-diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
-index 48225ebf577ff27fc3a24f2a95bc326bf7116b0a..f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5
---- a/src/pages/Gallery.jsx
-+++ b/src/pages/Gallery.jsx
-@@ -1,11 +1,16 @@
- export default function Gallery() {
-   return (
--    <section>
--      <h1>Gallery</h1>
--      <img
--        src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=80"
--        alt="Gallery preview"
--      />
--    </section>
-+    <main>
-+      <section aria-labelledby="gallery-title">
-+        <div>
-+          <p>Osteria 19 Torino</p>
-+          <h1 id="gallery-title">Gallery</h1>
-+          <p>
-+            A first look at the dining room, the evening mood, and the plated
-+            details that define our contemporary osteria in Torino.
+ Launching Codex for TASK section-gallery-gallery-grid.
++2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
+--- /dev/null
++++ b/src/components/Gallery-gridSection.jsx
+@@ -0,0 +1,186 @@
++const galleryImages = [
++  {
++    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
++    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
++    category: "Dining room",
++    title: "Warm urban interiors",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant restaurant table setting prepared for evening service",
++    category: "Table setting",
++    title: "Evening table detail",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
++    alt: "Refined plated pasta served in a modern Italian restaurant",
++    category: "Pasta",
++    title: "Signature pasta plates",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
++    alt: "Intimate restaurant interior with candlelit tables and bar seating",
++    category: "Atmosphere",
++    title: "Dinner mood in Torino",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
++    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
++    category: "Hospitality",
++    title: "Designed for long dinners",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
++    alt: "Modern plated seafood course with refined presentation",
++    category: "Main course",
++    title: "Seasonal plates with precision",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant bar with wine glasses and warm ambient lighting",
++    category: "Wine and cocktails",
++    title: "Curated bottles and aperitivi",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant dessert plated with modern presentation and rich textures",
++    category: "Dessert",
++    title: "A polished final course",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant interior corner with soft lighting and contemporary decor",
++    category: "Interior detail",
++    title: "Quiet corners and soft light",
++  },
++]
++
++const styles = {
++  section: {
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
++    color: "#1f1f1b",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "0 1.5rem 5rem",
++    display: "grid",
++    gap: "2rem",
++  },
++  intro: {
++    display: "grid",
++    gap: "0.9rem",
++    maxWidth: "38rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2rem, 4vw, 3.4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1rem",
++    lineHeight: 1.75,
++    color: "rgba(31, 31, 27, 0.74)",
++  },
++  grid: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1rem",
++  },
++  card: {
++    position: "relative",
++    overflow: "hidden",
++    minHeight: "21rem",
++    borderRadius: "1.6rem",
++    backgroundColor: "#d9d1c4",
++    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
++  },
++  image: {
++    position: "absolute",
++    inset: 0,
++    width: "100%",
++    height: "100%",
++    objectFit: "cover",
++  },
++  overlay: {
++    position: "absolute",
++    inset: 0,
++    background:
++      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
++  },
++  caption: {
++    position: "absolute",
++    inset: "auto 0 0 0",
++    padding: "1.25rem",
++    display: "grid",
++    gap: "0.4rem",
++    color: "#f6f1e8",
++  },
++  category: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.14em",
++    fontSize: "0.74rem",
++    fontWeight: 700,
++  },
++  captionTitle: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "1.35rem",
++    lineHeight: 1.1,
++  },
++}
++
++export default function GalleryGridSection() {
++  return (
++    <section
++      id="gallery-grid"
++      aria-labelledby="gallery-grid-heading"
++      style={styles.section}
++    >
++      <div style={styles.shell}>
++        <div style={styles.intro}>
++          <p style={styles.eyebrow}>Gallery</p>
++          <h2 id="gallery-grid-heading" style={styles.title}>
++            Interiors, plates, and the pace of service
++          </h2>
++          <p style={styles.lead}>
++            A visual edit of the dining room, signature dishes, and evening
++            atmosphere that shape Osteria 19 Torino.
 +          </p>
 +        </div>
-+      </section>
-+    </main>
++
++        <div style={styles.grid}>
++          {galleryImages.map((image) => (
++            <figure key={image.src} style={styles.card}>
++              <img
++                src={image.src}
++                alt={image.alt}
++                loading="lazy"
++                style={styles.image}
++              />
++              <div aria-hidden="true" style={styles.overlay} />
++              <figcaption style={styles.caption}>
++                <p style={styles.category}>{image.category}</p>
++                <p style={styles.captionTitle}>{image.title}</p>
++              </figcaption>
++            </figure>
++          ))}
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,16 +1,59 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
+ export default function Gallery() {
+   return (
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+             details that define our contemporary osteria in Torino.
+           </p>
+         </div>
+       </section>
++      <GalleryGridSection />
+     </main>
+   )
+ }
+
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index cee5f23115591fbc68cd721dac25586b76f1327b..1943cfc309ce53b5ac9a8b844c0f4b25d67f9f90
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -141,3 +141,4 @@
+ Prepared TASK section-gallery-gallery-grid (Create gallery-grid section on gallery) for execution.
+ 
+ Launching Codex for TASK section-gallery-gallery-grid.
++2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
+--- /dev/null
++++ b/src/components/Gallery-gridSection.jsx
+@@ -0,0 +1,186 @@
++const galleryImages = [
++  {
++    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
++    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
++    category: "Dining room",
++    title: "Warm urban interiors",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant restaurant table setting prepared for evening service",
++    category: "Table setting",
++    title: "Evening table detail",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
++    alt: "Refined plated pasta served in a modern Italian restaurant",
++    category: "Pasta",
++    title: "Signature pasta plates",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
++    alt: "Intimate restaurant interior with candlelit tables and bar seating",
++    category: "Atmosphere",
++    title: "Dinner mood in Torino",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
++    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
++    category: "Hospitality",
++    title: "Designed for long dinners",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
++    alt: "Modern plated seafood course with refined presentation",
++    category: "Main course",
++    title: "Seasonal plates with precision",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant bar with wine glasses and warm ambient lighting",
++    category: "Wine and cocktails",
++    title: "Curated bottles and aperitivi",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant dessert plated with modern presentation and rich textures",
++    category: "Dessert",
++    title: "A polished final course",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant interior corner with soft lighting and contemporary decor",
++    category: "Interior detail",
++    title: "Quiet corners and soft light",
++  },
++]
++
++const styles = {
++  section: {
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
++    color: "#1f1f1b",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "0 1.5rem 5rem",
++    display: "grid",
++    gap: "2rem",
++  },
++  intro: {
++    display: "grid",
++    gap: "0.9rem",
++    maxWidth: "38rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2rem, 4vw, 3.4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1rem",
++    lineHeight: 1.75,
++    color: "rgba(31, 31, 27, 0.74)",
++  },
++  grid: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1rem",
++  },
++  card: {
++    position: "relative",
++    overflow: "hidden",
++    minHeight: "21rem",
++    borderRadius: "1.6rem",
++    backgroundColor: "#d9d1c4",
++    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
++  },
++  image: {
++    position: "absolute",
++    inset: 0,
++    width: "100%",
++    height: "100%",
++    objectFit: "cover",
++  },
++  overlay: {
++    position: "absolute",
++    inset: 0,
++    background:
++      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
++  },
++  caption: {
++    position: "absolute",
++    inset: "auto 0 0 0",
++    padding: "1.25rem",
++    display: "grid",
++    gap: "0.4rem",
++    color: "#f6f1e8",
++  },
++  category: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.14em",
++    fontSize: "0.74rem",
++    fontWeight: 700,
++  },
++  captionTitle: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "1.35rem",
++    lineHeight: 1.1,
++  },
++}
++
++export default function GalleryGridSection() {
++  return (
++    <section
++      id="gallery-grid"
++      aria-labelledby="gallery-grid-heading"
++      style={styles.section}
++    >
++      <div style={styles.shell}>
++        <div style={styles.intro}>
++          <p style={styles.eyebrow}>Gallery</p>
++          <h2 id="gallery-grid-heading" style={styles.title}>
++            Interiors, plates, and the pace of service
++          </h2>
++          <p style={styles.lead}>
++            A visual edit of the dining room, signature dishes, and evening
++            atmosphere that shape Osteria 19 Torino.
++          </p>
++        </div>
++
++        <div style={styles.grid}>
++          {galleryImages.map((image) => (
++            <figure key={image.src} style={styles.card}>
++              <img
++                src={image.src}
++                alt={image.alt}
++                loading="lazy"
++                style={styles.image}
++              />
++              <div aria-hidden="true" style={styles.overlay} />
++              <figcaption style={styles.caption}>
++                <p style={styles.category}>{image.category}</p>
++                <p style={styles.captionTitle}>{image.title}</p>
++              </figcaption>
++            </figure>
++          ))}
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,16 +1,59 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
+ export default function Gallery() {
+   return (
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+             details that define our contemporary osteria in Torino.
+           </p>
+         </div>
+       </section>
++      <GalleryGridSection />
+     </main>
+   )
+ }
+
+codex
+Modified files: [src/pages/Gallery.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/pages/Gallery.jsx), [src/components/Gallery-gridSection.jsx](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/src/components/Gallery-gridSection.jsx), [agent/AGENT_REPORT.md](/Users/armandocosta/Desktop/ai-site-engine/site-create-a-premium-modern-website-for-an-i/agent/AGENT_REPORT.md).
+
+Implemented the `gallery-grid` section on the gallery page by adding a reusable `GalleryGridSection` component and rendering it from the gallery page shell. The section uses a responsive image grid with nine premium Unsplash images, lazy-loaded media, semantic `figure`/`figcaption` markup, and copy/styling aligned to the restaurant brand and existing page structure.
+
+Build result: `npm run build` passed successfully with Vite production output generated.
+file update:
+diff --git a/agent/AGENT_REPORT.md b/agent/AGENT_REPORT.md
+index cee5f23115591fbc68cd721dac25586b76f1327b..1943cfc309ce53b5ac9a8b844c0f4b25d67f9f90
+--- a/agent/AGENT_REPORT.md
++++ b/agent/AGENT_REPORT.md
+@@ -141,3 +141,4 @@
+ Prepared TASK section-gallery-gallery-grid (Create gallery-grid section on gallery) for execution.
+ 
+ Launching Codex for TASK section-gallery-gallery-grid.
++2026-03-10: Added a dedicated `GalleryGridSection` component with a responsive image-grid layout, nine premium restaurant/gallery images from Unsplash, and accessible captions, then rendered it from `src/pages/Gallery.jsx` beneath the existing gallery page intro.
+diff --git a/src/components/Gallery-gridSection.jsx b/src/components/Gallery-gridSection.jsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..3167c6ee88b7a1fe06452079d0b4788e83859aa5
+--- /dev/null
++++ b/src/components/Gallery-gridSection.jsx
+@@ -0,0 +1,186 @@
++const galleryImages = [
++  {
++    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
++    alt: "Contemporary Italian restaurant dining room with warm pendant lighting",
++    category: "Dining room",
++    title: "Warm urban interiors",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant restaurant table setting prepared for evening service",
++    category: "Table setting",
++    title: "Evening table detail",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
++    alt: "Refined plated pasta served in a modern Italian restaurant",
++    category: "Pasta",
++    title: "Signature pasta plates",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
++    alt: "Intimate restaurant interior with candlelit tables and bar seating",
++    category: "Atmosphere",
++    title: "Dinner mood in Torino",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
++    alt: "Guests sharing dinner and wine in a stylish contemporary restaurant",
++    category: "Hospitality",
++    title: "Designed for long dinners",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
++    alt: "Modern plated seafood course with refined presentation",
++    category: "Main course",
++    title: "Seasonal plates with precision",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant bar with wine glasses and warm ambient lighting",
++    category: "Wine and cocktails",
++    title: "Curated bottles and aperitivi",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
++    alt: "Elegant dessert plated with modern presentation and rich textures",
++    category: "Dessert",
++    title: "A polished final course",
++  },
++  {
++    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
++    alt: "Restaurant interior corner with soft lighting and contemporary decor",
++    category: "Interior detail",
++    title: "Quiet corners and soft light",
++  },
++]
++
++const styles = {
++  section: {
++    background:
++      "linear-gradient(180deg, rgba(246, 241, 232, 0.98) 0%, #ece3d6 100%)",
++    color: "#1f1f1b",
++  },
++  shell: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "0 1.5rem 5rem",
++    display: "grid",
++    gap: "2rem",
++  },
++  intro: {
++    display: "grid",
++    gap: "0.9rem",
++    maxWidth: "38rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(2rem, 4vw, 3.4rem)",
++    lineHeight: 1,
++    letterSpacing: "-0.04em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1rem",
++    lineHeight: 1.75,
++    color: "rgba(31, 31, 27, 0.74)",
++  },
++  grid: {
++    display: "grid",
++    gridTemplateColumns: "repeat(auto-fit, minmax(16rem, 1fr))",
++    gap: "1rem",
++  },
++  card: {
++    position: "relative",
++    overflow: "hidden",
++    minHeight: "21rem",
++    borderRadius: "1.6rem",
++    backgroundColor: "#d9d1c4",
++    boxShadow: "0 24px 80px rgba(31, 31, 27, 0.12)",
++  },
++  image: {
++    position: "absolute",
++    inset: 0,
++    width: "100%",
++    height: "100%",
++    objectFit: "cover",
++  },
++  overlay: {
++    position: "absolute",
++    inset: 0,
++    background:
++      "linear-gradient(180deg, rgba(31, 31, 27, 0.04) 0%, rgba(31, 31, 27, 0.72) 100%)",
++  },
++  caption: {
++    position: "absolute",
++    inset: "auto 0 0 0",
++    padding: "1.25rem",
++    display: "grid",
++    gap: "0.4rem",
++    color: "#f6f1e8",
++  },
++  category: {
++    margin: 0,
++    color: "#c8a66a",
++    textTransform: "uppercase",
++    letterSpacing: "0.14em",
++    fontSize: "0.74rem",
++    fontWeight: 700,
++  },
++  captionTitle: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "1.35rem",
++    lineHeight: 1.1,
++  },
++}
++
++export default function GalleryGridSection() {
++  return (
++    <section
++      id="gallery-grid"
++      aria-labelledby="gallery-grid-heading"
++      style={styles.section}
++    >
++      <div style={styles.shell}>
++        <div style={styles.intro}>
++          <p style={styles.eyebrow}>Gallery</p>
++          <h2 id="gallery-grid-heading" style={styles.title}>
++            Interiors, plates, and the pace of service
++          </h2>
++          <p style={styles.lead}>
++            A visual edit of the dining room, signature dishes, and evening
++            atmosphere that shape Osteria 19 Torino.
++          </p>
++        </div>
++
++        <div style={styles.grid}>
++          {galleryImages.map((image) => (
++            <figure key={image.src} style={styles.card}>
++              <img
++                src={image.src}
++                alt={image.alt}
++                loading="lazy"
++                style={styles.image}
++              />
++              <div aria-hidden="true" style={styles.overlay} />
++              <figcaption style={styles.caption}>
++                <p style={styles.category}>{image.category}</p>
++                <p style={styles.captionTitle}>{image.title}</p>
++              </figcaption>
++            </figure>
++          ))}
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/src/pages/Gallery.jsx b/src/pages/Gallery.jsx
+index f7c4a9b3b582c167673bdf9c0f3aca9aff44f2e5..8569209fd76792913ca8caad4379993628c828bf
+--- a/src/pages/Gallery.jsx
++++ b/src/pages/Gallery.jsx
+@@ -1,16 +1,59 @@
++import GalleryGridSection from "../components/Gallery-gridSection"
++
++const styles = {
++  main: {
++    backgroundColor: "#f6f1e8",
++    color: "#1f1f1b",
++  },
++  hero: {
++    maxWidth: "72rem",
++    margin: "0 auto",
++    padding: "7.5rem 1.5rem 3rem",
++  },
++  copy: {
++    maxWidth: "38rem",
++    display: "grid",
++    gap: "1rem",
++  },
++  eyebrow: {
++    margin: 0,
++    color: "#6f7558",
++    textTransform: "uppercase",
++    letterSpacing: "0.18em",
++    fontSize: "0.78rem",
++    fontWeight: 700,
++  },
++  title: {
++    margin: 0,
++    fontFamily: 'Georgia, "Times New Roman", serif',
++    fontSize: "clamp(3rem, 8vw, 5rem)",
++    lineHeight: 0.96,
++    letterSpacing: "-0.05em",
++  },
++  lead: {
++    margin: 0,
++    fontSize: "1.05rem",
++    lineHeight: 1.8,
++    color: "rgba(31, 31, 27, 0.76)",
++  },
++}
++
+ export default function Gallery() {
+   return (
+-    <main>
+-      <section aria-labelledby="gallery-title">
+-        <div>
+-          <p>Osteria 19 Torino</p>
+-          <h1 id="gallery-title">Gallery</h1>
+-          <p>
++    <main style={styles.main}>
++      <section aria-labelledby="gallery-title" style={styles.hero}>
++        <div style={styles.copy}>
++          <p style={styles.eyebrow}>Osteria 19 Torino</p>
++          <h1 id="gallery-title" style={styles.title}>
++            Gallery
++          </h1>
++          <p style={styles.lead}>
+             A first look at the dining room, the evening mood, and the plated
+             details that define our contemporary osteria in Torino.
+           </p>
+         </div>
+       </section>
++      <GalleryGridSection />
+     </main>
    )
  }
 
 tokens used
-13.260
+24.141
